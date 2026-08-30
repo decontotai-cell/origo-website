@@ -59,7 +59,7 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 | # | Seção | Fundo | Papel |
 | --- | --- | --- | --- |
 | 01 | Hero | Leveza | Tese + símbolo triádico arquitetônico (2 camadas, saindo pela viewport, deriva lenta) |
-| 02 | A origem | Névoa suave | Eixo diagonal Indicadores (passado, baixo) ↔ Comportamento (adiante, alto), rótulos verticais |
+| 02 | A origem | Névoa suave | Comparação editorial: **Indicadores = onde a empresa está** ↔ **Comportamentos = para onde a empresa está indo**, linha diagonal + bifurcação sutil (evolução ↗ / deterioração ↘). Síntese: "O futuro ainda não é um indicador. Ele está sendo construído nos comportamentos de hoje." Pergunta + CTA "Quero descobrir" → `/people` (futuro: diagnóstico) |
 | 03 | Frase-conceito | **Raiz** | "Os números contam o que aconteceu…" — ~88vh, tipografia enorme |
 | 04 | O nosso olhar | Leveza | 5 linhas editoriais (botões), numeração 01–05. Ativar um item (hover no desktop, toque no mobile) reenquadra a **mesma** foto — "a empresa é a mesma, muda o olhar" |
 | 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll. EVP/branding/treinamento/cultura são ações possíveis, nunca etapas |

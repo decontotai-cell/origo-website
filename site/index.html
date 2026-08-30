@@ -461,33 +461,64 @@
   }
   .origin__axis::before {
     content: "";
-    position: absolute; left: 8%; right: 8%; top: 42%;
+    position: absolute; left: 6%; right: 6%; top: 44%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--hairline-strong) 20%, var(--hairline-strong) 80%, transparent);
+    background: linear-gradient(90deg, transparent, var(--hairline-strong) 18%, var(--hairline-strong) 78%, transparent);
     transform: rotate(-4deg);
     transform-origin: center;
   }
   .pole { position: relative; }
   .pole--past { align-self: end; }
   .pole--future { align-self: start; padding-top: clamp(2rem, 6vw, 4.5rem); }
-  .pole__mark {
-    writing-mode: vertical-rl; text-orientation: mixed;
-    position: absolute; top: 0; left: -1.6rem;
-    font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-faint);
-  }
-  .pole--future .pole__mark { color: var(--accent-text); }
   .pole__kicker {
-    font-size: var(--s--1); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-faint); margin-bottom: 0.7rem;
+    font-size: var(--s--1); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 0.6rem;
   }
-  .pole__word { font-family: "Fraunces", serif; font-weight: 300; font-size: var(--s-3); line-height: 1; }
-  .pole__note { color: var(--ink-soft); margin-top: 0.8rem; font-size: 0.96rem; max-width: 24rem; }
+  .pole--future .pole__kicker { color: var(--accent-text); }
+  .pole__word {
+    font-family: "Fraunces", serif; font-weight: 300; font-size: var(--s-2);
+    line-height: 1.08; max-width: 13ch;
+  }
+  .pole__note { color: var(--ink-soft); margin-top: 0.9rem; font-size: 0.96rem; max-width: 25rem; }
+  .pole__ex {
+    margin-top: 0.9rem; font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .origin__fork { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0.55rem; }
+  .origin__fork span {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .origin__fork span::before {
+    content: ""; width: 1.9rem; height: 1px; background: var(--hairline-strong);
+    transform-origin: left center;
+  }
+  .origin__fork .up::before { transform: rotate(-20deg); }
+  .origin__fork .down::before { transform: rotate(20deg); }
+
+  .origin__synthesis {
+    position: relative; z-index: 2;
+    margin-top: clamp(4rem, 10vw, 7rem);
+  }
+  .origin__future {
+    font-family: "Fraunces", serif; font-weight: 300; font-size: var(--s-2); line-height: 1.15;
+    color: var(--ink);
+  }
+  .origin__future-sub { margin-top: 0.5rem; font-size: var(--s-0); color: var(--ink-soft); }
+
+  .origin__prompt { position: relative; z-index: 2; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .origin__q {
+    font-family: "Fraunces", serif; font-weight: 300; font-style: italic;
+    font-size: var(--s-1); line-height: 1.3; color: var(--ink); max-width: 30ch;
+  }
+  .origin__prompt .btn { margin-top: 1.6rem; }
+
   @media (max-width: 640px) {
     .origin__axis { grid-template-columns: 1fr; }
     .origin__axis::before { left: 0; right: auto; top: 0; bottom: 0; width: 1px; height: auto; transform: none; }
     .pole { padding-left: 1.6rem; }
     .pole--future { padding-top: 0; }
-    .pole__mark { writing-mode: horizontal-tb; position: static; margin-bottom: 0.4rem; }
+    .origin__fork { display: none; }
   }
 
   /* ================= 03 · FRASE CONCEITUAL (RAIZ) ================= */
@@ -870,23 +901,38 @@
 
     <div class="wrap origin__axis">
       <div class="pole pole--past reveal reveal--l">
-        <span class="pole__mark">o que já aconteceu</span>
         <p class="pole__kicker">Indicadores</p>
-        <p class="pole__word">Passado</p>
+        <p class="pole__word">Onde a empresa está.</p>
         <p class="pole__note">
-          Rotatividade, produtividade, custo, prazo. Mostram o resultado de decisões
-          e relações que começaram muito antes.
+          Os indicadores mostram onde a empresa chegou. São consequências de
+          decisões, relações e comportamentos que começaram muito antes.
         </p>
+        <p class="pole__ex">Rotatividade · produtividade · custos · prazos</p>
       </div>
       <div class="pole pole--future reveal reveal--r">
-        <span class="pole__mark">o que está começando</span>
-        <p class="pole__kicker">Comportamento</p>
-        <p class="pole__word">Adiante</p>
+        <p class="pole__kicker">Comportamentos</p>
+        <p class="pole__word">Para onde a empresa está indo.</p>
         <p class="pole__note">
-          Como as pessoas se relacionam, assumem responsabilidade e se sentem parte.
-          É o primeiro sinal — e o único que ainda pode ser mudado.
+          Os comportamentos mostram para onde a empresa está indo. E essa direção
+          ainda pode ser transformada quando a organização decide olhar para ela.
         </p>
+        <div class="origin__fork" aria-hidden="true">
+          <span class="up">Evolução</span>
+          <span class="down">Deterioração</span>
+        </div>
       </div>
+    </div>
+
+    <div class="wrap measure origin__synthesis reveal">
+      <p class="origin__future">O futuro ainda não é um indicador.</p>
+      <p class="origin__future-sub">Ele está sendo construído nos comportamentos de hoje.</p>
+    </div>
+
+    <div class="wrap measure origin__prompt reveal">
+      <p class="origin__q">Para onde os comportamentos da sua empresa estão levando o negócio?</p>
+      <a class="btn btn--solid" href="/people" data-route>Quero descobrir
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </section>
 
