@@ -1,0 +1,23 @@
+# --- Arquivos-fonte da marca (ficam locais / no Google Drive, não versionados) ---
+*.pdf
+*.docx
+/png origo.png
+/png sem fundo.png
+
+# --- Sistema operacional / editores ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+*.tmp
+*.log
+
+# --- Node / build (uso futuro) ---
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.*
+!.env.example
+.vercel
