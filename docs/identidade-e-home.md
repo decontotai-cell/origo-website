@@ -61,8 +61,8 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 | 01 | Hero | Leveza | Tese + símbolo triádico arquitetônico (2 camadas, saindo pela viewport, deriva lenta) |
 | 02 | A origem | Névoa suave | Eixo diagonal Indicadores (passado, baixo) ↔ Comportamento (adiante, alto), rótulos verticais |
 | 03 | Frase-conceito | **Raiz** | "Os números contam o que aconteceu…" — ~88vh, tipografia enorme |
-| 04 | O nosso olhar | Leveza | 5 linhas editoriais, numeração 01–05, hover mostra microtexto + quadro fotográfico que troca de legenda |
-| 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll |
+| 04 | O nosso olhar | Leveza | 5 linhas editoriais (botões), numeração 01–05. Ativar um item (hover no desktop, toque no mobile) reenquadra a **mesma** foto — "a empresa é a mesma, muda o olhar" |
+| 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll. EVP/branding/treinamento/cultura são ações possíveis, nunca etapas |
 | 06 | Duas vertentes | People em Névoa/Linho · Select em Raiz/Espresso | Dois territórios de ~84vh lado a lado; hover expande ~55/45; empilham no mobile |
 | 07 | Manifesto | **Espresso** | 3 linhas preservadas + símbolo gigante fora da tela, opacidade 0.06 |
 | 08 | Devolvemos a liberdade | Linho | Composição assimétrica texto ~55% / foto ~45%; a foto "escapa" para a seção seguinte |
@@ -72,7 +72,7 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 
 **Movimento (V2):** reveal com direção (esquerda/direita), deriva lenta e parallax mínimo no símbolo, linha do método preenchendo no scroll, marcador de capítulo no trilho lateral (A ORIGEM → O COMPORTAMENTO → O MÉTODO → PEOPLE + SELECT → O RESULTADO), hover editorial. Textura de papel fixa quase imperceptível. Tudo respeita `prefers-reduced-motion`; trilho some abaixo de 1120px.
 
-**Fotografia (V2):** 3 momentos apenas — quadro do "Nosso olhar", território People, seção "Devolvemos a liberdade". Todos são **placeholders** com moldura fina, rótulo "FOTOGRAFIA EDITORIAL · PLACEHOLDER" e legenda do que a foto deve mostrar. Substituir por imagens reais respeitando o moodboard.
+**Fotografia (V2):** 3 momentos, com função narrativa distinta — **Foto 01** (Nosso olhar) = a organização/sistema; **Foto 02** (People) = as pessoas; **Foto 03** (Liberdade) = o empresário. Direção completa, especificação de cada slot e como trocar o arquivo em [`fotografia.md`](fotografia.md). Enquanto não há fotos reais, cada slot já tem dimensão final, crop, tratamento (`.photo__grade`), interação e responsivo — basta trocar `<div class="photo__img">` por `<img>`. Sem rótulos de placeholder na interface.
 
 ## Textos
 

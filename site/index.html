@@ -501,67 +501,100 @@
   .phrase .eyebrow { color: var(--on-raiz-soft); }
 
   /* ================= 04 · NOSSO OLHAR ================= */
-  .lens__layout { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: clamp(2.5rem, 6vw, 4rem); position: relative; z-index: 2; }
+  .lens__layout { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3rem); margin-top: clamp(2.5rem, 6vw, 4rem); position: relative; z-index: 2; }
   @media (min-width: 940px) {
-    .lens__layout { grid-template-columns: 1.35fr 0.65fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+    .lens__layout { grid-template-columns: 1.3fr 0.7fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
   }
-  .lens__rows { border-top: 1px solid var(--hairline-strong); }
+  .lens__rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline-strong); }
   .lens__row {
+    width: 100%; text-align: left; font: inherit; color: inherit;
+    background: none; border: 0; border-bottom: 1px solid var(--hairline);
     display: grid; grid-template-columns: 3.2rem 1fr; gap: 0.3rem 1.4rem;
     align-items: baseline;
-    padding: clamp(1.3rem, 3.2vw, 2.1rem) 0;
-    border-bottom: 1px solid var(--hairline);
+    padding: clamp(1.2rem, 3vw, 2rem) 0;
+    cursor: pointer;
     transition: padding-left 0.45s var(--ease), background 0.45s var(--ease);
   }
   .lens__n {
-    font-family: "Fraunces", serif; font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-    color: var(--ink-faint); font-variant-numeric: tabular-nums;
+    font-family: "Fraunces", serif; font-weight: 400; font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+    color: var(--ink-faint); font-variant-numeric: tabular-nums; transition: color 0.4s var(--ease);
   }
-  .lens__t { font-family: "Fraunces", serif; font-weight: 300; font-size: clamp(1.3rem, 2.7vw, 2.05rem); line-height: 1.16; }
+  .lens__t { font-family: "Fraunces", serif; font-weight: 300; font-size: clamp(1.25rem, 2.6vw, 2rem); line-height: 1.16; }
   .lens__micro {
-    grid-column: 2; font-size: 0.86rem; color: var(--ink-faint); margin-top: 0.55rem;
-    max-width: 34rem;
+    grid-column: 2; font-size: 0.86rem; color: var(--ink-faint); max-width: 34rem;
+    max-height: 0; opacity: 0; margin-top: 0; overflow: hidden;
+    transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease), margin-top 0.4s var(--ease);
   }
-  @media (min-width: 940px) {
-    .lens__micro { opacity: 0; transform: translateY(-4px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+  .lens__row[aria-pressed="true"] { padding-left: 1rem; background: var(--ch-warm-ghost); }
+  .lens__row[aria-pressed="true"] .lens__n { color: var(--accent-text); }
+  .lens__row[aria-pressed="true"] .lens__micro { max-height: 7rem; opacity: 1; margin-top: 0.55rem; }
+  @media (hover: hover) and (min-width: 940px) {
     .lens__row:hover { padding-left: 1rem; background: var(--ch-warm-ghost); }
-    .lens__row:hover .lens__micro { opacity: 1; transform: none; }
     .lens__row:hover .lens__n { color: var(--accent-text); }
+    .lens__row:hover .lens__micro { max-height: 7rem; opacity: 1; margin-top: 0.55rem; }
   }
-  .lens__view { display: none; }
-  @media (min-width: 940px) {
-    .lens__view { display: block; position: sticky; top: 6rem; }
+  .lens__media { position: relative; }
+  @media (min-width: 940px) { .lens__media { position: sticky; top: 5.5rem; } }
+  .lens__whisper {
+    font-family: "Fraunces", serif; font-style: italic; font-weight: 300;
+    font-size: 0.95rem; line-height: 1.45; color: var(--ink-soft);
+    margin-top: 0.9rem; max-width: 22rem;
   }
 
-  /* moldura de foto — placeholder editorial */
-  .photo {
-    position: relative; overflow: hidden;
-    background-color: var(--ch-warm);
-    background-image: repeating-linear-gradient(135deg,
-      transparent 0 8px,
-      color-mix(in srgb, var(--pedra) 16%, transparent) 8px 9px);
-    outline: 1px solid var(--hairline-strong);
-    outline-offset: -12px;
-  }
-  .photo--portrait { aspect-ratio: 4 / 5; }
-  .photo--wide { aspect-ratio: 5 / 4; }
-  .photo__tag {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--ink-soft); border: 1px solid var(--hairline-strong);
-    padding: 0.5rem 0.9rem; background: color-mix(in srgb, var(--ground) 78%, transparent);
-    white-space: nowrap;
-  }
-  .photo__note {
-    position: absolute; left: 1rem; right: 1rem; bottom: 1rem;
-    font-size: 0.72rem; letter-spacing: 0.03em; color: var(--ink-soft);
-    line-height: 1.5;
-    transition: opacity 0.4s var(--ease);
-  }
+  /* ---- moldura de foto: placeholder tratado, pronto para trocar só o arquivo ---- */
   figure { margin: 0; }
-  figure figcaption {
-    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--ink-faint); margin-top: 0.75rem;
+  .photo {
+    position: relative; overflow: hidden; isolation: isolate;
+    aspect-ratio: var(--photo-ar, 4 / 5);
+  }
+  .photo[data-photo="olhar"] { --photo-ar: 5 / 4; --photo-tone: color-mix(in srgb, var(--pedra) 20%, var(--ground)); --photo-hi: var(--nevoa); }
+  .photo[data-photo="people"] { --photo-ar: 1 / 1; --photo-tone: color-mix(in srgb, var(--linho) 52%, var(--ground)); --photo-hi: var(--linho); --photo-cast: var(--linho); }
+  .photo[data-photo="liberdade"] { --photo-ar: 4 / 5; --photo-tone: color-mix(in srgb, var(--espresso) 28%, var(--ground)); --photo-hi: var(--pedra); --photo-cast: var(--raiz); --photo-pos: 33% 54%; }
+  @media (max-width: 600px) {
+    .photo[data-photo="olhar"] { --photo-ar: 4 / 3; }
+    .photo[data-photo="liberdade"] { --photo-ar: 1 / 1; }
+  }
+  .photo__img {
+    position: absolute; inset: 0; z-index: 1;
+    background-color: var(--photo-tone, var(--ch-warm));
+    background-image:
+      radial-gradient(115% 85% at var(--photo-pos, 50% 42%),
+        color-mix(in srgb, var(--photo-hi, var(--linho)) 55%, transparent) 0%, transparent 60%),
+      repeating-linear-gradient(135deg, transparent 0 9px,
+        color-mix(in srgb, var(--pedra) 13%, transparent) 9px 10px);
+    transform: scale(var(--photo-scale, 1.04));
+    transform-origin: var(--photo-pos, 50% 42%);
+    transition: background-image 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .photo > img {
+    position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
+    object-fit: cover; object-position: var(--photo-pos, 50% 42%);
+    transform: scale(var(--photo-scale, 1));
+    transition: object-position 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .photo:has(> img) .photo__img { display: none; }
+  .photo__grade {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--espresso) 30%, transparent) 100%),
+      color-mix(in srgb, var(--photo-cast, var(--pedra)) 12%, transparent);
+    mix-blend-mode: multiply;
+    transition: background 0.9s var(--ease);
+  }
+  .photo__grade::after {
+    content: ""; position: absolute; inset: 0;
+    box-shadow: inset 0 0 70px rgba(55, 48, 40, 0.26);
+    outline: 1px solid color-mix(in srgb, var(--ink) 11%, transparent);
+    outline-offset: -1px;
+  }
+  /* enquadramentos de "Nosso olhar" — a empresa é a mesma, muda o olhar */
+  .photo[data-frame="1"] { --photo-pos: 40% 60%; --photo-scale: 1.14; --photo-cast: var(--pedra); }
+  .photo[data-frame="2"] { --photo-pos: 60% 46%; --photo-scale: 1.09; --photo-cast: var(--linho); }
+  .photo[data-frame="3"] { --photo-pos: 48% 38%; --photo-scale: 1.07; --photo-cast: var(--pedra); }
+  .photo[data-frame="4"] { --photo-pos: 45% 45%; --photo-scale: 1.03; --photo-cast: var(--nevoa); }
+  .photo[data-frame="5"] { --photo-pos: 52% 44%; --photo-scale: 1.00; --photo-cast: var(--nevoa); }
+  @media (prefers-reduced-motion: reduce) {
+    .photo__img, .photo > img, .photo__grade { transition: none; }
   }
 
   /* ================= 05 · O MÉTODO (jornada) ================= */
@@ -618,6 +651,8 @@
   .terr__verbs span { position: relative; }
   .terr__verbs span + span::before { content: "·"; position: absolute; left: -0.68rem; opacity: 0.6; }
   .terr__photo { margin-top: 0.5rem; }
+  .terr__photo .photo { width: min(100%, 380px); }
+  @media (max-width: 860px) { .terr__photo .photo { width: min(100%, 460px); } }
   .terr__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; }
   .terr__cta {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -819,7 +854,7 @@
   </section>
 
   <div class="note-strip">
-    Protótipo visual — <b>Home V2</b>. Fotografias são <b>placeholders</b>. Páginas internas existem como rotas preparadas.
+    Protótipo — <b>Home V2</b>. As três fotografias entram na fase seguinte; páginas internas existem como rotas preparadas.
   </div>
 
   <!-- 02 · A ORIGEM -->
@@ -878,42 +913,51 @@
     </div>
 
     <div class="wrap lens__layout">
-      <ol class="lens__rows reveal">
-        <li class="lens__row">
-          <span class="lens__n">01</span>
-          <span class="lens__t">Como o trabalho é feito, de fato</span>
-          <span class="lens__micro">O que o processo escrito diz — e o que realmente acontece entre uma etapa e outra.</span>
+      <ul class="lens__rows reveal" aria-label="Pontos de observação">
+        <li>
+          <button class="lens__row" type="button" data-frame="1" aria-pressed="true">
+            <span class="lens__n">01</span>
+            <span class="lens__t">Como o trabalho é feito, de fato</span>
+            <span class="lens__micro">O que o processo escrito diz — e o que realmente acontece entre uma etapa e outra.</span>
+          </button>
         </li>
-        <li class="lens__row">
-          <span class="lens__n">02</span>
-          <span class="lens__t">Como as equipes se relacionam</span>
-          <span class="lens__micro">Quem fala com quem, quem assume responsabilidade e quem espera que outro assuma.</span>
+        <li>
+          <button class="lens__row" type="button" data-frame="2" aria-pressed="false">
+            <span class="lens__n">02</span>
+            <span class="lens__t">Como as equipes se relacionam</span>
+            <span class="lens__micro">Quem fala com quem, quem assume responsabilidade e quem espera que outro assuma.</span>
+          </button>
         </li>
-        <li class="lens__row">
-          <span class="lens__n">03</span>
-          <span class="lens__t">Como a liderança imediata conduz</span>
-          <span class="lens__micro">O líder direto da linha — o que ele reforça, o que ele deixa passar, como ele é ouvido.</span>
+        <li>
+          <button class="lens__row" type="button" data-frame="3" aria-pressed="false">
+            <span class="lens__n">03</span>
+            <span class="lens__t">Como a liderança imediata conduz</span>
+            <span class="lens__micro">O líder direto da linha — o que ele reforça, o que ele deixa passar, como ele é ouvido.</span>
+          </button>
         </li>
-        <li class="lens__row">
-          <span class="lens__n">04</span>
-          <span class="lens__t">Como a cultura influencia as decisões</span>
-          <span class="lens__micro">O que a empresa recompensa na prática, mesmo quando não está no discurso.</span>
+        <li>
+          <button class="lens__row" type="button" data-frame="4" aria-pressed="false">
+            <span class="lens__n">04</span>
+            <span class="lens__t">Como a cultura influencia as decisões</span>
+            <span class="lens__micro">O que a empresa recompensa na prática, mesmo quando não está no discurso.</span>
+          </button>
         </li>
-        <li class="lens__row">
-          <span class="lens__n">05</span>
-          <span class="lens__t">Como a estrutura favorece ou bloqueia o resultado</span>
-          <span class="lens__micro">Papéis, alçadas e rotinas que sustentam — ou que travam — quem faz o produto.</span>
+        <li>
+          <button class="lens__row" type="button" data-frame="5" aria-pressed="false">
+            <span class="lens__n">05</span>
+            <span class="lens__t">Como a estrutura favorece ou bloqueia o resultado</span>
+            <span class="lens__micro">Papéis, alçadas e rotinas que sustentam — ou que travam — quem faz o produto.</span>
+          </button>
         </li>
-      </ol>
+      </ul>
 
-      <div class="lens__view reveal reveal--r">
-        <figure>
-          <div class="photo photo--portrait">
-            <span class="photo__tag">Fotografia editorial · placeholder</span>
-            <span class="photo__note" data-lens-note>Chão de fábrica · mãos no trabalho · luz natural · observação sem pose.</span>
-          </div>
-          <figcaption>Imagem muda conforme o item — a definir</figcaption>
+      <div class="lens__media reveal reveal--r">
+        <figure class="photo" data-photo="olhar" data-frame="1">
+          <!-- FOTO 01 · uma empresa em funcionamento, cena ampla. Trocar por <img> mantendo os data-*. Ver docs/fotografia.md -->
+          <div class="photo__img" aria-hidden="true"></div>
+          <div class="photo__grade" aria-hidden="true"></div>
         </figure>
+        <p class="lens__whisper">A empresa é a mesma. O que muda é o nosso olhar.</p>
       </div>
     </div>
   </section>
@@ -924,9 +968,10 @@
       <p class="eyebrow">03 — O método</p>
       <h2>Não chegamos com uma solução pronta.</h2>
       <p class="lede">
-        Primeiro entendemos a realidade. Depois estruturamos o que precisa mudar,
-        desenvolvemos quem precisa evoluir e consolidamos isso na cultura e na
-        gestão — medindo e acompanhando até a mudança se sustentar sozinha.
+        O comportamento é uma das lentes — a atuação chega a pessoas, estrutura,
+        processos, liderança, RH e cultura. Primeiro entendemos a realidade;
+        depois estruturamos, desenvolvemos e consolidamos as mudanças, medindo e
+        acompanhando até se sustentarem sozinhas.
       </p>
     </div>
 
@@ -935,38 +980,38 @@
       <div class="phase reveal reveal--l">
         <p class="phase__n">01</p>
         <h3 class="phase__verb">Diagnosticar</h3>
-        <p class="phase__d">Entender como a empresa funciona de verdade — causas, relações, cultura real, gargalos e riscos — e definir o que precisa ser feito primeiro.</p>
-        <p class="phase__steps">Diagnóstico · Prioridades · Plano de ação</p>
+        <p class="phase__d">Entender o cenário, identificar causas e definir prioridades. Não termina numa fotografia da empresa: gera diagnóstico, prioridades e plano de ação.</p>
+        <p class="phase__steps">O que acontece · Por que acontece · O que fazer</p>
       </div>
       <div class="phase reveal reveal--r">
         <p class="phase__n">02</p>
         <h3 class="phase__verb">Estruturar</h3>
-        <p class="phase__d">Organizar o que o diagnóstico apontou: pessoas nas funções certas, papéis e responsabilidades claras, práticas e fluxos de gestão de pessoas.</p>
-        <p class="phase__steps">Pessoas · Papéis · Processos · Práticas</p>
+        <p class="phase__d">Organizar pessoas, papéis, processos e práticas de gestão. As ações estruturais que o diagnóstico apontar — nunca um catálogo fixo de serviços.</p>
+        <p class="phase__steps">Pessoas · Papéis · Processos · Políticas</p>
       </div>
       <div class="phase reveal reveal--l">
         <p class="phase__n">03</p>
         <h3 class="phase__verb">Desenvolver</h3>
-        <p class="phase__d">Preparar quem precisa evoluir — colaboradores, lideranças, gestores e RH — com as ações que a estratégia definida pedir.</p>
+        <p class="phase__d">Preparar colaboradores, líderes, gestores e RH. Não só liderança e não só treinamento: o que a estratégia definida pedir.</p>
         <p class="phase__steps">Colaboradores · Lideranças · Gestores · RH</p>
       </div>
       <div class="phase reveal reveal--r">
         <p class="phase__n">04</p>
         <h3 class="phase__verb">Consolidar</h3>
-        <p class="phase__d">Transformar as mudanças em cultura e prática permanente, até deixarem de depender da consultoria e passarem a fazer parte da empresa.</p>
-        <p class="phase__steps">Cultura · Práticas · Pertencimento</p>
+        <p class="phase__d">Transformar mudanças em cultura e práticas permanentes, até deixarem de depender da consultoria e passarem a fazer parte da empresa.</p>
+        <p class="phase__steps">Cultura · Rituais · Reconhecimento · Pertencimento</p>
       </div>
       <div class="phase reveal reveal--l">
         <p class="phase__n">05</p>
         <h3 class="phase__verb">Mensurar</h3>
-        <p class="phase__d">Avaliar o que mudou com indicadores definidos para aquela empresa — uma leitura de antes e depois, sem prometer resultado universal.</p>
-        <p class="phase__steps">Antes · Depois · Indicadores próprios</p>
+        <p class="phase__d">Avaliar evolução e impacto por meio de indicadores — definidos para cada empresa, numa leitura de antes e depois. Sem resultado universal.</p>
+        <p class="phase__steps">Antes · Depois · Indicadores do projeto</p>
       </div>
       <div class="phase reveal reveal--r">
         <p class="phase__n">06</p>
         <h3 class="phase__verb">Acompanhar</h3>
-        <p class="phase__d">Verificar a aplicação, ajustar a rota e sustentar a evolução ao longo do tempo. Comportamento, cultura e gestão não se transformam numa ação isolada.</p>
-        <p class="phase__steps">Ajuste · Reforço · Continuidade</p>
+        <p class="phase__d">Ajustar, fortalecer e sustentar a evolução. Comportamento, cultura e gestão não se transformam numa ação isolada.</p>
+        <p class="phase__steps">Aplicação · Correção de rota · Continuidade</p>
       </div>
     </div>
   </section>
@@ -987,16 +1032,17 @@
         <div class="terr__top">
           <span class="terr__label">Órigo People</span>
           <span class="terr__title">Olhar para dentro da organização.</span>
-          <span class="terr__sub">Consultoria estratégica em gestão de pessoas — para compreender, organizar, estruturar e fortalecer quem já faz parte da empresa.</span>
+          <span class="terr__sub">Consultoria estratégica em gestão de pessoas. Entramos na organização e trabalhamos com quem já faz parte dela.</span>
           <span class="terr__verbs">
-            <span>Compreender</span><span>Diagnosticar</span><span>Organizar</span>
-            <span>Estruturar</span><span>Fortalecer</span><span>Acompanhar</span>
+            <span>Diagnosticar</span><span>Estruturar</span><span>Desenvolver</span>
+            <span>Consolidar</span><span>Mensurar</span><span>Acompanhar</span>
           </span>
         </div>
         <figure class="terr__photo">
-          <div class="photo photo--wide">
-            <span class="photo__tag">Fotografia editorial · placeholder</span>
-            <span class="photo__note">Reunião espontânea · pessoas trabalhando de verdade · ambiente empresarial real.</span>
+          <div class="photo" data-photo="people">
+            <!-- FOTO 02 · escuta, observação, relação, desenvolvimento. Cena humana próxima. Trocar por <img>. Ver docs/fotografia.md -->
+            <div class="photo__img" aria-hidden="true"></div>
+            <div class="photo__grade" aria-hidden="true"></div>
           </div>
         </figure>
         <span class="terr__ctas">
@@ -1055,11 +1101,11 @@
         </p>
       </div>
       <figure class="freedom__photo reveal reveal--r">
-        <div class="photo photo--portrait">
-          <span class="photo__tag">Fotografia editorial · placeholder</span>
-          <span class="photo__note">Empresário observando a operação · ambiente de decisão · trabalho acontecendo — sem pose corporativa.</span>
+        <div class="photo" data-photo="liberdade">
+          <!-- FOTO 03 · o empresário dentro da própria operação, de costas / perfil / 3-4, sem olhar para a câmera. Presença sem centralização. Trocar por <img>. Ver docs/fotografia.md -->
+          <div class="photo__img" aria-hidden="true"></div>
+          <div class="photo__grade" aria-hidden="true"></div>
         </div>
-        <figcaption>Realidade empresarial — a definir</figcaption>
       </figure>
     </div>
   </section>
@@ -1244,22 +1290,18 @@
     }, 3400);
   }
 
-  /* legenda do quadro em "Nosso olhar" */
-  var lensNote = document.querySelector("[data-lens-note]");
-  var lensNotes = [
-    "Chão de fábrica · mãos no trabalho · luz natural · observação sem pose.",
-    "Duas pessoas resolvendo algo juntas · conversa informal · ambiente real.",
-    "Líder de linha com a equipe · gesto de orientação · rotina de produção.",
-    "Detalhe de cotidiano profissional · quadro de avisos · papel, madeira, textura.",
-    "Vista ampla da operação · arquitetura do espaço de trabalho · movimento."
-  ];
-  if (lensNote) {
-    document.querySelectorAll(".lens__row").forEach(function (row, idx) {
-      row.addEventListener("mouseenter", function () {
-        if (lensNotes[idx]) { lensNote.style.opacity = "0"; setTimeout(function () { lensNote.textContent = lensNotes[idx]; lensNote.style.opacity = "1"; }, 200); }
-      });
-    });
+  /* "Nosso olhar" — a empresa é a mesma, muda o enquadramento */
+  var lensRows = [].slice.call(document.querySelectorAll(".lens__row"));
+  var lensPhoto = document.querySelector('[data-photo="olhar"]');
+  var canHover = window.matchMedia("(hover: hover) and (min-width: 940px)").matches;
+  function activateLens(row) {
+    lensRows.forEach(function (r) { r.setAttribute("aria-pressed", r === row ? "true" : "false"); });
+    if (lensPhoto) lensPhoto.setAttribute("data-frame", row.getAttribute("data-frame"));
   }
+  lensRows.forEach(function (row) {
+    row.addEventListener("click", function () { activateLens(row); });
+    if (canHover) row.addEventListener("mouseenter", function () { activateLens(row); });
+  });
 
   /* menu mobile */
   var menuBtn = document.querySelector(".menu-btn");
