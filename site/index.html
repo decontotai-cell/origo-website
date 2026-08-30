@@ -633,7 +633,11 @@
   }
 
   /* ================= 05 · O MÉTODO (jornada) ================= */
-  .journey { position: relative; z-index: 2; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .journey {
+    position: relative; z-index: 2;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-left: clamp(1.4rem, 4vw, 2.5rem);
+  }
   .journey__line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--hairline-strong); }
   .journey__line::after {
     content: ""; position: absolute; inset: 0 auto auto 0; width: 1px;
@@ -641,19 +645,26 @@
     transform: scaleY(var(--journey, 0)); transform-origin: top;
   }
   .phase {
-    position: relative; padding: clamp(1.6rem, 4vw, 2.9rem) 0 clamp(1.6rem, 4vw, 2.9rem) clamp(1.6rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: clamp(2.5rem, 6vw, 3.75rem) 1fr;
+    column-gap: clamp(1rem, 3vw, 2rem);
+    align-items: start;
+    padding: clamp(1.75rem, 4.5vw, 3rem) 0;
   }
   .phase + .phase { border-top: 1px solid var(--hairline); }
-  .phase:nth-child(even) { padding-left: clamp(3rem, 12vw, 8rem); }
   .phase__n {
-    font-family: "Fraunces", serif; font-size: 0.82rem; letter-spacing: 0.1em;
+    grid-column: 1; grid-row: 1;
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: clamp(1rem, 1.5vw, 1.28rem); letter-spacing: 0.03em;
     color: var(--accent-text); font-variant-numeric: tabular-nums;
+    padding-top: 0.3rem;
   }
+  .phase__verb, .phase__d, .phase__steps { grid-column: 2; }
   .phase__verb {
-    font-family: "Fraunces", serif; font-weight: 300; font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-    line-height: 1.05; margin: 0.4rem 0 0.7rem;
+    font-family: "Fraunces", serif; font-weight: 300; font-size: clamp(1.8rem, 4.2vw, 2.9rem);
+    line-height: 1.05; margin: 0 0 0.7rem;
   }
-  .phase__d { color: var(--ink-soft); max-width: 42ch; font-size: 0.97rem; }
+  .phase__d { color: var(--ink-soft); max-width: 44ch; font-size: 0.97rem; }
   .phase__steps {
     margin-top: 0.9rem; font-size: 0.76rem; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--ink-soft);
@@ -835,10 +846,10 @@
     .btn { padding: 1rem 1.6rem; min-height: 3rem; }
     .origin__prompt .btn, .final .btn { width: 100%; justify-content: center; }
 
-    /* método: um item por vez, sem deslocamento horizontal */
-    .journey__line { left: 0.1rem; }
-    .phase,
-    .phase:nth-child(even) { padding-left: 1.4rem; padding-block: 1.5rem; }
+    /* método: coluna única alinhada, número como pequena guia lateral */
+    .journey { padding-left: 1.15rem; }
+    .phase { grid-template-columns: 2.25rem 1fr; column-gap: 0.85rem; padding-block: 1.6rem; }
+    .phase__n { font-size: 0.95rem; padding-top: 0.25rem; }
     .phase__verb { font-size: clamp(1.7rem, 8vw, 2.2rem); }
     .phase__d { max-width: none; }
 
@@ -1097,37 +1108,37 @@
 
     <div class="wrap journey">
       <div class="journey__line" aria-hidden="true"></div>
-      <div class="phase reveal reveal--l">
+      <div class="phase reveal">
         <p class="phase__n">01</p>
         <h3 class="phase__verb">Diagnosticar</h3>
         <p class="phase__d">Entender o cenário, identificar causas e definir prioridades. Não termina numa fotografia da empresa: gera diagnóstico, prioridades e plano de ação.</p>
         <p class="phase__steps">O que acontece · Por que acontece · O que fazer</p>
       </div>
-      <div class="phase reveal reveal--r">
+      <div class="phase reveal">
         <p class="phase__n">02</p>
         <h3 class="phase__verb">Estruturar</h3>
         <p class="phase__d">Organizar pessoas, papéis, processos e práticas de gestão. As ações estruturais que o diagnóstico apontar — nunca um catálogo fixo de serviços.</p>
         <p class="phase__steps">Pessoas · Papéis · Processos · Políticas</p>
       </div>
-      <div class="phase reveal reveal--l">
+      <div class="phase reveal">
         <p class="phase__n">03</p>
         <h3 class="phase__verb">Desenvolver</h3>
         <p class="phase__d">Preparar colaboradores, líderes, gestores e RH. Não só liderança e não só treinamento: o que a estratégia definida pedir.</p>
         <p class="phase__steps">Colaboradores · Lideranças · Gestores · RH</p>
       </div>
-      <div class="phase reveal reveal--r">
+      <div class="phase reveal">
         <p class="phase__n">04</p>
         <h3 class="phase__verb">Consolidar</h3>
         <p class="phase__d">Transformar mudanças em cultura e práticas permanentes, até deixarem de depender da consultoria e passarem a fazer parte da empresa.</p>
         <p class="phase__steps">Cultura · Rituais · Reconhecimento · Pertencimento</p>
       </div>
-      <div class="phase reveal reveal--l">
+      <div class="phase reveal">
         <p class="phase__n">05</p>
         <h3 class="phase__verb">Mensurar</h3>
         <p class="phase__d">Avaliar evolução e impacto por meio de indicadores — definidos para cada empresa, numa leitura de antes e depois. Sem resultado universal.</p>
         <p class="phase__steps">Antes · Depois · Indicadores do projeto</p>
       </div>
-      <div class="phase reveal reveal--r">
+      <div class="phase reveal">
         <p class="phase__n">06</p>
         <h3 class="phase__verb">Acompanhar</h3>
         <p class="phase__d">Ajustar, fortalecer e sustentar a evolução. Comportamento, cultura e gestão não se transformam numa ação isolada.</p>
