@@ -59,7 +59,7 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 | # | Seção | Fundo | Papel |
 | --- | --- | --- | --- |
 | 01 | Hero | Leveza | Tese + símbolo triádico arquitetônico (2 camadas, saindo pela viewport, deriva lenta) |
-| 02 | A origem | Névoa suave | Comparação editorial: **Indicadores = onde a empresa está** ↔ **Comportamentos = para onde a empresa está indo**, linha diagonal + bifurcação sutil (evolução ↗ / deterioração ↘). Síntese: "O futuro ainda não é um indicador. Ele está sendo construído nos comportamentos de hoje." Pergunta + CTA "Quero descobrir" → `/people` (futuro: diagnóstico) |
+| 02 | A origem | Névoa suave | Comparação editorial **sem linha diagonal** (só hierarquia/posição/espaço): **Indicadores = onde a empresa está** ↔ **Comportamentos = para onde a empresa está indo** + bifurcação sutil (evolução ↗ / deterioração ↘). Síntese: "O futuro ainda não é um indicador. Ele está sendo construído nos comportamentos de hoje." Pergunta + CTA "Quero descobrir" → `/people` (futuro: diagnóstico) |
 | 03 | Frase-conceito | **Raiz** | "Os números contam o que aconteceu…" — ~88vh, tipografia enorme |
 | 04 | O nosso olhar | Leveza | 5 linhas editoriais (botões), numeração 01–05. Ativar um item (hover no desktop, toque no mobile) reenquadra a **mesma** foto — "a empresa é a mesma, muda o olhar" |
 | 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll. EVP/branding/treinamento/cultura são ações possíveis, nunca etapas |
@@ -70,7 +70,11 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 | 10 | CTA final | **Espresso** | "Todo crescimento tem uma origem. Vamos encontrá-la." |
 | — | Rodapé | Espresso | Navegação, legal, social (em breve) |
 
-**Movimento (V2):** reveal com direção (esquerda/direita), deriva lenta e parallax mínimo no símbolo, linha do método preenchendo no scroll, marcador de capítulo no trilho lateral (A ORIGEM → O COMPORTAMENTO → O MÉTODO → PEOPLE + SELECT → O RESULTADO), hover editorial. Textura de papel fixa quase imperceptível. Tudo respeita `prefers-reduced-motion`; trilho some abaixo de 1120px.
+**Movimento (V2):** reveal com direção (esquerda/direita), deriva lenta e parallax mínimo no símbolo (só desktop), linha do método preenchendo no scroll, marcador de capítulo no trilho lateral (A ORIGEM → O COMPORTAMENTO → O MÉTODO → PEOPLE + SELECT → O RESULTADO), hover editorial. Textura de papel fixa quase imperceptível. Tudo respeita `prefers-reduced-motion`; trilho some abaixo de 1120px.
+
+**Mobile (template próprio, não "encolher o desktop"):** header enxuto (logo + hambúrguer ≥44px, tema ≥40px); trilho lateral removido; escala tipográfica com base menor (serifada grande preservada); seções empilham (A Origem: Indicadores → Comportamentos; Método: um passo por vez, sem offset horizontal; People/Select: dois blocos altos com cores próprias; Decisão: uma por bloco; Liberdade: texto → foto). "Nosso Olhar" no mobile: foto fixa (sticky) no topo + 5 botões; tocar reenquadra. CTAs largura total. Parallax off; fade/reveal mantidos. Padding lateral ~20–24px; `--pad-x` cai para 1.15rem abaixo de 380px; `small` do logo some abaixo de 380px.
+
+**Fotografia "Nosso Olhar" — 5 enquadramentos:** `--photo-pos` de 13%→92% e `--photo-scale` 1.0→1.62 (execução esq. fechado → relações extrema dir. → condução dir. mais fechado → cultura central leve → sistema 50% sem zoom). Transição 0,7s. Trocar o arquivo da foto quando a nova (empresa contemporânea, vidro/luz natural) chegar; ajustar só os % se necessário.
 
 **Fotografia (V2):** 3 momentos, com função narrativa distinta — **Foto 01** (Nosso olhar) = a organização/sistema; **Foto 02** (People) = as pessoas; **Foto 03** (Liberdade) = o empresário. Direção completa, especificação de cada slot e como trocar o arquivo em [`fotografia.md`](fotografia.md). Enquanto não há fotos reais, cada slot já tem dimensão final, crop, tratamento (`.photo__grade`), interação e responsivo — basta trocar `<div class="photo__img">` por `<img>`. Sem rótulos de placeholder na interface.
 
