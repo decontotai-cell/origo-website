@@ -54,19 +54,25 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 - Onboarding **não** é passo final: é uma das muitas ações que partem do diagnóstico, dentro do trabalho com a equipe.
 - Tema claro e escuro, ambos com contraste AA. Animações respeitam `prefers-reduced-motion`.
 
-## Hierarquia das seções
+## Hierarquia das seções — V2 (capítulos visuais + ritmo cromático)
 
-| # | Seção | Papel |
-| --- | --- | --- |
-| 01 | Hero | Tese: antes dos resultados existe o que os produz |
-| 02 | A origem | Indicadores (passado) × Comportamento (o que começa) |
-| 03 | O nosso olhar | "Analisamos comportamentos" — não começa pela liderança, começa no chão de fábrica + **O método** em 7 passos |
-| 04 | Duas vertentes | **central** — People × Select, dois territórios divididos por um filete |
-| 05 | Filosofia / Manifesto | Faixa Espresso, muito espaço negativo |
-| 06 | Resultado | "Devolvemos a liberdade…" com a ressalva |
-| 07 | People ou Select? | Interação A/B → revela a solução certa |
-| 08 | CTA final | "Todo crescimento tem uma origem. Vamos encontrá-la." |
-| — | Rodapé | Faixa Espresso, navegação, legal, social (em breve) |
+| # | Seção | Fundo | Papel |
+| --- | --- | --- | --- |
+| 01 | Hero | Leveza | Tese + símbolo triádico arquitetônico (2 camadas, saindo pela viewport, deriva lenta) |
+| 02 | A origem | Névoa suave | Eixo diagonal Indicadores (passado, baixo) ↔ Comportamento (adiante, alto), rótulos verticais |
+| 03 | Frase-conceito | **Raiz** | "Os números contam o que aconteceu…" — ~88vh, tipografia enorme |
+| 04 | O nosso olhar | Leveza | 5 linhas editoriais, numeração 01–05, hover mostra microtexto + quadro fotográfico que troca de legenda |
+| 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll |
+| 06 | Duas vertentes | People em Névoa/Linho · Select em Raiz/Espresso | Dois territórios de ~84vh lado a lado; hover expande ~55/45; empilham no mobile |
+| 07 | Manifesto | **Espresso** | 3 linhas preservadas + símbolo gigante fora da tela, opacidade 0.06 |
+| 08 | Devolvemos a liberdade | Linho | Composição assimétrica texto ~55% / foto ~45%; a foto "escapa" para a seção seguinte |
+| 09 | Decisão | Leveza | "Preciso olhar para dentro" / "Preciso encontrar quem vai chegar" — duas linhas grandes e clicáveis (sem "Opção A/B") |
+| 10 | CTA final | **Espresso** | "Todo crescimento tem uma origem. Vamos encontrá-la." |
+| — | Rodapé | Espresso | Navegação, legal, social (em breve) |
+
+**Movimento (V2):** reveal com direção (esquerda/direita), deriva lenta e parallax mínimo no símbolo, linha do método preenchendo no scroll, marcador de capítulo no trilho lateral (A ORIGEM → O COMPORTAMENTO → O MÉTODO → PEOPLE + SELECT → O RESULTADO), hover editorial. Textura de papel fixa quase imperceptível. Tudo respeita `prefers-reduced-motion`; trilho some abaixo de 1120px.
+
+**Fotografia (V2):** 3 momentos apenas — quadro do "Nosso olhar", território People, seção "Devolvemos a liberdade". Todos são **placeholders** com moldura fina, rótulo "FOTOGRAFIA EDITORIAL · PLACEHOLDER" e legenda do que a foto deve mostrar. Substituir por imagens reais respeitando o moodboard.
 
 ## Textos
 
@@ -83,6 +89,8 @@ da empresa, de baixo para cima").
 - **Contato** — sem e-mail, telefone, cidade ou endereço nos arquivos. `contato@origo.net.br` é placeholder.
 - **Redes sociais** — LinkedIn / Instagram sem URLs.
 - **Fundadora (Taiane)** — decidir se entra na Home ou só em "A Órigo".
-- **Método na Home** — 7 passos na seção 03, alinhados ao método oficial. O detalhamento de cada passo fica para `/people`. Confirmar redação.
+- **Método na Home (V2, revisado 30/08/2026)** — jornada de 6 macroetapas: **Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar**. Na interface: verbo grande + 1 frase-síntese + linha de palavras-chave. EVP, Employer Branding, cultura, treinamento, DISC etc. **não** são etapas — são ações possíveis que surgem do diagnóstico de cada empresa. Lógica implícita: "não chegamos com uma solução pronta; primeiro entendemos". Detalhe completo de cada fase fica para `/people`.
+- **Fotografia** — sem imagens reais ainda. Definir 3 fotos editoriais (Nosso olhar / People / Liberdade).
+- **Fontes da marca** — Nexa/Athena/Alamanda são licenciadas; o protótipo usa Fraunces + Manrope. Adquirir/instalar para o build definitivo.
 - **Números, clientes, cases, certificações** — nenhum foi inventado, conforme instruído.
 - **Política de Privacidade / Termos** — só rotas; conteúdo jurídico depois.
