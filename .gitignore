@@ -5,6 +5,15 @@
 /png sem fundo.png
 /origo_foto_*.png
 
+# --- Fontes sem licença comercial (NÃO versionar / NÃO publicar) ---
+# Nexa/Athena/Alamanda só entram em site/fonts/ quando forem .woff2 LICENCIADOS.
+/nexa/
+/athena/
+/alamanda/
+/*.ttf
+/*.otf
+FontsFree-Net-*
+
 # --- Artefatos de build ---
 *.b64.txt
 
