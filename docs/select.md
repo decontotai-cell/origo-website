@@ -55,3 +55,14 @@ Ferramentas/insumos ao longo do processo:
 
 Sem números de assertividade, taxas de conversão, tempo médio, cases ou clientes
 até que sejam fornecidos.
+
+## Contatos (fornecidos 31/08/2026)
+
+- E-mail: **origoelect@gmail.com** — ⚠️ conferir grafia (o Instagram é
+  `@origoselect`; o e-mail veio sem o "s"). Usar exatamente como fornecido
+  até o cliente confirmar.
+- Instagram: **@origoselect** — https://instagram.com/origoselect
+- WhatsApp/telefone: **(54) 99668-9010** (`wa.me/5554996689010`) —
+  provisório, o mesmo número da Órigo People por enquanto.
+- Aplicar no CTA e no rodapé quando a página for construída, no mesmo
+  padrão da People.
