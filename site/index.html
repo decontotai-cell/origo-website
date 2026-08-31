@@ -633,43 +633,54 @@
     .photo__img, .photo > img, .photo__grade { transition: none; }
   }
 
-  /* ================= 05 · O MÉTODO (jornada) ================= */
-  .journey {
-    position: relative; z-index: 2;
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    padding-left: clamp(1.4rem, 4vw, 2.5rem);
+  /* ================= 05 · O MÉTODO (síntese) ================= */
+  .mflow {
+    list-style: none; padding: 0;
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    position: relative;
   }
-  .journey__line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--hairline-strong); }
-  .journey__line::after {
-    content: ""; position: absolute; inset: 0 auto auto 0; width: 1px;
-    height: 100%; background: var(--accent-text);
-    transform: scaleY(var(--journey, 0)); transform-origin: top;
+  .mflow::before {
+    content: ""; position: absolute;
+    left: calc(100% / 12); right: calc(100% / 12); top: 9px;
+    height: 1px; background: var(--hairline-strong);
   }
-  .phase {
-    display: grid;
-    grid-template-columns: clamp(2.5rem, 6vw, 3.75rem) 1fr;
-    column-gap: clamp(1rem, 3vw, 2rem);
-    align-items: start;
-    padding: clamp(1.75rem, 4.5vw, 3rem) 0;
+  .mflow li {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem;
+    padding-right: 0.75rem; position: relative;
   }
-  .phase + .phase { border-top: 1px solid var(--hairline); }
-  .phase__n {
-    grid-column: 1; grid-row: 1;
-    font-family: "Fraunces", serif; font-weight: 400;
-    font-size: clamp(1rem, 1.5vw, 1.28rem); letter-spacing: 0.03em;
-    color: var(--accent-text); font-variant-numeric: tabular-nums;
-    padding-top: 0.3rem;
+  .mflow__ring {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1px solid var(--accent-text);
+    background: var(--ch-warm);
+    position: relative; z-index: 1; flex: none;
   }
-  .phase__verb, .phase__d, .phase__steps { grid-column: 2; }
-  .phase__verb {
-    font-family: "Fraunces", serif; font-weight: 300; font-size: clamp(1.8rem, 4.2vw, 2.9rem);
-    line-height: 1.05; margin: 0 0 0.7rem;
+  .mflow__n {
+    font-family: "Fraunces", serif; font-size: 0.8rem; letter-spacing: 0.06em;
+    color: var(--ink-soft); font-variant-numeric: tabular-nums;
   }
-  .phase__d { color: var(--ink-soft); max-width: 44ch; font-size: 0.97rem; }
-  .phase__steps {
-    margin-top: 0.9rem; font-size: 0.76rem; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--ink-soft);
+  .mflow__v {
+    font-family: "Fraunces", serif; font-weight: 300; line-height: 1.12;
+    font-size: clamp(1rem, 1.7vw, 1.4rem); color: var(--ink);
   }
+  .mflow__cta { margin-top: clamp(2.5rem, 6vw, 3.5rem); }
+  @media (max-width: 768px) {
+    .mflow { grid-template-columns: 1fr; margin-top: clamp(2rem, 8vw, 2.75rem); }
+    .mflow::before { left: 9px; right: auto; top: 10px; bottom: 10px; width: 1px; height: auto; }
+    .mflow li {
+      flex-direction: row; align-items: baseline; gap: 0.9rem;
+      padding: 0.6rem 0;
+    }
+    .mflow__ring { align-self: center; }
+    .mflow__n { order: 3; margin-left: auto; }
+  }
+
+  .terr-link { position: relative; z-index: 2; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .terr-link p {
+    font-family: "Fraunces", serif; font-weight: 300;
+    font-size: var(--s-1); line-height: 1.4; color: var(--ink-soft);
+  }
+  .terr-link b { font-weight: 500; font-style: italic; color: var(--ink); }
 
   /* ================= 06 · TERRITÓRIOS PEOPLE + SELECT ================= */
   .territories { position: relative; z-index: 2; display: flex; min-height: 84vh; }
@@ -847,12 +858,6 @@
     .btn { padding: 1rem 1.6rem; min-height: 3rem; }
     .origin__prompt .btn, .final .btn { width: 100%; justify-content: center; }
 
-    /* método: coluna única alinhada, número como pequena guia lateral */
-    .journey { padding-left: 1.15rem; }
-    .phase { grid-template-columns: 2.25rem 1fr; column-gap: 0.85rem; padding-block: 1.6rem; }
-    .phase__n { font-size: 0.95rem; padding-top: 0.25rem; }
-    .phase__verb { font-size: clamp(1.7rem, 8vw, 2.2rem); }
-    .phase__d { max-width: none; }
 
     /* territórios: blocos altos, cores próprias, CTAs grandes */
     .territories { min-height: 0; }
@@ -1094,57 +1099,29 @@
     </div>
   </section>
 
-  <!-- 05 · O MÉTODO -->
+  <!-- 05 · O MÉTODO (síntese — o detalhe vive na Órigo People) -->
   <section class="chapter chapter--warm" id="metodo" data-chapter="O método">
     <div class="wrap measure reveal">
       <p class="eyebrow">03 — O método</p>
       <h2>Não chegamos com uma solução pronta.</h2>
       <p class="lede">
-        O comportamento é uma das lentes — a atuação chega a pessoas, estrutura,
-        processos, liderança, RH e cultura. Primeiro entendemos a realidade;
-        depois estruturamos, desenvolvemos e consolidamos as mudanças, medindo e
-        acompanhando até se sustentarem sozinhas.
+        Existe um caminho — do diagnóstico ao acompanhamento contínuo. Seis passos
+        que se conectam. Cada um deles vive na Órigo People.
       </p>
     </div>
 
-    <div class="wrap journey">
-      <div class="journey__line" aria-hidden="true"></div>
-      <div class="phase reveal">
-        <p class="phase__n">01</p>
-        <h3 class="phase__verb">Diagnosticar</h3>
-        <p class="phase__d">Entender o cenário, identificar causas e definir prioridades. Não termina numa fotografia da empresa: gera diagnóstico, prioridades e plano de ação.</p>
-        <p class="phase__steps">O que acontece · Por que acontece · O que fazer</p>
-      </div>
-      <div class="phase reveal">
-        <p class="phase__n">02</p>
-        <h3 class="phase__verb">Estruturar</h3>
-        <p class="phase__d">Organizar pessoas, papéis, processos e práticas de gestão. As ações estruturais que o diagnóstico apontar — nunca um catálogo fixo de serviços.</p>
-        <p class="phase__steps">Pessoas · Papéis · Processos · Políticas</p>
-      </div>
-      <div class="phase reveal">
-        <p class="phase__n">03</p>
-        <h3 class="phase__verb">Desenvolver</h3>
-        <p class="phase__d">Preparar colaboradores, líderes, gestores e RH. Não só liderança e não só treinamento: o que a estratégia definida pedir.</p>
-        <p class="phase__steps">Colaboradores · Lideranças · Gestores · RH</p>
-      </div>
-      <div class="phase reveal">
-        <p class="phase__n">04</p>
-        <h3 class="phase__verb">Consolidar</h3>
-        <p class="phase__d">Transformar mudanças em cultura e práticas permanentes, até deixarem de depender da consultoria e passarem a fazer parte da empresa.</p>
-        <p class="phase__steps">Cultura · Rituais · Reconhecimento · Pertencimento</p>
-      </div>
-      <div class="phase reveal">
-        <p class="phase__n">05</p>
-        <h3 class="phase__verb">Mensurar</h3>
-        <p class="phase__d">Avaliar evolução e impacto por meio de indicadores — definidos para cada empresa, numa leitura de antes e depois. Sem resultado universal.</p>
-        <p class="phase__steps">Antes · Depois · Indicadores do projeto</p>
-      </div>
-      <div class="phase reveal">
-        <p class="phase__n">06</p>
-        <h3 class="phase__verb">Acompanhar</h3>
-        <p class="phase__d">Ajustar, fortalecer e sustentar a evolução. Comportamento, cultura e gestão não se transformam numa ação isolada.</p>
-        <p class="phase__steps">Aplicação · Correção de rota · Continuidade</p>
-      </div>
+    <div class="wrap reveal">
+      <ol class="mflow">
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">01</span><span class="mflow__v">Diagnosticar</span></li>
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">02</span><span class="mflow__v">Estruturar</span></li>
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">03</span><span class="mflow__v">Desenvolver</span></li>
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">04</span><span class="mflow__v">Consolidar</span></li>
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">05</span><span class="mflow__v">Mensurar</span></li>
+        <li><span class="mflow__ring" aria-hidden="true"></span><span class="mflow__n">06</span><span class="mflow__v">Acompanhar</span></li>
+      </ol>
+      <a class="btn btn--solid mflow__cta" href="/people" data-route>Ver o método na Órigo People
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </section>
 
@@ -1187,10 +1164,10 @@
         <div class="terr__top">
           <span class="terr__label">Órigo Select</span>
           <span class="terr__title">Encontrar quem precisa chegar.</span>
-          <span class="terr__sub">Recrutamento e seleção estratégico — para identificar, avaliar e selecionar profissionais com profundidade e aderência ao momento do negócio.</span>
+          <span class="terr__sub">Recrutamento e seleção estratégico, focado em assertividade: traçamos o perfil ideal da vaga e só encaminhamos quem dá match — para o cliente não perder tempo com a pessoa errada, e o profissional chegar numa vaga com a cara dele.</span>
           <span class="terr__verbs">
-            <span>Identificar</span><span>Avaliar</span><span>Compreender</span>
-            <span>Selecionar</span><span>Conectar</span><span>Acompanhar</span>
+            <span>Perfil da vaga</span><span>Assessments</span><span>Comportamento</span>
+            <span>Competências</span><span>Match</span><span>Conversão</span>
           </span>
         </div>
         <span class="terr__ctas">
@@ -1198,6 +1175,14 @@
           <span class="terr__cta">Ver oportunidades</span>
         </span>
       </a>
+    </div>
+
+    <div class="wrap measure terr-link reveal">
+      <p>
+        <b>Uma complementa a outra.</b> A People fortalece e organiza quem já está
+        na empresa; a Select traz quem ainda falta, no lugar certo. Juntas, cuidam
+        de toda a estrutura humana do negócio.
+      </p>
     </div>
   </section>
 
@@ -1331,11 +1316,10 @@
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 
-  /* header + rail + jornada + parallax (um só handler) */
+  /* header + rail + parallax (um só handler) */
   var header = document.querySelector(".site-header");
   var railFill = document.querySelector(".rail__fill");
   var railChapter = document.querySelector("[data-rail]");
-  var journey = document.querySelector(".journey");
   var glyphFar = document.querySelectorAll(".glyph--far");
   var manifestoGlyph = document.querySelectorAll(".manifesto__glyph");
   var wideEnough = window.matchMedia("(min-width: 861px)").matches;
@@ -1347,14 +1331,6 @@
     header.setAttribute("data-scrolled", y > 12 ? "true" : "false");
     var h = document.documentElement.scrollHeight - window.innerHeight;
     railFill.style.setProperty("--progress", h > 0 ? (y / h).toFixed(4) : 0);
-
-    if (journey) {
-      var r = journey.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var total = r.height + vh * 0.6;
-      var p = (vh * 0.7 - r.top) / total;
-      journey.style.setProperty("--journey", Math.max(0, Math.min(1, p)).toFixed(4));
-    }
 
     if (!reduce && wideEnough) {
       glyphFar.forEach(function (g) { g.style.marginTop = (y * -0.03).toFixed(1) + "px"; });

@@ -62,8 +62,8 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 | 02 | A origem | Névoa suave | Comparação editorial **sem linha diagonal** (só hierarquia/posição/espaço): **Indicadores = onde a empresa está** ↔ **Comportamentos = para onde a empresa está indo** + bifurcação sutil (evolução ↗ / deterioração ↘). Síntese: "O futuro ainda não é um indicador. Ele está sendo construído nos comportamentos de hoje." Pergunta + CTA "Quero descobrir" → `/people` (futuro: diagnóstico) |
 | 03 | Frase-conceito | **Raiz** | "Os números contam o que aconteceu…" — ~88vh, tipografia enorme |
 | 04 | O nosso olhar | Leveza | 5 linhas editoriais (botões), numeração 01–05. Ativar um item (hover no desktop, toque no mobile) reenquadra a **mesma** foto — "a empresa é a mesma, muda o olhar" |
-| 05 | O método | Linho | Jornada: Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar, com linha que preenche no scroll. EVP/branding/treinamento/cultura são ações possíveis, nunca etapas |
-| 06 | Duas vertentes | People em Névoa/Linho · Select em Raiz/Espresso | Dois territórios de ~84vh lado a lado; hover expande ~55/45; empilham no mobile |
+| 05 | O método | Linho | **Síntese apenas:** os 6 verbos (Diagnosticar · Estruturar · Desenvolver · Consolidar · Mensurar · Acompanhar) como anéis conectados por um fio (círculos da marca) + CTA "Ver o método na Órigo People". O detalhe de cada passo NÃO fica na Home — vive em `/people` |
+| 06 | Duas vertentes | People em Névoa/Linho · Select em Raiz/Espresso | Dois territórios de ~84vh lado a lado; hover expande ~55/45; empilham no mobile. Fecha com a frase de **complementaridade** (People fortalece quem está · Select traz quem falta · juntas = estrutura humana completa). Detalhe de Select em [`select.md`](select.md) |
 | 07 | Manifesto | **Espresso** | 3 linhas preservadas + símbolo gigante fora da tela, opacidade 0.06 |
 | 08 | Devolvemos a liberdade | Linho | Composição assimétrica texto ~55% / foto ~45%; a foto "escapa" para a seção seguinte |
 | 09 | Decisão | Leveza | "Preciso olhar para dentro" / "Preciso encontrar quem vai chegar" — duas linhas grandes e clicáveis (sem "Opção A/B") |
