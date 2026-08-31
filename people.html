@@ -16,15 +16,47 @@
 <link rel="stylesheet" href="origo.css" />
 
 <style>
-  /* ===== Órigo People — regras específicas da página ===== */
+  /* ===================================================================
+     ÓRIGO PEOPLE — regras próprias da página
+     (herda tokens, header, footer, .btn, .chapter, .reveal de origo.css)
+     =================================================================== */
+
+  /* ---------- GRID / ALINHAMENTO (desktop) ----------
+     Uma única margem: todo conteúdo — eyebrow, título, parágrafo, método,
+     blocos editoriais — começa na mesma borda esquerda. O texto corrido
+     fica limitado à medida de leitura, mas alinhado (não centralizado). */
+  @media (min-width: 769px) {
+    .p-hero .wrap.measure,
+    .chapter > .wrap.measure { max-width: var(--wrap); }
+    .p-hero .wrap.measure > :is(p, ul, ol),
+    .chapter > .wrap.measure > :is(p, ul, ol) { max-width: var(--measure); }
+    .respiro > .wrap { width: 100%; margin-inline: auto; }
+  }
+
+  /* ---------- HERO ---------- */
+  .p-hero { position: relative; overflow: clip; }
+  .p-hero .wrap { position: relative; z-index: 2; }
+  .p-hero__glyph {
+    position: absolute; z-index: 1; pointer-events: none;
+    width: min(50vw, 600px); right: -13vw; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.09;
+    animation: pheroDrift 30s ease-in-out infinite alternate;
+  }
+  @keyframes pheroDrift {
+    from { transform: translateY(-50%) translate(0, -12px) rotate(-2deg); }
+    to   { transform: translateY(-50%) translate(-16px, 12px) rotate(2deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .p-hero__glyph { animation: none; } }
+
+  .p-rule { width: 3rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.6rem; }
   .p-h1 {
     font-family: var(--font-display); font-weight: 300;
-    font-size: var(--s-4); line-height: 1.05; letter-spacing: -0.015em;
-    text-wrap: balance; margin: 1.1rem 0 0;
+    font-size: var(--s-4); line-height: 1.03; letter-spacing: -0.02em;
+    text-wrap: balance; margin: 1.1rem 0 0; max-width: 15ch;
   }
   .p-h1 em { font-style: italic; color: var(--accent-text); font-weight: 400; }
-  .p-hero-actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
-  .p-back { font-size: 0.82rem; color: var(--ink-faint); }
+  .p-hero-actions { margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
   .pnote {
     font-size: 0.82em; color: var(--mist-inkable);
@@ -32,29 +64,56 @@
     padding: 0.05em 0.4em; border-radius: 3px; white-space: nowrap;
   }
 
-  /* listas editoriais (sinais / o que muda) */
-  .plist { list-style: none; margin: clamp(2rem, 5vw, 3rem) 0 0; padding: 0; border-top: 1px solid var(--hairline-strong); }
-  .plist li {
-    padding: clamp(1.1rem, 3vw, 1.6rem) 0;
-    border-bottom: 1px solid var(--hairline);
-    font-family: var(--font-display); font-weight: 300;
-    font-size: clamp(1.15rem, 2.4vw, 1.7rem); line-height: 1.28; color: var(--ink);
+  /* ---------- 01 · QUANDO FAZ SENTIDO ---------- */
+  .situ-list {
+    position: relative; z-index: 2;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--hairline-strong);
   }
-  .plist li b { font-weight: 500; color: var(--ink); }
-  .plist--change li { font-size: clamp(1.05rem, 2vw, 1.4rem); }
+  .situ {
+    padding: clamp(1.8rem, 4.5vw, 3rem) 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .situ__line {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.4rem, 3.2vw, 2.15rem); line-height: 1.16;
+    color: var(--ink); text-wrap: balance;
+  }
+  .situ__note {
+    color: var(--ink-soft); font-size: 0.96rem; line-height: 1.6;
+    margin-top: 0.65rem; max-width: 54ch;
+  }
+  @media (min-width: 769px) {
+    .situ {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+      column-gap: clamp(2rem, 5vw, 4rem);
+      align-items: baseline;
+    }
+    .situ__note { margin-top: 0.2rem; }
+  }
 
-  /* ===== O MÉTODO ===== */
+  /* ---------- 02 · O MÉTODO ---------- */
   .mmethod {
     position: relative; z-index: 2;
     margin-top: clamp(2.5rem, 6vw, 4rem);
   }
-  .mmethod__line { position: absolute; left: 13px; top: 1.6rem; bottom: 2.5rem; width: 1px; background: var(--hairline-strong); }
+  .mmethod__line {
+    position: absolute; left: 13px; top: 1.6rem; bottom: 2.5rem;
+    width: 1px; background: var(--hairline-strong);
+  }
   .mmethod__fill {
     position: absolute; inset: 0 auto auto 0; width: 1px; height: 100%;
-    background: var(--accent-text); transform: scaleY(var(--mprogress, 0)); transform-origin: top;
+    background: var(--accent-text);
+    transform: scaleY(var(--mprogress, 0)); transform-origin: top;
+    transition: transform 0.15s linear;
   }
-  .mstep { border-top: 1px solid var(--hairline); }
+  @media (prefers-reduced-motion: reduce) { .mmethod__fill { transition: none; } }
+
+  .mstep { border-top: 1px solid var(--hairline); position: relative; }
   .mstep:first-child { border-top: none; }
+
+  /* base = MOBILE (acordeão) — não alterar nesta rodada */
   .mstep__toggle {
     appearance: none; -webkit-appearance: none; background: none; border: 0;
     width: 100%; text-align: left; color: inherit; font: inherit; cursor: pointer;
@@ -86,17 +145,17 @@
   }
   .mstep__chev {
     grid-column: 4; grid-row: 1; width: 22px; height: 22px; margin-top: 0.3rem;
-    color: var(--ink-faint); transition: transform 0.4s var(--ease);
+    color: var(--ink-faint); transition: transform 0.4s var(--ease); flex: none;
   }
   .mstep[data-open="true"] .mstep__chev { transform: rotate(180deg); }
-
+  /* acordeão mobile: max-height (anima de forma confiável neste layout) */
   .mstep__detail {
     grid-column: 3; grid-row: 3;
-    display: grid; grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s var(--ease);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
   }
-  .mstep__inner { overflow: hidden; }
-  .mstep[data-open="true"] .mstep__detail { grid-template-rows: 1fr; }
+  .mstep[data-open="true"] .mstep__detail { max-height: 900px; }
+  @media (prefers-reduced-motion: reduce) { .mstep__detail { transition: none; } }
   .mstep__inner > .body-copy:first-child { margin-top: 0.9rem; }
   .mstep__inner > .body-copy { max-width: 48ch; }
   .mstep__inner b { font-weight: 600; color: var(--ink); }
@@ -105,26 +164,107 @@
     font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
   }
 
-  /* Desktop: cada passo é um momento — tudo aberto, sem acordeão */
+  /* DESKTOP — grade de 2 colunas de verdade: [trilho 80px] [conteúdo 64ch] */
   @media (min-width: 769px) {
-    .mmethod { padding-left: clamp(0.5rem, 2vw, 1.5rem); }
-    .mmethod__line { left: 13px; top: 3.5rem; }
-    .mstep__toggle {
-      cursor: default;
-      grid-template-columns: 26px auto minmax(0, 1fr);
-      padding: clamp(3.5rem, 9vw, 7rem) 0 0;
+    /* a linha vive na coluna 1: alinhada à borda da grade (= centro dos nós).
+       o JS ajusta a altura para terminar exatamente no último nó;
+       o 'bottom' abaixo é só fallback sem-JS. */
+    .mmethod__line { left: var(--pad-x); top: clamp(2rem, 4vw, 3rem); bottom: clamp(6rem, 12vw, 9rem); }
+
+    .mstep {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 64ch);
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(2.5rem, 5vw, 4rem);
+    }
+    .mstep:first-child { padding-top: clamp(2.5rem, 5vw, 3.5rem); }
+
+    .mstep__toggle { display: contents; cursor: default; }
+
+    .mstep__node {
+      position: absolute; left: 0; transform: translateX(-50%);
+      margin-top: 0; width: 24px; height: 24px;
+      box-shadow: 0 0 0 8px var(--ch-warm); z-index: 2;
+      top: clamp(4rem, 8vw, 7rem);
+    }
+    .mstep:first-child .mstep__node { top: clamp(2.5rem, 5vw, 3.5rem); }
+
+    .mstep__n {
+      grid-column: 1; grid-row: 1;
+      justify-self: end; align-self: start; padding-top: 0.75rem;
+      font-size: 1rem; color: var(--ink-faint);
+      transition: color 0.45s var(--ease);
+    }
+    .mstep.is-active .mstep__n { color: var(--accent-text); }
+
+    .mstep__verb {
+      grid-column: 2; grid-row: 1;
+      font-size: var(--s-3); letter-spacing: -0.02em; color: var(--ink);
+      transition: color 0.45s var(--ease);
+    }
+    .mstep.is-active .mstep__verb { color: var(--accent-text); }
+
+    .mstep__lead {
+      grid-column: 2; grid-row: 2;
+      font-family: var(--font-display); font-weight: 300;
+      font-size: var(--s-1); line-height: 1.32; color: var(--ink);
+      margin-top: 0.95rem; max-width: 36ch;
     }
     .mstep__chev { display: none; }
-    .mstep__verb { font-size: var(--s-3); }
-    .mstep__lead { font-size: var(--s-1); color: var(--ink); margin-top: 0.8rem; }
-    .mstep__detail { grid-template-rows: 1fr; }
-    .mstep__inner { overflow: visible; }
-    .mstep__inner > .body-copy:first-child { margin-top: 1.4rem; }
+
+    .mstep__detail {
+      grid-column: 2; grid-row: 3;
+      max-height: none; overflow: visible;
+    }
+    .mstep__inner { max-width: 64ch; }
+    .mstep__inner > .body-copy { font-size: 1rem; line-height: 1.72; margin-top: 1.5rem; }
+    .mstep__inner > .body-copy:first-child { margin-top: 1.6rem; }
+    .mstep__tags { margin-top: 1.8rem; padding-bottom: 0; }
+  }
+
+  /* ---------- RESPIRO (faixa Raiz entre Método e O que muda) ---------- */
+  .respiro { min-height: 58vh; display: flex; align-items: center; }
+  .respiro__phrase {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: var(--s-4); line-height: 1.14; letter-spacing: -0.015em;
+    max-width: 22ch; color: var(--on-raiz);
+  }
+  .respiro__phrase em { font-style: italic; color: #C9D9E0; }
+
+  /* ---------- 03 · O QUE MUDA (pares antes → depois) ---------- */
+  .shifts {
+    position: relative; z-index: 2;
+    display: grid; gap: clamp(2.75rem, 6vw, 4.75rem);
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+  .shift__pair {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.5rem, 3.4vw, 2.25rem); line-height: 1.12;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.9rem;
+  }
+  .shift__from { color: var(--ink-faint); }
+  .shift__arrow { color: var(--accent-text); font-size: 0.7em; }
+  .shift__to { color: var(--ink); }
+  .shift__note {
+    color: var(--ink-soft); font-size: 0.95rem; line-height: 1.6;
+    margin-top: 0.75rem; max-width: 50ch;
+  }
+  @media (min-width: 769px) {
+    .shift:nth-child(even) { margin-left: clamp(2rem, 10vw, 7rem); }
+  }
+
+  /* ---------- CTA ---------- */
+  @media (min-width: 769px) {
+    .final h2 { max-width: 20ch; }
+    .final .btn { margin-top: 3rem; padding: 1.1rem 2rem; font-size: 0.95rem; }
   }
 
   @media (max-width: 768px) {
+    .p-hero__glyph { width: 148px; right: -18px; top: -8px; transform: none; opacity: 0.1; }
     .p-hero-actions .btn { flex: 1 1 100%; justify-content: center; }
     .final .btn { width: 100%; justify-content: center; }
+    .respiro { min-height: 0; }
   }
 </style>
 </head>
@@ -179,8 +319,10 @@
 <main id="conteudo">
 
   <!-- HERO -->
-  <section class="chapter" id="topo" data-chapter="Órigo People" style="padding-block: clamp(3.5rem,9vw,6rem) clamp(2rem,6vw,3.5rem)">
+  <section class="chapter p-hero" id="topo" data-chapter="Órigo People" style="padding-block: clamp(3.5rem,9vw,6rem) clamp(2rem,6vw,3.5rem)">
+    <img class="p-hero__glyph" src="brand/symbol.png" alt="" aria-hidden="true" />
     <div class="wrap measure reveal">
+      <span class="p-rule" aria-hidden="true"></span>
       <p class="eyebrow">Órigo People</p>
       <h1 class="p-h1">Olhar para dentro da organização.</h1>
       <p class="lede">
@@ -208,16 +350,34 @@
       <p class="eyebrow">01 — Quando faz sentido</p>
       <h2>Alguns sinais que a empresa costuma reconhecer.</h2>
     </div>
-    <div class="wrap reveal">
-      <ul class="plist">
-        <li>O dono vive apagando incêndio, e sobra pouco tempo para pensar no futuro.</li>
-        <li>Rotatividade, conflito entre áreas, retrabalho — e a sensação de que ninguém assume.</li>
-        <li>A empresa cresceu (o marketing e as vendas funcionaram), mas a operação não deu conta de entregar.</li>
-        <li>O time cumpre tarefa, mas não se sente parte. Falta pertencimento.</li>
-        <li>Já se investe em processo e tecnologia, mas o resultado não acompanha.</li>
-        <li>As decisões importantes ainda passam todas pelo dono.</li>
-      </ul>
-      <p class="body-copy measure">
+    <div class="wrap situ-list reveal">
+      <div class="situ">
+        <p class="situ__line">O dono vive apagando incêndio.</p>
+        <p class="situ__note">Sobra pouco tempo e pouca energia para pensar no futuro do negócio.</p>
+      </div>
+      <div class="situ">
+        <p class="situ__line">Ninguém assume o que dá errado.</p>
+        <p class="situ__note">Rotatividade, conflito entre áreas e retrabalho viram rotina.</p>
+      </div>
+      <div class="situ">
+        <p class="situ__line">A empresa cresceu, mas não deu conta de entregar.</p>
+        <p class="situ__note">O marketing e as vendas funcionaram; a operação não acompanhou.</p>
+      </div>
+      <div class="situ">
+        <p class="situ__line">O time cumpre tarefa, mas não se sente parte.</p>
+        <p class="situ__note">Falta pertencimento — e isso aparece no resultado.</p>
+      </div>
+      <div class="situ">
+        <p class="situ__line">Investe-se em processo e tecnologia, e o resultado não acompanha.</p>
+        <p class="situ__note">O que trava está no comportamento, não na ferramenta.</p>
+      </div>
+      <div class="situ">
+        <p class="situ__line">Toda decisão importante ainda passa pelo dono.</p>
+        <p class="situ__note">A estrutura não sustenta a empresa sozinha.</p>
+      </div>
+    </div>
+    <div class="wrap measure reveal">
+      <p class="body-copy">
         A Órigo People costuma fazer mais sentido para empresas que já têm alguma
         estrutura para desenvolver <span class="pnote">porte a validar</span> e que
         enxergam pessoas como parte da estratégia, não como custo. Não é para quem
@@ -255,13 +415,13 @@
             projeto, pode observar cultura real e cultura desejada, comportamento,
             relações, comunicação, liderança, estrutura, papéis e
             responsabilidades, processos de gestão de pessoas, percepção dos
-            colaboradores, dinâmica das equipes, indicadores existentes, gargalos,
-            conflitos, riscos e causas-raiz.
+            colaboradores, indicadores existentes, gargalos, conflitos, riscos e
+            causas-raiz.
           </p>
           <p class="body-copy">
             Ao final, três entregas: <b>diagnóstico</b>, <b>prioridades</b> e
-            <b>plano de ação</b>. Precisamos conseguir responder: o que está
-            acontecendo? por que está acontecendo? o que precisa ser feito primeiro?
+            <b>plano de ação</b>. Precisamos conseguir responder o que está
+            acontecendo, por que está acontecendo e o que fazer primeiro.
           </p>
           <p class="mstep__tags">O que acontece · Por que acontece · O que fazer</p>
         </div></div>
@@ -277,16 +437,11 @@
         </button>
         <div class="mstep__detail"><div class="mstep__inner">
           <p class="body-copy">
-            A partir do diagnóstico, as ações estruturais necessárias. Pode
-            envolver reposicionamento de pessoas, aderência entre perfil e função,
-            cargos e responsabilidades, estrutura de liderança, organização do RH,
-            processos e fluxos, comunicação interna, políticas, jornada do
-            colaborador, EVP e employer branding — e o que mais o diagnóstico
-            apontar.
-          </p>
-          <p class="body-copy">
-            Não é um catálogo fixo de serviços: cada intervenção nasce do que foi
-            identificado, na medida daquela empresa.
+            As ações estruturais nascem do diagnóstico — não de um catálogo fixo de
+            serviços. Podem envolver reposicionamento de pessoas, aderência entre
+            perfil e função, cargos e responsabilidades, estrutura de liderança,
+            organização do RH, processos e fluxos, comunicação interna, políticas,
+            jornada do colaborador, EVP e employer branding.
           </p>
           <p class="mstep__tags">Pessoas · Papéis · Processos · Políticas</p>
         </div></div>
@@ -302,15 +457,11 @@
         </button>
         <div class="mstep__detail"><div class="mstep__inner">
           <p class="body-copy">
-            Não desenvolvemos só líderes. As ações podem envolver colaboradores,
+            A Órigo não trabalha apenas liderança, e não vende só treinamento.
+            As ações dependem da estratégia definida e podem envolver colaboradores,
             lideranças imediatas, coordenadores, gestores, RH e a direção quando
-            necessário. Podem incluir treinamentos, formações, desenvolvimento por
-            competências, comunicação, feedback, autonomia, responsabilidade,
-            gestão de conflitos, tomada de decisão e aplicação prática.
-          </p>
-          <p class="body-copy">
-            Treinamento não é o produto central — é uma das ações possíveis depois
-            do diagnóstico e da estratégia definida.
+            necessário — em formações, desenvolvimento por competências, feedback,
+            autonomia, gestão de conflitos, tomada de decisão e aplicação prática.
           </p>
           <p class="mstep__tags">Colaboradores · Lideranças · Gestores · RH</p>
         </div></div>
@@ -321,20 +472,15 @@
           <span class="mstep__node" aria-hidden="true"></span>
           <span class="mstep__n">04</span>
           <span class="mstep__verb">Consolidar</span>
-          <span class="mstep__lead">Transformar as mudanças em cultura e prática permanente.</span>
+          <span class="mstep__lead">Transformar as mudanças em cultura e práticas permanentes.</span>
           <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="mstep__detail"><div class="mstep__inner">
           <p class="body-copy">
-            Não basta diagnosticar, reorganizar ou treinar: as mudanças precisam
-            fazer parte de como a empresa funciona. Pode envolver cultura
-            organizacional, EVP, employer branding, valores vividos, comportamentos
-            esperados, comunicação interna, rituais, reconhecimento, experiência do
-            colaborador, políticas, processos e práticas de liderança.
-          </p>
-          <p class="body-copy">
-            A ideia central: a mudança deixa de depender da consultoria e passa a
-            fazer parte da empresa.
+            As mudanças precisam fazer parte de como a empresa funciona, não
+            depender da consultoria. Pode envolver cultura, EVP, employer branding,
+            comunicação, rituais, reconhecimento, políticas, processos, práticas de
+            liderança e pertencimento — sem virar catálogo.
           </p>
           <p class="mstep__tags">Cultura · Rituais · Reconhecimento · Pertencimento</p>
         </div></div>
@@ -351,12 +497,11 @@
         <div class="mstep__detail"><div class="mstep__inner">
           <p class="body-copy">
             Sempre que fizer sentido, uma leitura de <b>antes e depois</b>. Os
-            indicadores dependem do projeto e podem incluir turnover, absenteísmo,
+            indicadores são definidos conforme o projeto — turnover, absenteísmo,
             clima, engajamento, desempenho, produtividade, conflitos, retrabalho,
-            adesão aos processos, evolução das equipes, percepção das lideranças e
-            indicadores específicos definidos para cada organização.
+            adesão aos processos, evolução das equipes, percepção das lideranças.
+            Sem prometer resultados universais.
           </p>
-          <p class="body-copy">Sem prometer resultados universais.</p>
           <p class="mstep__tags">Antes · Depois · Indicadores do projeto</p>
         </div></div>
       </article>
@@ -371,16 +516,11 @@
         </button>
         <div class="mstep__detail"><div class="mstep__inner">
           <p class="body-copy">
-            A transformação não termina depois de uma intervenção. Acompanhamos a
-            aplicação das mudanças, a resposta das equipes, a atuação das
-            lideranças, a sustentação pelo RH, a evolução dos indicadores, novos
-            gargalos, necessidade de reforço e correções de rota. Pode envolver
-            reuniões, novas avaliações, análise de indicadores, feedbacks e revisão
-            de ações.
-          </p>
-          <p class="body-copy">
-            Comportamento, cultura e gestão não se transformam numa ação isolada —
-            precisam ser observados, fortalecidos e ajustados ao longo do tempo.
+            A transformação continua sendo observada, medida e ajustada. Acompanhamos
+            a aplicação das mudanças, a resposta das equipes, a atuação das
+            lideranças, a sustentação pelo RH, a evolução dos indicadores e as
+            correções de rota. Comportamento, cultura e gestão não se transformam
+            numa ação isolada.
           </p>
           <p class="mstep__tags">Aplicação · Correção de rota · Continuidade</p>
         </div></div>
@@ -388,22 +528,44 @@
     </div>
   </section>
 
+  <!-- RESPIRO -->
+  <section class="chapter chapter--raiz respiro" data-chapter="O método">
+    <div class="wrap reveal">
+      <p class="eyebrow">A lógica</p>
+      <p class="respiro__phrase">
+        Não chegamos com uma solução pronta. <em>A ação nasce daquilo que a empresa revela.</em>
+      </p>
+    </div>
+  </section>
+
   <!-- 03 — O QUE MUDA -->
   <section class="chapter" data-chapter="O que muda">
     <div class="wrap measure reveal">
       <p class="eyebrow">03 — O que muda</p>
-      <h2>O que a empresa costuma sentir depois.</h2>
-      <p class="lede">Sem promessa de resultado garantido — o que a atuação busca:</p>
+      <h2>A transformação que a consultoria busca construir.</h2>
+      <p class="lede">Sem promessa de resultado garantido — a direção do trabalho:</p>
     </div>
-    <div class="wrap reveal">
-      <ul class="plist plist--change">
-        <li><b>Pessoas com clareza.</b> Cada um entende o próprio papel e o impacto que gera.</li>
-        <li><b>Menos incêndio.</b> Conflitos e desalinhamentos são tratados na causa, antes de virar prejuízo.</li>
-        <li><b>Cultura vivida.</b> Valores e comportamentos esperados aparecem na prática, não só no mural.</li>
-        <li><b>Lideranças mais preparadas.</b> Os líderes imediatos conduzem e sustentam o que foi construído.</li>
-        <li><b>RH no comando da continuidade.</b> A empresa segue sem depender da consultoria.</li>
-        <li><b>O dono de volta à estratégia.</b> Tempo e energia para crescimento, cultura e inovação — não para apagar fogo.</li>
-      </ul>
+    <div class="wrap shifts reveal">
+      <div class="shift">
+        <p class="shift__pair"><span class="shift__from">Centralização</span><span class="shift__arrow">&rarr;</span><span class="shift__to">Autonomia</span></p>
+        <p class="shift__note">As decisões deixam de passar todas pelo dono.</p>
+      </div>
+      <div class="shift">
+        <p class="shift__pair"><span class="shift__from">Reação</span><span class="shift__arrow">&rarr;</span><span class="shift__to">Prevenção</span></p>
+        <p class="shift__note">As causas são tratadas antes de virarem prejuízo.</p>
+      </div>
+      <div class="shift">
+        <p class="shift__pair"><span class="shift__from">Cultura declarada</span><span class="shift__arrow">&rarr;</span><span class="shift__to">Cultura vivida</span></p>
+        <p class="shift__note">Valores e comportamentos aparecem na prática, não só no mural.</p>
+      </div>
+      <div class="shift">
+        <p class="shift__pair"><span class="shift__from">Papéis difusos</span><span class="shift__arrow">&rarr;</span><span class="shift__to">Responsabilidade clara</span></p>
+        <p class="shift__note">Cada um entende o impacto que gera no resultado.</p>
+      </div>
+      <div class="shift">
+        <p class="shift__pair"><span class="shift__from">Dependência da consultoria</span><span class="shift__arrow">&rarr;</span><span class="shift__to">Continuidade pelo RH</span></p>
+        <p class="shift__note">A empresa sustenta a mudança sozinha.</p>
+      </div>
     </div>
   </section>
 
@@ -477,7 +639,25 @@
   var railFill = document.querySelector(".rail__fill");
   var railChapter = document.querySelector("[data-rail]");
   var mmethod = document.querySelector(".mmethod");
+  var mline = document.querySelector(".mmethod__line");
+  var dtop = window.matchMedia("(min-width: 769px)");
   var ticking = false;
+
+  /* no desktop a linha termina no centro do último nó — nunca "solta" no vazio */
+  function sizeMethodLine() {
+    if (!mmethod || !mline) return;
+    if (!dtop.matches) { mline.style.height = ""; return; }
+    var nodes = mmethod.querySelectorAll(".mstep__node");
+    if (!nodes.length) return;
+    var base = mline.getBoundingClientRect().top;
+    var last = nodes[nodes.length - 1].getBoundingClientRect();
+    var h = Math.max(0, (last.top + last.height / 2) - base);
+    if (Math.abs(parseFloat(mline.style.height || 0) - h) > 1) mline.style.height = h + "px";
+  }
+  window.addEventListener("load", function () { sizeMethodLine(); setTimeout(sizeMethodLine, 1000); });
+  dtop.addEventListener("change", sizeMethodLine);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeMethodLine);
+  sizeMethodLine();
 
   function frame() {
     ticking = false;
@@ -488,13 +668,15 @@
     if (mmethod) {
       var r = mmethod.getBoundingClientRect();
       var vh = window.innerHeight;
-      var p = (vh * 0.65 - r.top) / (r.height + vh * 0.5);
+      var p = (vh * 0.62 - r.top) / (r.height + vh * 0.4);
       mmethod.style.setProperty("--mprogress", Math.max(0, Math.min(1, p)).toFixed(4));
+      sizeMethodLine();
+      markActiveStep();
     }
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", frame);
+  window.addEventListener("resize", function () { frame(); sizeMethodLine(); });
   frame();
 
   var reveals = [].slice.call(document.querySelectorAll(".reveal"));
@@ -535,9 +717,31 @@
     chapterSections.forEach(function (s) { cio.observe(s); });
   }
 
-  /* método: acordeão no mobile, tudo aberto no desktop (CSS) */
+  /* etapa ativa do método (desktop) — microcontraste no verbo.
+     dirigido pelo scroll (confiável): a etapa cujo verbo está mais perto
+     da linha de leitura recebe .is-active. */
+  var steps = [].slice.call(document.querySelectorAll(".mstep"));
+  function markActiveStep() {
+    if (!steps || !steps.length) return;
+    if (!dtop.matches) {
+      steps.forEach(function (s) { s.classList.remove("is-active"); });
+      return;
+    }
+    var focus = window.innerHeight * 0.4;
+    var best = null, bestDist = Infinity;
+    steps.forEach(function (s) {
+      var v = s.querySelector(".mstep__verb").getBoundingClientRect();
+      var d = Math.abs((v.top + v.height / 2) - focus);
+      if (v.top < window.innerHeight && v.bottom > 0 && d < bestDist) { bestDist = d; best = s; }
+    });
+    steps.forEach(function (s) { s.classList.toggle("is-active", s === best); });
+  }
+  markActiveStep();
+  dtop.addEventListener("change", markActiveStep);
+
+  /* método: acordeão SÓ no mobile (max-height via CSS); desktop = tudo aberto */
   var mq = window.matchMedia("(max-width: 768px)");
-  [].slice.call(document.querySelectorAll(".mstep")).forEach(function (step) {
+  steps.forEach(function (step) {
     var btn = step.querySelector(".mstep__toggle");
     btn.addEventListener("click", function () {
       if (!mq.matches) return;
@@ -560,7 +764,6 @@
   document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
   mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
 
-  /* rotas ainda não construídas -> toast */
   var toast = document.querySelector(".toast");
   var toastCode = toast.querySelector("code");
   var toastTimer;
