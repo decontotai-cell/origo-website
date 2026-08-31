@@ -158,63 +158,79 @@
     font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
   }
 
-  /* DESKTOP — grade de 2 colunas de verdade: [trilho 80px] [conteúdo 64ch] */
+  /* DESKTOP — mesma grade de 2 colunas [trilho 80px | conteúdo 64ch],
+     porém acordeão: cada etapa abre ao clique (interação de leitura). */
   @media (min-width: 769px) {
-    /* a linha vive na coluna 1: alinhada à borda da grade (= centro dos nós).
-       o JS ajusta a altura para terminar exatamente no último nó;
-       o 'bottom' abaixo é só fallback sem-JS. */
-    .mmethod__line { left: var(--pad-x); top: clamp(2rem, 4vw, 3rem); bottom: clamp(6rem, 12vw, 9rem); }
+    /* a linha vive na coluna 1, alinhada à borda da grade (= centro dos nós).
+       o JS ajusta a altura para terminar no último nó; acompanha o abrir/fechar. */
+    .mmethod__line {
+      left: var(--pad-x);
+      top: clamp(1.4rem, 3vw, 2.1rem); bottom: clamp(6rem, 12vw, 9rem);
+      transition: height 0.4s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
 
     .mstep {
       display: grid;
       grid-template-columns: 80px minmax(0, 64ch);
       column-gap: clamp(2rem, 4vw, 3.5rem);
       align-items: start;
-      padding: clamp(4rem, 8vw, 7rem) 0 clamp(2.5rem, 5vw, 4rem);
+      padding: clamp(1.7rem, 3.4vw, 2.6rem) 0;
     }
-    .mstep:first-child { padding-top: clamp(2.5rem, 5vw, 3.5rem); }
 
-    .mstep__toggle { display: contents; cursor: default; }
+    .mstep__toggle { display: contents; }
+    .mstep__n, .mstep__verb, .mstep__lead, .mstep__chev { cursor: pointer; }
 
     .mstep__node {
       position: absolute; left: 0; transform: translateX(-50%);
       margin-top: 0; width: 24px; height: 24px;
       box-shadow: 0 0 0 8px var(--ch-warm); z-index: 2;
-      top: clamp(4rem, 8vw, 7rem);
+      top: clamp(1.7rem, 3.4vw, 2.6rem);
     }
-    .mstep:first-child .mstep__node { top: clamp(2.5rem, 5vw, 3.5rem); }
 
     .mstep__n {
       grid-column: 1; grid-row: 1;
-      justify-self: end; align-self: start; padding-top: 0.75rem;
+      justify-self: end; align-self: start; padding-top: 0.7rem;
       font-size: 1rem; color: var(--ink-faint);
-      transition: color 0.45s var(--ease);
+      transition: color 0.35s var(--ease);
     }
     .mstep.is-active .mstep__n { color: var(--accent-text); }
 
     .mstep__verb {
       grid-column: 2; grid-row: 1;
       font-size: var(--s-3); letter-spacing: -0.02em; color: var(--ink);
-      transition: color 0.45s var(--ease);
+      padding-right: 2.75rem;
+      transition: color 0.3s var(--ease);
     }
-    .mstep.is-active .mstep__verb { color: var(--accent-text); }
+    .mstep.is-active .mstep__verb,
+    .mstep:hover .mstep__verb { color: var(--accent-text); }
 
     .mstep__lead {
       grid-column: 2; grid-row: 2;
       font-family: var(--font-display); font-weight: 300;
       font-size: var(--s-1); line-height: 1.32; color: var(--ink);
-      margin-top: 0.95rem; max-width: 36ch;
+      margin-top: 0.7rem; max-width: 42ch;
     }
-    .mstep__chev { display: none; }
 
-    .mstep__detail {
-      grid-column: 2; grid-row: 3;
-      max-height: none; overflow: visible;
+    .mstep__chev {
+      display: block;
+      grid-column: 2; grid-row: 1;
+      justify-self: end; align-self: start;
+      width: 26px; height: 26px; margin-top: 0.55rem;
+      color: var(--ink-faint);
+      transition: transform 0.4s var(--ease), color 0.3s var(--ease);
     }
+    .mstep:hover .mstep__chev { color: var(--accent-text); }
+
+    .mstep__detail { grid-column: 2; grid-row: 3; }
+    .mstep[data-open="true"] .mstep__detail { max-height: 1200px; }
     .mstep__inner { max-width: 64ch; }
-    .mstep__inner > .body-copy { font-size: 1rem; line-height: 1.72; margin-top: 1.5rem; }
-    .mstep__inner > .body-copy:first-child { margin-top: 1.6rem; }
-    .mstep__tags { margin-top: 1.8rem; padding-bottom: 0; }
+    .mstep__inner > .body-copy { font-size: 1rem; line-height: 1.72; margin-top: 1.4rem; }
+    .mstep__inner > .body-copy:first-child { margin-top: 1.5rem; }
+    .mstep__tags { margin-top: 1.7rem; padding-bottom: clamp(0.6rem, 2vw, 1.3rem); }
+  }
+
+  @media (min-width: 769px) and (prefers-reduced-motion: reduce) {
+    .mmethod__line { transition: none; }
   }
 
   /* ---------- RESPIRO (faixa Raiz entre Método e O que muda) ---------- */
@@ -643,20 +659,32 @@
   var dtop = window.matchMedia("(min-width: 769px)");
   var ticking = false;
 
-  /* no desktop a linha termina no centro do último nó — nunca "solta" no vazio */
-  function sizeMethodLine() {
+  /* no desktop a linha termina no centro do último nó — nunca "solta" no vazio.
+     'animate' só quando a mudança vem de abrir/fechar uma etapa; o ajuste
+     contínuo (load, fontes, scroll) é instantâneo para não ficar "perseguindo". */
+  var lineSized = false;
+  function sizeMethodLine(animate) {
     if (!mmethod || !mline) return;
-    if (!dtop.matches) { mline.style.height = ""; return; }
+    if (!dtop.matches) { mline.style.height = ""; lineSized = false; return; }
     var nodes = mmethod.querySelectorAll(".mstep__node");
     if (!nodes.length) return;
     var base = mline.getBoundingClientRect().top;
     var last = nodes[nodes.length - 1].getBoundingClientRect();
     var h = Math.max(0, (last.top + last.height / 2) - base);
-    if (Math.abs(parseFloat(mline.style.height || 0) - h) > 1) mline.style.height = h + "px";
+    if (Math.abs(parseFloat(mline.style.height || 0) - h) <= 1) return;
+    if (!animate || !lineSized) {
+      mline.style.transition = "none";
+      mline.style.height = h + "px";
+      void mline.offsetHeight;
+      mline.style.transition = "";
+    } else {
+      mline.style.height = h + "px";
+    }
+    lineSized = true;
   }
-  window.addEventListener("load", function () { sizeMethodLine(); setTimeout(sizeMethodLine, 1000); });
-  dtop.addEventListener("change", sizeMethodLine);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeMethodLine);
+  window.addEventListener("load", function () { sizeMethodLine(); setTimeout(sizeMethodLine, 400); setTimeout(sizeMethodLine, 1200); });
+  dtop.addEventListener("change", function () { sizeMethodLine(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { sizeMethodLine(); });
   sizeMethodLine();
 
   function frame() {
@@ -739,15 +767,18 @@
   markActiveStep();
   dtop.addEventListener("change", markActiveStep);
 
-  /* método: acordeão SÓ no mobile (max-height via CSS); desktop = tudo aberto */
-  var mq = window.matchMedia("(max-width: 768px)");
+  /* método: acordeão em qualquer largura — cada etapa abre ao clique.
+     a abertura em si é CSS (max-height); aqui só alternamos o estado e
+     reajustamos a linha de continuidade, que muda de altura junto. */
   steps.forEach(function (step) {
     var btn = step.querySelector(".mstep__toggle");
     btn.addEventListener("click", function () {
-      if (!mq.matches) return;
       var open = step.getAttribute("data-open") === "true";
       step.setAttribute("data-open", open ? "false" : "true");
       btn.setAttribute("aria-expanded", open ? "false" : "true");
+      sizeMethodLine(true);
+      setTimeout(function () { sizeMethodLine(true); }, 130);
+      setTimeout(function () { sizeMethodLine(true); }, 540);
     });
   });
 
