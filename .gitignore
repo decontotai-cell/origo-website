@@ -3,6 +3,10 @@
 *.docx
 /png origo.png
 /png sem fundo.png
+/origo_foto_*.png
+
+# --- Artefatos de build ---
+*.b64.txt
 
 # --- Sistema operacional / editores ---
 .DS_Store
