@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Órigo People — consultoria estratégica em gestão de pessoas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Órigo People — consultoria estratégica em gestão de pessoas. Diagnóstico, estruturação, desenvolvimento, cultura, indicadores e acompanhamento." />
+<meta property="og:title" content="Órigo People" />
+<meta property="og:description" content="Olhar para dentro da organização. Reorganizar a base humana para o negócio crescer sem depender do dono no dia a dia." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="origo.css" />
+
+<style>
+  /* ===== Órigo People — regras específicas da página ===== */
+  .p-h1 {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: var(--s-4); line-height: 1.05; letter-spacing: -0.015em;
+    text-wrap: balance; margin: 1.1rem 0 0;
+  }
+  .p-h1 em { font-style: italic; color: var(--accent-text); font-weight: 400; }
+  .p-hero-actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .p-back { font-size: 0.82rem; color: var(--ink-faint); }
+
+  .pnote {
+    font-size: 0.82em; color: var(--mist-inkable);
+    border: 1px dashed color-mix(in srgb, var(--mist-inkable) 45%, transparent);
+    padding: 0.05em 0.4em; border-radius: 3px; white-space: nowrap;
+  }
+
+  /* listas editoriais (sinais / o que muda) */
+  .plist { list-style: none; margin: clamp(2rem, 5vw, 3rem) 0 0; padding: 0; border-top: 1px solid var(--hairline-strong); }
+  .plist li {
+    padding: clamp(1.1rem, 3vw, 1.6rem) 0;
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.15rem, 2.4vw, 1.7rem); line-height: 1.28; color: var(--ink);
+  }
+  .plist li b { font-weight: 500; color: var(--ink); }
+  .plist--change li { font-size: clamp(1.05rem, 2vw, 1.4rem); }
+
+  /* ===== O MÉTODO ===== */
+  .mmethod {
+    position: relative; z-index: 2;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+  .mmethod__line { position: absolute; left: 13px; top: 1.6rem; bottom: 2.5rem; width: 1px; background: var(--hairline-strong); }
+  .mmethod__fill {
+    position: absolute; inset: 0 auto auto 0; width: 1px; height: 100%;
+    background: var(--accent-text); transform: scaleY(var(--mprogress, 0)); transform-origin: top;
+  }
+  .mstep { border-top: 1px solid var(--hairline); }
+  .mstep:first-child { border-top: none; }
+  .mstep__toggle {
+    appearance: none; -webkit-appearance: none; background: none; border: 0;
+    width: 100%; text-align: left; color: inherit; font: inherit; cursor: pointer;
+    display: grid;
+    grid-template-columns: 26px auto minmax(0, 1fr) 22px;
+    column-gap: clamp(0.8rem, 2.5vw, 1.3rem);
+    align-items: start;
+    padding: clamp(1.3rem, 4vw, 1.9rem) 0;
+  }
+  .mstep__node {
+    grid-column: 1; grid-row: 1 / span 3; align-self: start; margin-top: 0.15rem;
+    width: 26px; height: 26px;
+    background: var(--sym-url) center / contain no-repeat;
+    box-shadow: 0 0 0 7px var(--ch-warm);
+  }
+  .mstep__n {
+    grid-column: 2; grid-row: 1; align-self: start; padding-top: 0.35rem;
+    font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.05em;
+    color: var(--accent-text); font-variant-numeric: tabular-nums;
+  }
+  .mstep__verb {
+    grid-column: 3; grid-row: 1;
+    font-family: var(--font-display); font-weight: 300; line-height: 1.05;
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+  }
+  .mstep__lead {
+    grid-column: 3; grid-row: 2;
+    color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.5rem; max-width: 46ch;
+  }
+  .mstep__chev {
+    grid-column: 4; grid-row: 1; width: 22px; height: 22px; margin-top: 0.3rem;
+    color: var(--ink-faint); transition: transform 0.4s var(--ease);
+  }
+  .mstep[data-open="true"] .mstep__chev { transform: rotate(180deg); }
+
+  .mstep__detail {
+    grid-column: 3; grid-row: 3;
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--ease);
+  }
+  .mstep__inner { overflow: hidden; }
+  .mstep[data-open="true"] .mstep__detail { grid-template-rows: 1fr; }
+  .mstep__inner > .body-copy:first-child { margin-top: 0.9rem; }
+  .mstep__inner > .body-copy { max-width: 48ch; }
+  .mstep__inner b { font-weight: 600; color: var(--ink); }
+  .mstep__tags {
+    margin-top: 1.1rem; padding-bottom: clamp(0.4rem, 2vw, 1rem);
+    font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  /* Desktop: cada passo é um momento — tudo aberto, sem acordeão */
+  @media (min-width: 769px) {
+    .mmethod { padding-left: clamp(0.5rem, 2vw, 1.5rem); }
+    .mmethod__line { left: 13px; top: 3.5rem; }
+    .mstep__toggle {
+      cursor: default;
+      grid-template-columns: 26px auto minmax(0, 1fr);
+      padding: clamp(3.5rem, 9vw, 7rem) 0 0;
+    }
+    .mstep__chev { display: none; }
+    .mstep__verb { font-size: var(--s-3); }
+    .mstep__lead { font-size: var(--s-1); color: var(--ink); margin-top: 0.8rem; }
+    .mstep__detail { grid-template-rows: 1fr; }
+    .mstep__inner { overflow: visible; }
+    .mstep__inner > .body-copy:first-child { margin-top: 1.4rem; }
+  }
+
+  @media (max-width: 768px) {
+    .p-hero-actions .btn { flex: 1 1 100%; justify-content: center; }
+    .final .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__fill"></div>
+  <span class="rail__chapter" data-rail>Órigo People</span>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Órigo Human Strategy — início">
+      <img class="tri-pos" src="brand/symbol.png" alt="" width="28" />
+      <img class="tri-neg" src="brand/symbol-neg.png" alt="" width="28" />
+      <span>Órigo<small>Human Strategy</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#inicio">Início</a>
+      <a href="index.html#a-origo">A Órigo</a>
+      <a href="people.html" aria-current="page">People</a>
+      <a href="select.html" data-route>Select</a>
+      <a href="index.html#olhar">Como pensamos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="header-cta" href="#contato">Fale com a Órigo</a>
+    <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.4 4.4l1.8 1.8M17.8 17.8l1.8 1.8M2.5 12H5M19 12h2.5M4.4 19.6l1.8-1.8M17.8 6.2l1.8-1.8"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" data-open="false" aria-hidden="true">
+  <button class="mm-close" type="button" aria-label="Fechar menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="index.html#inicio">Início</a>
+  <a href="index.html#a-origo">A Órigo</a>
+  <a href="people.html" aria-current="page">People</a>
+  <a href="select.html" data-route>Select</a>
+  <a href="index.html#olhar">Como pensamos</a>
+  <a href="#contato">Contato</a>
+  <a class="mm-cta" href="#contato">Fale com a Órigo</a>
+</div>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="chapter" id="topo" data-chapter="Órigo People" style="padding-block: clamp(3.5rem,9vw,6rem) clamp(2rem,6vw,3.5rem)">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Órigo People</p>
+      <h1 class="p-h1">Olhar para dentro da organização.</h1>
+      <p class="lede">
+        Consultoria estratégica em gestão de pessoas. Começa na primeira linha —
+        quem faz o produto todos os dias — e sobe pela estrutura: líderes
+        imediatos, RH, cultura, EVP e employer branding.
+      </p>
+      <p class="body-copy">
+        Não é treinamento de liderança nem RH terceirizado. É entender como a
+        empresa funciona de verdade e reorganizar a base humana para o negócio
+        crescer sem depender do dono na resolução do dia a dia.
+      </p>
+      <div class="p-hero-actions">
+        <a class="btn btn--solid" href="#metodo">Ver o método
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="index.html">Voltar para a Home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 — QUANDO FAZ SENTIDO -->
+  <section class="chapter chapter--cool" data-chapter="Quando faz sentido">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">01 — Quando faz sentido</p>
+      <h2>Alguns sinais que a empresa costuma reconhecer.</h2>
+    </div>
+    <div class="wrap reveal">
+      <ul class="plist">
+        <li>O dono vive apagando incêndio, e sobra pouco tempo para pensar no futuro.</li>
+        <li>Rotatividade, conflito entre áreas, retrabalho — e a sensação de que ninguém assume.</li>
+        <li>A empresa cresceu (o marketing e as vendas funcionaram), mas a operação não deu conta de entregar.</li>
+        <li>O time cumpre tarefa, mas não se sente parte. Falta pertencimento.</li>
+        <li>Já se investe em processo e tecnologia, mas o resultado não acompanha.</li>
+        <li>As decisões importantes ainda passam todas pelo dono.</li>
+      </ul>
+      <p class="body-copy measure">
+        A Órigo People costuma fazer mais sentido para empresas que já têm alguma
+        estrutura para desenvolver <span class="pnote">porte a validar</span> e que
+        enxergam pessoas como parte da estratégia, não como custo. Não é para quem
+        procura solução imediatista nem palestra motivacional.
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 — O MÉTODO -->
+  <section class="chapter chapter--warm" id="metodo" data-chapter="O método">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">02 — O método</p>
+      <h2>Não chegamos com uma solução pronta.</h2>
+      <p class="lede">
+        Seis etapas que se conectam — do diagnóstico ao acompanhamento contínuo.
+        Cada intervenção nasce do que a etapa anterior revelou; nunca de um
+        catálogo fixo de serviços.
+      </p>
+    </div>
+
+    <div class="wrap mmethod reveal">
+      <div class="mmethod__line" aria-hidden="true"><span class="mmethod__fill"></span></div>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">01</span>
+          <span class="mstep__verb">Diagnosticar</span>
+          <span class="mstep__lead">Entender o cenário, identificar causas e definir prioridades.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            O diagnóstico não termina numa fotografia da empresa. Conforme o
+            projeto, pode observar cultura real e cultura desejada, comportamento,
+            relações, comunicação, liderança, estrutura, papéis e
+            responsabilidades, processos de gestão de pessoas, percepção dos
+            colaboradores, dinâmica das equipes, indicadores existentes, gargalos,
+            conflitos, riscos e causas-raiz.
+          </p>
+          <p class="body-copy">
+            Ao final, três entregas: <b>diagnóstico</b>, <b>prioridades</b> e
+            <b>plano de ação</b>. Precisamos conseguir responder: o que está
+            acontecendo? por que está acontecendo? o que precisa ser feito primeiro?
+          </p>
+          <p class="mstep__tags">O que acontece · Por que acontece · O que fazer</p>
+        </div></div>
+      </article>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">02</span>
+          <span class="mstep__verb">Estruturar</span>
+          <span class="mstep__lead">Organizar pessoas, papéis, processos e práticas de gestão.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            A partir do diagnóstico, as ações estruturais necessárias. Pode
+            envolver reposicionamento de pessoas, aderência entre perfil e função,
+            cargos e responsabilidades, estrutura de liderança, organização do RH,
+            processos e fluxos, comunicação interna, políticas, jornada do
+            colaborador, EVP e employer branding — e o que mais o diagnóstico
+            apontar.
+          </p>
+          <p class="body-copy">
+            Não é um catálogo fixo de serviços: cada intervenção nasce do que foi
+            identificado, na medida daquela empresa.
+          </p>
+          <p class="mstep__tags">Pessoas · Papéis · Processos · Políticas</p>
+        </div></div>
+      </article>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">03</span>
+          <span class="mstep__verb">Desenvolver</span>
+          <span class="mstep__lead">Preparar colaboradores, líderes, gestores e RH.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            Não desenvolvemos só líderes. As ações podem envolver colaboradores,
+            lideranças imediatas, coordenadores, gestores, RH e a direção quando
+            necessário. Podem incluir treinamentos, formações, desenvolvimento por
+            competências, comunicação, feedback, autonomia, responsabilidade,
+            gestão de conflitos, tomada de decisão e aplicação prática.
+          </p>
+          <p class="body-copy">
+            Treinamento não é o produto central — é uma das ações possíveis depois
+            do diagnóstico e da estratégia definida.
+          </p>
+          <p class="mstep__tags">Colaboradores · Lideranças · Gestores · RH</p>
+        </div></div>
+      </article>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">04</span>
+          <span class="mstep__verb">Consolidar</span>
+          <span class="mstep__lead">Transformar as mudanças em cultura e prática permanente.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            Não basta diagnosticar, reorganizar ou treinar: as mudanças precisam
+            fazer parte de como a empresa funciona. Pode envolver cultura
+            organizacional, EVP, employer branding, valores vividos, comportamentos
+            esperados, comunicação interna, rituais, reconhecimento, experiência do
+            colaborador, políticas, processos e práticas de liderança.
+          </p>
+          <p class="body-copy">
+            A ideia central: a mudança deixa de depender da consultoria e passa a
+            fazer parte da empresa.
+          </p>
+          <p class="mstep__tags">Cultura · Rituais · Reconhecimento · Pertencimento</p>
+        </div></div>
+      </article>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">05</span>
+          <span class="mstep__verb">Mensurar</span>
+          <span class="mstep__lead">Avaliar evolução e impacto por meio de indicadores.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            Sempre que fizer sentido, uma leitura de <b>antes e depois</b>. Os
+            indicadores dependem do projeto e podem incluir turnover, absenteísmo,
+            clima, engajamento, desempenho, produtividade, conflitos, retrabalho,
+            adesão aos processos, evolução das equipes, percepção das lideranças e
+            indicadores específicos definidos para cada organização.
+          </p>
+          <p class="body-copy">Sem prometer resultados universais.</p>
+          <p class="mstep__tags">Antes · Depois · Indicadores do projeto</p>
+        </div></div>
+      </article>
+
+      <article class="mstep" data-open="false">
+        <button class="mstep__toggle" type="button" aria-expanded="false">
+          <span class="mstep__node" aria-hidden="true"></span>
+          <span class="mstep__n">06</span>
+          <span class="mstep__verb">Acompanhar</span>
+          <span class="mstep__lead">Ajustar, fortalecer e sustentar a evolução.</span>
+          <svg class="mstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mstep__detail"><div class="mstep__inner">
+          <p class="body-copy">
+            A transformação não termina depois de uma intervenção. Acompanhamos a
+            aplicação das mudanças, a resposta das equipes, a atuação das
+            lideranças, a sustentação pelo RH, a evolução dos indicadores, novos
+            gargalos, necessidade de reforço e correções de rota. Pode envolver
+            reuniões, novas avaliações, análise de indicadores, feedbacks e revisão
+            de ações.
+          </p>
+          <p class="body-copy">
+            Comportamento, cultura e gestão não se transformam numa ação isolada —
+            precisam ser observados, fortalecidos e ajustados ao longo do tempo.
+          </p>
+          <p class="mstep__tags">Aplicação · Correção de rota · Continuidade</p>
+        </div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 03 — O QUE MUDA -->
+  <section class="chapter" data-chapter="O que muda">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">03 — O que muda</p>
+      <h2>O que a empresa costuma sentir depois.</h2>
+      <p class="lede">Sem promessa de resultado garantido — o que a atuação busca:</p>
+    </div>
+    <div class="wrap reveal">
+      <ul class="plist plist--change">
+        <li><b>Pessoas com clareza.</b> Cada um entende o próprio papel e o impacto que gera.</li>
+        <li><b>Menos incêndio.</b> Conflitos e desalinhamentos são tratados na causa, antes de virar prejuízo.</li>
+        <li><b>Cultura vivida.</b> Valores e comportamentos esperados aparecem na prática, não só no mural.</li>
+        <li><b>Lideranças mais preparadas.</b> Os líderes imediatos conduzem e sustentam o que foi construído.</li>
+        <li><b>RH no comando da continuidade.</b> A empresa segue sem depender da consultoria.</li>
+        <li><b>O dono de volta à estratégia.</b> Tempo e energia para crescimento, cultura e inovação — não para apagar fogo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="chapter chapter--espresso final" id="contato" data-chapter="Conversar">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Conversar</p>
+      <h2>Todo crescimento começa por dentro. <em>Vamos olhar juntos.</em></h2>
+      <a class="btn btn--on-raiz" href="mailto:contato@origo.net.br">Conversar com a Órigo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="body-copy" style="font-size:0.8rem;color:var(--on-espresso-soft);margin-top:1.2rem">
+        e-mail e telefone a confirmar
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="brand/lockup-neg.png" alt="Órigo Human Strategy" />
+        <p class="dom">origo.net.br</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <a href="people.html" aria-current="page">Órigo People</a>
+          <a href="select.html" data-route>Órigo Select</a>
+          <a href="index.html#olhar">Como pensamos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="politica-de-privacidade.html" data-route>Política de Privacidade</a>
+          <a href="termos.html" data-route>Termos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Social</h4>
+          <span class="soon">LinkedIn · em breve</span>
+          <span class="soon">Instagram · em breve</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Órigo Human Strategy. Todos os direitos reservados.</span>
+      <span class="footer__flag">Contato, endereço e redes sociais a confirmar</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite">
+  Rota <code></code> preparada — página em construção.
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+
+  document.querySelector(".theme-toggle").addEventListener("click", function () {
+    var isDark = root.getAttribute("data-theme") === "dark"
+      || (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  var header = document.querySelector(".site-header");
+  var railFill = document.querySelector(".rail__fill");
+  var railChapter = document.querySelector("[data-rail]");
+  var mmethod = document.querySelector(".mmethod");
+  var ticking = false;
+
+  function frame() {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset;
+    header.setAttribute("data-scrolled", y > 12 ? "true" : "false");
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    railFill.style.setProperty("--progress", h > 0 ? (y / h).toFixed(4) : 0);
+    if (mmethod) {
+      var r = mmethod.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh * 0.65 - r.top) / (r.height + vh * 0.5);
+      mmethod.style.setProperty("--mprogress", Math.max(0, Math.min(1, p)).toFixed(4));
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", frame);
+  frame();
+
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+  function show(el) { el.classList.add("in"); }
+  if (reduce || !("IntersectionObserver" in window)) {
+    reveals.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -22px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+    var sweep = function () {
+      reveals.forEach(function (el) {
+        if (!el.classList.contains("in") && el.getBoundingClientRect().top < window.innerHeight * 0.95) { show(el); io.unobserve(el); }
+      });
+    };
+    sweep();
+    window.addEventListener("load", sweep);
+    setTimeout(sweep, 1200);
+    setTimeout(function () { reveals.forEach(show); }, 2800);
+  }
+
+  var chapterSections = [].slice.call(document.querySelectorAll("[data-chapter]"));
+  if ("IntersectionObserver" in window && railChapter) {
+    var current = "";
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var name = e.target.getAttribute("data-chapter");
+          if (name && name !== current) {
+            current = name;
+            railChapter.classList.add("fade");
+            setTimeout(function () { railChapter.textContent = name; railChapter.classList.remove("fade"); }, 260);
+          }
+        }
+      });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    chapterSections.forEach(function (s) { cio.observe(s); });
+  }
+
+  /* método: acordeão no mobile, tudo aberto no desktop (CSS) */
+  var mq = window.matchMedia("(max-width: 768px)");
+  [].slice.call(document.querySelectorAll(".mstep")).forEach(function (step) {
+    var btn = step.querySelector(".mstep__toggle");
+    btn.addEventListener("click", function () {
+      if (!mq.matches) return;
+      var open = step.getAttribute("data-open") === "true";
+      step.setAttribute("data-open", open ? "false" : "true");
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+    });
+  });
+
+  /* menu mobile */
+  var menuBtn = document.querySelector(".menu-btn");
+  var mobileMenu = document.querySelector(".mobile-menu");
+  function setMenu(open) {
+    mobileMenu.setAttribute("data-open", open ? "true" : "false");
+    mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  menuBtn.addEventListener("click", function () { setMenu(true); });
+  document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
+  mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+
+  /* rotas ainda não construídas -> toast */
+  var toast = document.querySelector(".toast");
+  var toastCode = toast.querySelector("code");
+  var toastTimer;
+  document.querySelectorAll("[data-route]").forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      toastCode.textContent = a.getAttribute("href");
+      toast.setAttribute("data-show", "true");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.removeAttribute("data-show"); }, 3200);
+    });
+  });
+})();
+</script>
+</body>
+</html>
