@@ -798,6 +798,73 @@
   .final h2 em { font-style: italic; color: #C9D9E0; }
   .final .btn { margin-top: 2.4rem; }
 
+  /* bloco editorial de contato — abaixo do botão do CTA final */
+  .cta-contact {
+    margin-top: clamp(2rem, 3.6vw, 2.5rem);   /* respiro do botão: ~32–40px */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem clamp(1.6rem, 4vw, 2.75rem);
+  }
+  .cta-contact__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .cta-contact__item + .cta-contact__item {
+    border-left: 1px solid var(--espresso-hairline);
+    padding-left: clamp(1.6rem, 4vw, 2.75rem);
+  }
+  .cta-contact__label {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--on-espresso-soft);
+  }
+  .cta-contact__value {
+    position: relative;
+    align-self: flex-start;
+    font-family: var(--font-ui);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    color: var(--on-espresso);
+    transition: color 0.25s var(--ease), opacity 0.25s var(--ease);
+  }
+  .cta-contact__value::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.32s var(--ease);
+  }
+  .cta-contact__value:hover {
+    color: var(--linho);
+    opacity: 0.92;
+  }
+  .cta-contact__value:hover::after { transform: scaleX(1); }
+  .cta-contact__value:focus-visible {
+    outline: 2px solid var(--linho);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-contact__value::after { transition: none; }
+  }
+  @media (max-width: 768px) {
+    .cta-contact { flex-direction: column; gap: 1.35rem; }
+    .cta-contact__item + .cta-contact__item {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+
   /* ================= FOOTER ================= */
   .site-footer {
     background: var(--espresso-ground); color: var(--on-espresso-soft);
