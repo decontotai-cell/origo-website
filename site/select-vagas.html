@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Oportunidades | Órigo Select</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="A nova experiência de oportunidades da Órigo Select está em preparação." />
+<meta name="robots" content="noindex" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="origo.css" />
+
+<style>
+  .stub { min-height: calc(100svh - 4.2rem); display: flex; align-items: center; }
+  .stub__glyph {
+    position: absolute; z-index: 1; pointer-events: none;
+    width: min(46vw, 520px); right: -12vw; top: 50%; transform: translateY(-50%);
+    opacity: 0.07;
+  }
+  .stub__inner { position: relative; z-index: 2; }
+  .stub__rule { width: 3rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.6rem; }
+  .stub__h1 {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: var(--s-4); line-height: 1.1; letter-spacing: -0.015em;
+    max-width: 16ch; margin: 1.1rem 0 0;
+  }
+  .stub__actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  @media (max-width: 768px) {
+    .stub__glyph { width: 160px; right: -20px; }
+    .stub__actions .btn { flex: 1 1 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__fill"></div>
+  <span class="rail__chapter" data-rail>Órigo Select</span>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Órigo Human Strategy — início">
+      <img class="tri-pos" src="brand/symbol.png" alt="" width="28" />
+      <img class="tri-neg" src="brand/symbol-neg.png" alt="" width="28" />
+      <span>Órigo<small>Human Strategy</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#inicio">Início</a>
+      <a href="index.html#a-origo">A Órigo</a>
+      <a href="people.html">People</a>
+      <a href="select.html" aria-current="page">Select</a>
+      <a href="index.html#olhar">Como pensamos</a>
+    </nav>
+    <a class="header-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+    <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.4 4.4l1.8 1.8M17.8 17.8l1.8 1.8M2.5 12H5M19 12h2.5M4.4 19.6l1.8-1.8M17.8 6.2l1.8-1.8"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" data-open="false" aria-hidden="true">
+  <button class="mm-close" type="button" aria-label="Fechar menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="index.html#inicio">Início</a>
+  <a href="index.html#a-origo">A Órigo</a>
+  <a href="people.html">People</a>
+  <a href="select.html" aria-current="page">Select</a>
+  <a href="index.html#olhar">Como pensamos</a>
+  <a class="mm-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+</div>
+
+<main id="conteudo">
+  <section class="chapter stub" id="topo" data-chapter="Oportunidades">
+    <img class="stub__glyph" src="brand/symbol.png" alt="" aria-hidden="true" />
+    <div class="wrap measure stub__inner reveal">
+      <span class="stub__rule" aria-hidden="true"></span>
+      <p class="eyebrow">Órigo Select · Oportunidades</p>
+      <h1 class="stub__h1">Estamos preparando a nova experiência de oportunidades da Órigo Select.</h1>
+      <p class="lede">
+        Assim que a estrutura estiver pronta, você vai poder ver as vagas
+        abertas e se candidatar diretamente por aqui.
+      </p>
+      <p class="body-copy">
+        Enquanto isso, fale com a gente pelo WhatsApp ou volte para conhecer a
+        Órigo Select.
+      </p>
+      <div class="stub__actions">
+        <a class="btn btn--solid" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Falar com a Órigo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="select.html">Voltar para a Órigo Select</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="brand/lockup-neg.png" alt="Órigo Human Strategy" />
+        <p class="dom">origo.net.br</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <a href="people.html">Órigo People</a>
+          <a href="select.html">Órigo Select</a>
+          <a href="index.html#olhar">Como pensamos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="politica-de-privacidade.html" data-route>Política de Privacidade</a>
+          <a href="termos.html" data-route>Termos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a href="mailto:origoelect@gmail.com">origoelect@gmail.com</a>
+          <a href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">WhatsApp (54) 99668-9010</a>
+          <a href="https://instagram.com/origoselect" target="_blank" rel="noopener">Instagram @origoselect</a>
+          <span class="soon">LinkedIn · em breve</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Órigo Human Strategy. Todos os direitos reservados.</span>
+      <span class="footer__flag">Endereço a confirmar</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite">
+  Rota <code></code> preparada — página em construção.
+</div>
+
+<script defer src="ats-config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+
+  document.querySelector(".theme-toggle").addEventListener("click", function () {
+    var isDark = root.getAttribute("data-theme") === "dark"
+      || (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  var header = document.querySelector(".site-header");
+  var railFill = document.querySelector(".rail__fill");
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset;
+    header.setAttribute("data-scrolled", y > 12 ? "true" : "false");
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    railFill.style.setProperty("--progress", h > 0 ? (y / h).toFixed(4) : 0);
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", frame);
+  frame();
+
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+  function show(el) { el.classList.add("in"); }
+  if (reduce || !("IntersectionObserver" in window)) {
+    reveals.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -22px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { reveals.forEach(show); }, 1200);
+  }
+
+  var menuBtn = document.querySelector(".menu-btn");
+  var mobileMenu = document.querySelector(".mobile-menu");
+  function setMenu(open) {
+    mobileMenu.setAttribute("data-open", open ? "true" : "false");
+    mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  menuBtn.addEventListener("click", function () { setMenu(true); });
+  document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
+  mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+
+  var toast = document.querySelector(".toast");
+  var toastCode = toast.querySelector("code");
+  var toastTimer;
+  document.querySelectorAll("[data-route]").forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      toastCode.textContent = a.getAttribute("href");
+      toast.setAttribute("data-show", "true");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.removeAttribute("data-show"); }, 3200);
+    });
+  });
+})();
+</script>
+</body>
+</html>

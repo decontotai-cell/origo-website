@@ -79,3 +79,25 @@ Sempre com `target="_blank" rel="noopener noreferrer"` e `data-wa="select"`.
 
 **NÃO** aplicar essa integração de WhatsApp aos CTAs de candidato / vaga /
 banco de talentos — esses fluxos terão integração própria com o ATS/CRM.
+
+## Status de implementação (01/09/2026)
+
+Página `/select` completa e no ar, reaproveitando o sistema visual de
+Home + People (mesmo header/footer, `.chapter`, `.btn`, `.lens`,
+`.decision`, `.photo`, `.cta-contact` — nada redesenhado).
+
+Arquivos:
+- `site/select.html` — página principal.
+- `site/select-vagas.html` — placeholder elegante de "/select/vagas"
+  ("estrutura em implantação", sem "em breve"/"em construção" como texto
+  visível).
+- `site/select-talentos.html` — idem para "/select/talentos".
+- `site/ats-config.js` — camada `OrigoATS` (`provider: "pending"`),
+  interface `getJobs/getJob/applyToJob/createTalentProfile/
+  createJobRequest/getClientPortalUrl`. Nada chama isso ainda.
+- `/select/empresas` NÃO virou arquivo próprio — o conteúdo já é
+  completo na âncora `select.html#empresas`.
+- `/select/vagas/[slug]` só documentado (depende de dados reais do ATS).
+
+Links `/select` (Home) e `select.html` `data-route` (Home + People)
+foram trocados por links reais — a página deixou de ser "em construção".
