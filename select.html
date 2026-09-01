@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Órigo Select | Recrutamento e Seleção Estratégico</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Recrutamento e seleção com análise de competências, comportamento, contexto e aderência para apoiar decisões de contratação mais consistentes." />
+<meta property="og:title" content="Órigo Select" />
+<meta property="og:description" content="Contratar não é preencher uma vaga. É decidir quem vai fazer parte do futuro da empresa." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="origo.css" />
+
+<style>
+  /* ===================================================================
+     ÓRIGO SELECT — regras próprias da página
+     (herda tokens, header, footer, .btn, .chapter, .lens, .decision,
+     .photo, .cta-contact, .reveal de origo.css — mesmo sistema da Home
+     e da People, nada redefinido aqui)
+     =================================================================== */
+
+  /* ---------- GRID / ALINHAMENTO (desktop) — igual à People ---------- */
+  @media (min-width: 769px) {
+    .sel-hero .wrap.measure,
+    .chapter > .wrap.measure { max-width: var(--wrap); }
+    .sel-hero .wrap.measure > :is(p, ul, ol),
+    .chapter > .wrap.measure > :is(p, ul, ol) { max-width: var(--measure); }
+  }
+
+  /* ---------- HERO ---------- */
+  .sel-hero { position: relative; overflow: clip; }
+  .sel-hero .wrap { position: relative; z-index: 2; }
+  .sel-hero__glyph {
+    position: absolute; z-index: 1; pointer-events: none;
+    width: min(50vw, 600px); left: -14vw; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.09;
+    animation: shDrift 32s ease-in-out infinite alternate;
+  }
+  @keyframes shDrift {
+    from { transform: translateY(-50%) translate(0, -10px) rotate(2deg); }
+    to   { transform: translateY(-50%) translate(16px, 12px) rotate(-2deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .sel-hero__glyph { animation: none; } }
+
+  .sel-rule { width: 3rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.6rem; }
+  .sel-h1 {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: var(--s-4); line-height: 1.06; letter-spacing: -0.02em;
+    text-wrap: balance; margin: 1.1rem 0 0; max-width: 17ch;
+  }
+  .sel-h1 em { font-style: italic; color: var(--accent-text); font-weight: 400; }
+  .sel-hero-actions { margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  /* ---------- O QUE OBSERVAMOS (usa .lens do sistema compartilhado) ---------- */
+  .lens__whisper.sel { color: var(--ink-soft); }
+
+  /* ---------- COMO CONDUZIMOS — mesma grade/acordeão da People, renomeado ---------- */
+  .sprocess { position: relative; z-index: 2; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .sprocess__line {
+    position: absolute; left: 13px; top: 1.6rem; bottom: 2.5rem;
+    width: 1px; background: var(--hairline-strong);
+  }
+  .sprocess__fill {
+    position: absolute; inset: 0 auto auto 0; width: 1px; height: 100%;
+    background: var(--accent-text);
+    transform: scaleY(var(--sprogress, 0)); transform-origin: top;
+    transition: transform 0.15s linear;
+  }
+  @media (prefers-reduced-motion: reduce) { .sprocess__fill { transition: none; } }
+
+  .sstep { border-top: 1px solid var(--hairline); position: relative; }
+  .sstep:first-child { border-top: none; }
+
+  .sstep__toggle {
+    appearance: none; -webkit-appearance: none; background: none; border: 0;
+    width: 100%; text-align: left; color: inherit; font: inherit; cursor: pointer;
+    display: grid;
+    grid-template-columns: 26px auto minmax(0, 1fr) 22px;
+    column-gap: clamp(0.8rem, 2.5vw, 1.3rem);
+    align-items: start;
+    padding: clamp(1.3rem, 4vw, 1.9rem) 0;
+  }
+  .sstep__node {
+    grid-column: 1; grid-row: 1 / span 3; align-self: start; margin-top: 0.15rem;
+    width: 26px; height: 26px;
+    background: var(--sym-url) center / contain no-repeat;
+    box-shadow: 0 0 0 7px var(--ch-warm);
+  }
+  .sstep__n {
+    grid-column: 2; grid-row: 1; align-self: start; padding-top: 0.35rem;
+    font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.05em;
+    color: var(--accent-text); font-variant-numeric: tabular-nums;
+  }
+  .sstep__verb {
+    grid-column: 3; grid-row: 1;
+    font-family: var(--font-display); font-weight: 300; line-height: 1.05;
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+  }
+  .sstep__lead {
+    grid-column: 3; grid-row: 2;
+    color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.5rem; max-width: 46ch;
+  }
+  .sstep__chev {
+    grid-column: 4; grid-row: 1; width: 22px; height: 22px; margin-top: 0.3rem;
+    color: var(--ink-faint); transition: transform 0.4s var(--ease); flex: none;
+  }
+  .sstep[data-open="true"] .sstep__chev { transform: rotate(180deg); }
+  .sstep__detail {
+    grid-column: 3; grid-row: 3;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  .sstep[data-open="true"] .sstep__detail { max-height: 900px; }
+  @media (prefers-reduced-motion: reduce) { .sstep__detail { transition: none; } }
+  .sstep__inner > .body-copy:first-child { margin-top: 0.9rem; }
+  .sstep__inner > .body-copy { max-width: 48ch; }
+  .sstep__tags {
+    margin-top: 1.1rem; padding-bottom: clamp(0.4rem, 2vw, 1rem);
+    font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  @media (min-width: 769px) {
+    .sprocess__line {
+      left: var(--pad-x);
+      top: clamp(1.4rem, 3vw, 2.1rem); bottom: clamp(6rem, 12vw, 9rem);
+      transition: height 0.4s var(--ease, cubic-bezier(0.4, 0, 0.2, 1));
+    }
+    .sstep {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 64ch);
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+      padding: clamp(1.7rem, 3.4vw, 2.6rem) 0;
+    }
+    .sstep__toggle { display: contents; }
+    .sstep__n, .sstep__verb, .sstep__lead, .sstep__chev { cursor: pointer; }
+    .sstep__node {
+      position: absolute; left: 0; transform: translateX(-50%);
+      margin-top: 0; width: 24px; height: 24px;
+      box-shadow: 0 0 0 8px var(--ch-warm); z-index: 2;
+      top: clamp(1.7rem, 3.4vw, 2.6rem);
+    }
+    .sstep__n {
+      grid-column: 1; grid-row: 1;
+      justify-self: end; align-self: start; padding-top: 0.7rem;
+      font-size: 1rem; color: var(--ink-faint);
+      transition: color 0.35s var(--ease);
+    }
+    .sstep.is-active .sstep__n { color: var(--accent-text); }
+    .sstep__verb {
+      grid-column: 2; grid-row: 1;
+      font-size: var(--s-3); letter-spacing: -0.02em; color: var(--ink);
+      padding-right: 2.75rem;
+      transition: color 0.3s var(--ease);
+    }
+    .sstep.is-active .sstep__verb,
+    .sstep:hover .sstep__verb { color: var(--accent-text); }
+    .sstep__lead {
+      grid-column: 2; grid-row: 2;
+      font-size: var(--s-1); line-height: 1.5; color: var(--ink);
+      margin-top: 0.7rem; max-width: 42ch;
+    }
+    .sstep__chev {
+      display: block;
+      grid-column: 2; grid-row: 1;
+      justify-self: end; align-self: start;
+      width: 26px; height: 26px; margin-top: 0.55rem;
+      color: var(--ink-faint);
+      transition: transform 0.4s var(--ease), color 0.3s var(--ease);
+    }
+    .sstep:hover .sstep__chev { color: var(--accent-text); }
+    .sstep__detail { grid-column: 2; grid-row: 3; }
+    .sstep[data-open="true"] .sstep__detail { max-height: 1200px; }
+    .sstep__inner { max-width: 64ch; }
+    .sstep__inner > .body-copy { font-size: 1rem; line-height: 1.72; margin-top: 1.4rem; }
+    .sstep__inner > .body-copy:first-child { margin-top: 1.5rem; }
+    .sstep__tags { margin-top: 1.7rem; padding-bottom: clamp(0.6rem, 2vw, 1.3rem); }
+  }
+  @media (min-width: 769px) and (prefers-reduced-motion: reduce) {
+    .sprocess__line { transition: none; }
+  }
+
+  /* ---------- FERRAMENTAS / TECNOLOGIA — bandas curtas ---------- */
+  .sel-band { max-width: 46rem; }
+  .sel-band__lead {
+    font-family: var(--font-display); font-weight: 300; font-style: italic;
+    font-size: var(--s-2); line-height: 1.24; color: var(--ink); max-width: 16ch;
+  }
+  .sel-tags {
+    margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .sel-tags span { position: relative; }
+  .sel-tags span + span::before { content: "·"; position: absolute; left: -0.68rem; opacity: 0.6; }
+
+  /* ---------- PARA EMPRESAS / PROFISSIONAIS ---------- */
+  .sel-cta-row { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  /* ---------- DIFERENCIAL ---------- */
+  .sel-diff-sub {
+    font-family: var(--font-display); font-weight: 300; font-style: italic;
+    font-size: var(--s-1); line-height: 1.4; color: var(--on-raiz-soft);
+    margin-top: 1.6rem; max-width: 34ch;
+  }
+
+  /* ---------- CTA final: par de botões ---------- */
+  .final .sel-cta-row { margin-top: 3rem; }
+  @media (min-width: 769px) {
+    .final h2 { max-width: 22ch; }
+  }
+
+  @media (max-width: 768px) {
+    .sel-hero__glyph { width: 148px; left: -18px; top: -8px; transform: none; opacity: 0.1; }
+    .sel-hero-actions .btn { flex: 1 1 100%; justify-content: center; }
+    .sel-cta-row .btn { flex: 1 1 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__fill"></div>
+  <span class="rail__chapter" data-rail>Órigo Select</span>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Órigo Human Strategy — início">
+      <img class="tri-pos" src="brand/symbol.png" alt="" width="28" />
+      <img class="tri-neg" src="brand/symbol-neg.png" alt="" width="28" />
+      <span>Órigo<small>Human Strategy</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#inicio">Início</a>
+      <a href="index.html#a-origo">A Órigo</a>
+      <a href="people.html">People</a>
+      <a href="select.html" aria-current="page">Select</a>
+      <a href="index.html#olhar">Como pensamos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="header-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+    <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.4 4.4l1.8 1.8M17.8 17.8l1.8 1.8M2.5 12H5M19 12h2.5M4.4 19.6l1.8-1.8M17.8 6.2l1.8-1.8"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" data-open="false" aria-hidden="true">
+  <button class="mm-close" type="button" aria-label="Fechar menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="index.html#inicio">Início</a>
+  <a href="index.html#a-origo">A Órigo</a>
+  <a href="people.html">People</a>
+  <a href="select.html" aria-current="page">Select</a>
+  <a href="index.html#olhar">Como pensamos</a>
+  <a href="#contato">Contato</a>
+  <a class="mm-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+</div>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="chapter sel-hero" id="topo" data-chapter="Órigo Select" style="padding-block: clamp(3.5rem,9vw,6rem) clamp(2rem,6vw,3.5rem)">
+    <img class="sel-hero__glyph" src="brand/symbol.png" alt="" aria-hidden="true" />
+    <div class="wrap measure reveal">
+      <span class="sel-rule" aria-hidden="true"></span>
+      <p class="eyebrow">Órigo Select</p>
+      <h1 class="sel-h1">Contratar não é preencher uma vaga. <em>É decidir quem vai fazer parte do futuro da empresa.</em></h1>
+      <p class="lede">
+        A Órigo Select conduz processos de recrutamento e seleção a partir da
+        compreensão da empresa, da função e das pessoas — combinando análise,
+        comportamento, competências e contexto para apoiar decisões de
+        contratação mais consistentes.
+      </p>
+      <div class="sel-hero-actions">
+        <a class="btn btn--solid" href="#empresas">Preciso contratar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="select-vagas.html">Ver oportunidades</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRASE-CONCEITO -->
+  <section class="chapter chapter--raiz phrase" data-chapter="O que observamos">
+    <div class="wrap reveal">
+      <p class="eyebrow">A ideia central</p>
+      <p class="phrase__big">
+        Um currículo mostra onde alguém esteve.
+        <em>Uma seleção precisa compreender para onde essa pessoa pode ir.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- 01 — O QUE OBSERVAMOS -->
+  <section class="chapter" id="observamos" data-chapter="O que observamos">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">01 — O que observamos</p>
+      <h2>Selecionar exige olhar além do currículo.</h2>
+      <p class="lede">
+        Nenhuma dessas dimensões decide sozinha — a decisão nasce do conjunto.
+      </p>
+    </div>
+
+    <div class="wrap lens__layout">
+      <ul class="lens__rows reveal" aria-label="O que a Órigo Select observa">
+        <li>
+          <button class="lens__row" type="button" data-frame="1" aria-pressed="true">
+            <span class="lens__n">01</span>
+            <span class="lens__t">O contexto da empresa e da função</span>
+            <span class="lens__micro">Quem é a empresa, como trabalha, quem lidera, quais desafios existem e o que a função precisa entregar.</span>
+          </button>
+        </li>
+        <li>
+          <button class="lens__row" type="button" data-frame="2" aria-pressed="false">
+            <span class="lens__n">02</span>
+            <span class="lens__t">As competências que sustentam a função</span>
+            <span class="lens__micro">O que o profissional sabe fazer e quais experiências sustentam a função.</span>
+          </button>
+        </li>
+        <li>
+          <button class="lens__row" type="button" data-frame="3" aria-pressed="false">
+            <span class="lens__n">03</span>
+            <span class="lens__t">O comportamento por trás da experiência</span>
+            <span class="lens__micro">Como decide, se comunica, reage, se relaciona, lidera ou executa.</span>
+          </button>
+        </li>
+        <li>
+          <button class="lens__row" type="button" data-frame="4" aria-pressed="false">
+            <span class="lens__n">04</span>
+            <span class="lens__t">A aderência entre pessoa e organização</span>
+            <span class="lens__micro">O encontro entre pessoa, função, liderança, equipe, cultura e momento da empresa.</span>
+          </button>
+        </li>
+        <li>
+          <button class="lens__row" type="button" data-frame="5" aria-pressed="false">
+            <span class="lens__n">05</span>
+            <span class="lens__t">O potencial que o currículo não mostra</span>
+            <span class="lens__micro">Aquilo que o currículo sozinho não consegue revelar.</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="lens__media reveal reveal--r">
+        <figure class="photo" data-photo="select" data-frame="1">
+          <div class="photo__grade" aria-hidden="true"></div>
+        </figure>
+        <p class="lens__whisper sel">Cada dimensão soma à decisão — nenhuma isolada basta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — COMO CONDUZIMOS -->
+  <section class="chapter chapter--warm" id="processo" data-chapter="Como conduzimos">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">02 — Como conduzimos</p>
+      <h2>Um método que se adapta à vaga.</h2>
+      <p class="lede">
+        Não é um processo engessado — cada posição pode exigir ferramentas
+        diferentes. O que não muda são as seis etapas que conectam a busca à
+        decisão.
+      </p>
+    </div>
+
+    <div class="wrap sprocess reveal">
+      <div class="sprocess__line" aria-hidden="true"><span class="sprocess__fill"></span></div>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">01</span>
+          <span class="sstep__verb">Compreender</span>
+          <span class="sstep__lead">Entender empresa, contexto, liderança, função e o perfil necessário.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            Antes de buscar qualquer candidato, mapeamos a empresa, o contexto
+            do time, a liderança direta, as responsabilidades da posição, os
+            objetivos esperados e o perfil que a função realmente exige.
+          </p>
+          <p class="sstep__tags">Empresa · Liderança · Função · Perfil</p>
+        </div></div>
+      </article>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">02</span>
+          <span class="sstep__verb">Atrair</span>
+          <span class="sstep__lead">Buscar profissionais pelos canais adequados a cada vaga.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            Divulgação, banco de talentos, hunting direto e outros canais são
+            combinados conforme a posição — nem toda vaga pede a mesma
+            estratégia de atração.
+          </p>
+          <p class="sstep__tags">Divulgação · Banco de talentos · Hunting</p>
+        </div></div>
+      </article>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">03</span>
+          <span class="sstep__verb">Analisar</span>
+          <span class="sstep__lead">Currículo, experiências, competências e aderência inicial.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            Trajetória, competências e experiências anteriores são lidas em
+            conjunto para identificar quem tem aderência real à posição — não
+            apenas ao cargo.
+          </p>
+          <p class="sstep__tags">Trajetória · Competências · Aderência inicial</p>
+        </div></div>
+      </article>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">04</span>
+          <span class="sstep__verb">Avaliar</span>
+          <span class="sstep__lead">Entrevistas, avaliações comportamentais e instrumentos conforme a posição.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            As ferramentas variam conforme o que a vaga exige compreender —
+            nem todo processo usa os mesmos testes. Entrevistas, avaliações de
+            perfil e instrumentos técnicos são escolhidos posição a posição.
+          </p>
+          <p class="sstep__tags">Entrevistas · Avaliações · Instrumentos da posição</p>
+        </div></div>
+      </article>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">05</span>
+          <span class="sstep__verb">Apresentar</span>
+          <span class="sstep__lead">Encaminhar quem tem maior aderência, com informações que apoiem a decisão.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            Menos currículo enviado, mais informação para decidir: cada
+            profissional encaminhado chega com o contexto que apoia a escolha
+            do cliente.
+          </p>
+          <p class="sstep__tags">Aderência · Contexto · Decisão do cliente</p>
+        </div></div>
+      </article>
+
+      <article class="sstep" data-open="false">
+        <button class="sstep__toggle" type="button" aria-expanded="false">
+          <span class="sstep__node" aria-hidden="true"></span>
+          <span class="sstep__n">06</span>
+          <span class="sstep__verb">Acompanhar</span>
+          <span class="sstep__lead">Acompanhar processo, contratação e indicadores relevantes.</span>
+          <svg class="sstep__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sstep__detail"><div class="sstep__inner">
+          <p class="body-copy">
+            Depois da contratação, seguimos observando a aplicação, a
+            adaptação e — com o tempo — indicadores de permanência e
+            assertividade do processo.
+          </p>
+          <p class="sstep__tags">Contratação · Permanência · Assertividade</p>
+        </div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS -->
+  <section class="chapter chapter--cool" data-chapter="Ferramentas">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Ferramentas</p>
+      <div class="sel-band">
+        <p class="sel-band__lead">A ferramenta vem depois da pergunta.</p>
+        <p class="body-copy">
+          A Órigo escolhe as avaliações conforme aquilo que precisa ser
+          compreendido em cada função — nem todas são usadas em todos os
+          processos.
+        </p>
+        <p class="sel-tags">
+          <span>DISC</span><span>Eneagrama</span><span>Avaliações de perfil</span>
+          <span>Competências</span><span>Fit cultural</span><span>Raciocínio</span>
+          <span>Entrevistas estruturadas</span><span>Entrevistas por competências</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIA -->
+  <section class="chapter" data-chapter="Tecnologia">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Tecnologia</p>
+      <div class="sel-band">
+        <p class="sel-band__lead">Tecnologia apoia. <em>Decisão continua humana.</em></p>
+        <p class="body-copy">
+          A estrutura tecnológica da Select está sendo preparada para integrar
+          ferramentas de recrutamento, dados e inteligência que apoiem decisões
+          mais consistentes. Nenhum desses recursos substitui a decisão humana
+          — eles existem para sustentá-la melhor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — PARA EMPRESAS -->
+  <section class="chapter chapter--raiz" id="empresas" data-chapter="Para empresas">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">03 — Para empresas</p>
+      <h2>Precisamos compreender a vaga antes de procurar quem vai ocupá-la.</h2>
+      <p class="lede">
+        O processo começa entendendo a empresa, a área, a liderança imediata,
+        as responsabilidades, as expectativas, os desafios, a cultura e o
+        contexto da contratação.
+      </p>
+      <p class="sel-tags" style="color: var(--on-raiz-soft)">
+        <span>Empresa</span><span>Área</span><span>Liderança imediata</span>
+        <span>Responsabilidades</span><span>Expectativas</span><span>Desafios</span>
+        <span>Cultura</span><span>Contexto da contratação</span>
+      </p>
+      <div class="sel-cta-row">
+        <a class="btn btn--on-raiz" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Preciso contratar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — PARA PROFISSIONAIS -->
+  <section class="chapter chapter--cool" id="profissionais" data-chapter="Para profissionais">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">04 — Para profissionais</p>
+      <h2>Uma trajetória profissional é maior do que um currículo.</h2>
+      <p class="lede">
+        Queremos conhecer competências, experiências, escolhas, interesses e o
+        momento profissional de cada pessoa — não apenas os cargos que já
+        ocupou.
+      </p>
+      <p class="body-copy">
+        Talvez a oportunidade certa ainda não esteja aberta. Fazer parte do
+        banco de talentos da Órigo permite que seu perfil seja considerado em
+        processos compatíveis com sua trajetória, interesses e momento
+        profissional.
+      </p>
+      <div class="sel-cta-row">
+        <a class="btn btn--solid" href="select-vagas.html">Ver oportunidades
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="select-talentos.html">Quero fazer parte do banco de talentos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIS DA CONTRATAÇÃO -->
+  <section class="chapter" data-chapter="Depois da contratação">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Depois da contratação</p>
+      <h2>A contratação é um marco. <em>O resultado aparece depois.</em></h2>
+      <p class="body-copy">
+        Queremos acompanhar informações do processo e da contratação para
+        construir, com o tempo, indicadores de qualidade e assertividade —
+        candidatos apresentados, entrevistas, finalistas, contratados, tempo
+        de contratação, permanência, motivos de saída, desempenho do processo
+        e assertividade por cliente. Ainda não temos esses números: é para lá
+        que a estrutura está sendo construída.
+      </p>
+      <p class="body-copy">
+        <b>Menos currículo enviado. Mais informação para decidir.</b> O
+        cliente deve receber candidatos com contexto e análise relevantes
+        para a decisão. No futuro, um portal do cliente reunirá candidatos
+        encaminhados, pareceres, avaliações e andamento do processo — o
+        portal ainda não está ativo, mas o espaço já está sendo preparado.
+      </p>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAL -->
+  <section class="chapter chapter--raiz phrase" data-chapter="Diferencial">
+    <div class="wrap reveal">
+      <p class="eyebrow">Diferencial</p>
+      <p class="phrase__big">
+        Pessoa <em>+</em> Função <em>+</em> Liderança <em>+</em> Cultura <em>+</em> Empresa.
+      </p>
+      <p class="sel-diff-sub">
+        Não avaliamos apenas se alguém consegue fazer o trabalho. Buscamos
+        compreender como essa pessoa poderá existir dentro daquela organização.
+      </p>
+    </div>
+  </section>
+
+  <!-- VÍNCULO PEOPLE + SELECT -->
+  <section class="chapter" data-chapter="People + Select">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">As duas frentes</p>
+    </div>
+    <div class="wrap decisions">
+      <a class="decision reveal" href="people.html">
+        <span class="decision__k">Fortalecer quem já está dentro é People.</span>
+        <span class="decision__d">Encontrar quem ainda falta é Select — as duas seguem a mesma visão de pessoas.</span>
+        <span class="decision__cta">Conhecer Órigo People
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="chapter chapter--espresso final" id="contato" data-chapter="Conversar">
+    <div class="wrap measure reveal">
+      <p class="eyebrow">Conversar</p>
+      <h2>Uma contratação muda mais do que uma cadeira. <em>Ela impacta equipe, liderança, cultura e resultado.</em></h2>
+      <div class="sel-cta-row">
+        <a class="btn btn--on-raiz" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Conversar sobre uma vaga
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost-raiz" href="select-vagas.html">Sou profissional</a>
+      </div>
+      <div class="cta-contact">
+        <div class="cta-contact__item">
+          <span class="cta-contact__label">E-mail</span>
+          <a class="cta-contact__value" href="mailto:origoelect@gmail.com">origoelect@gmail.com</a>
+        </div>
+        <div class="cta-contact__item">
+          <span class="cta-contact__label">WhatsApp</span>
+          <a class="cta-contact__value" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">(54) 99668-9010</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="brand/lockup-neg.png" alt="Órigo Human Strategy" />
+        <p class="dom">origo.net.br</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <a href="people.html">Órigo People</a>
+          <a href="select.html" aria-current="page">Órigo Select</a>
+          <a href="index.html#olhar">Como pensamos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="politica-de-privacidade.html" data-route>Política de Privacidade</a>
+          <a href="termos.html" data-route>Termos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a href="mailto:origoelect@gmail.com">origoelect@gmail.com</a>
+          <a href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">WhatsApp (54) 99668-9010</a>
+          <a href="https://instagram.com/origoselect" target="_blank" rel="noopener">Instagram @origoselect</a>
+          <span class="soon">LinkedIn · em breve</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Órigo Human Strategy. Todos os direitos reservados.</span>
+      <span class="footer__flag">Endereço a confirmar</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite">
+  Rota <code></code> preparada — página em construção.
+</div>
+
+<script defer src="ats-config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+
+  document.querySelector(".theme-toggle").addEventListener("click", function () {
+    var isDark = root.getAttribute("data-theme") === "dark"
+      || (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  var header = document.querySelector(".site-header");
+  var railFill = document.querySelector(".rail__fill");
+  var railChapter = document.querySelector("[data-rail]");
+  var sprocess = document.querySelector(".sprocess");
+  var sline = document.querySelector(".sprocess__line");
+  var dtop = window.matchMedia("(min-width: 769px)");
+  var ticking = false;
+
+  var lineSized = false;
+  function sizeProcessLine(animate) {
+    if (!sprocess || !sline) return;
+    if (!dtop.matches) { sline.style.height = ""; lineSized = false; return; }
+    var nodes = sprocess.querySelectorAll(".sstep__node");
+    if (!nodes.length) return;
+    var base = sline.getBoundingClientRect().top;
+    var last = nodes[nodes.length - 1].getBoundingClientRect();
+    var h = Math.max(0, (last.top + last.height / 2) - base);
+    if (Math.abs(parseFloat(sline.style.height || 0) - h) <= 1) return;
+    if (!animate || !lineSized) {
+      sline.style.transition = "none";
+      sline.style.height = h + "px";
+      void sline.offsetHeight;
+      sline.style.transition = "";
+    } else {
+      sline.style.height = h + "px";
+    }
+    lineSized = true;
+  }
+  window.addEventListener("load", function () { sizeProcessLine(); setTimeout(sizeProcessLine, 400); setTimeout(sizeProcessLine, 1200); });
+  dtop.addEventListener("change", function () { sizeProcessLine(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { sizeProcessLine(); });
+  sizeProcessLine();
+
+  function frame() {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset;
+    header.setAttribute("data-scrolled", y > 12 ? "true" : "false");
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    railFill.style.setProperty("--progress", h > 0 ? (y / h).toFixed(4) : 0);
+    if (sprocess) {
+      var r = sprocess.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh * 0.62 - r.top) / (r.height + vh * 0.4);
+      sprocess.style.setProperty("--sprogress", Math.max(0, Math.min(1, p)).toFixed(4));
+      sizeProcessLine();
+      markActiveStep();
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", function () { frame(); sizeProcessLine(); });
+  frame();
+
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+  function show(el) { el.classList.add("in"); }
+  if (reduce || !("IntersectionObserver" in window)) {
+    reveals.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -22px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+    var sweep = function () {
+      reveals.forEach(function (el) {
+        if (!el.classList.contains("in") && el.getBoundingClientRect().top < window.innerHeight * 0.95) { show(el); io.unobserve(el); }
+      });
+    };
+    sweep();
+    window.addEventListener("load", sweep);
+    setTimeout(sweep, 1200);
+    setTimeout(function () { reveals.forEach(show); }, 2800);
+  }
+
+  var chapterSections = [].slice.call(document.querySelectorAll("[data-chapter]"));
+  if ("IntersectionObserver" in window && railChapter) {
+    var current = "";
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var name = e.target.getAttribute("data-chapter");
+          if (name && name !== current) {
+            current = name;
+            railChapter.classList.add("fade");
+            setTimeout(function () { railChapter.textContent = name; railChapter.classList.remove("fade"); }, 260);
+          }
+        }
+      });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    chapterSections.forEach(function (s) { cio.observe(s); });
+  }
+
+  /* etapa ativa do processo (desktop) — microcontraste no verbo */
+  var steps = [].slice.call(document.querySelectorAll(".sstep"));
+  function markActiveStep() {
+    if (!steps || !steps.length) return;
+    if (!dtop.matches) {
+      steps.forEach(function (s) { s.classList.remove("is-active"); });
+      return;
+    }
+    var focus = window.innerHeight * 0.4;
+    var best = null, bestDist = Infinity;
+    steps.forEach(function (s) {
+      var v = s.querySelector(".sstep__verb").getBoundingClientRect();
+      var d = Math.abs((v.top + v.height / 2) - focus);
+      if (v.top < window.innerHeight && v.bottom > 0 && d < bestDist) { bestDist = d; best = s; }
+    });
+    steps.forEach(function (s) { s.classList.toggle("is-active", s === best); });
+  }
+  markActiveStep();
+  dtop.addEventListener("change", markActiveStep);
+
+  /* processo: acordeão em qualquer largura */
+  steps.forEach(function (step) {
+    var btn = step.querySelector(".sstep__toggle");
+    btn.addEventListener("click", function () {
+      var open = step.getAttribute("data-open") === "true";
+      step.setAttribute("data-open", open ? "false" : "true");
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      sizeProcessLine(true);
+      setTimeout(function () { sizeProcessLine(true); }, 130);
+      setTimeout(function () { sizeProcessLine(true); }, 540);
+    });
+  });
+
+  /* "O que observamos" — troca o enquadramento da foto */
+  var lensRows = [].slice.call(document.querySelectorAll(".lens__row"));
+  var lensPhoto = document.querySelector('[data-photo="select"]');
+  var canHover = window.matchMedia("(hover: hover) and (min-width: 940px)").matches;
+  function activateLens(row) {
+    lensRows.forEach(function (r) { r.setAttribute("aria-pressed", r === row ? "true" : "false"); });
+    if (lensPhoto) lensPhoto.setAttribute("data-frame", row.getAttribute("data-frame"));
+  }
+  lensRows.forEach(function (row) {
+    row.addEventListener("click", function () { activateLens(row); });
+    if (canHover) row.addEventListener("mouseenter", function () { activateLens(row); });
+  });
+
+  /* menu mobile */
+  var menuBtn = document.querySelector(".menu-btn");
+  var mobileMenu = document.querySelector(".mobile-menu");
+  function setMenu(open) {
+    mobileMenu.setAttribute("data-open", open ? "true" : "false");
+    mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  menuBtn.addEventListener("click", function () { setMenu(true); });
+  document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
+  mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+
+  var toast = document.querySelector(".toast");
+  var toastCode = toast.querySelector("code");
+  var toastTimer;
+  document.querySelectorAll("[data-route]").forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      toastCode.textContent = a.getAttribute("href");
+      toast.setAttribute("data-show", "true");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.removeAttribute("data-show"); }, 3200);
+    });
+  });
+})();
+</script>
+</body>
+</html>
