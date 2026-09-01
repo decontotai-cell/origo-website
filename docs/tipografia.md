@@ -1,36 +1,35 @@
 # Tipografia
 
-## Fontes da marca (manual)
+## Sistema do site (digital) — em uso
 
-| Fonte | Papel no manual | No site (`--var`) |
-| --- | --- | --- |
-| **Nexa** | fonte principal, cabeçalhos (sans geométrica) | `--font-ui` — menu, botões, rótulos, eyebrows, números, footer |
-| **Athena** | subcabeçalhos e parágrafos | `--font-text` — corpo de texto, ledes, notas, `body` |
-| **Alamanda** | títulos | `--font-display` — h1/h2/h3, frases-conceito, pull quotes, títulos grandes |
+| Papel | Família | `--var` | Stack |
+| --- | --- | --- | --- |
+| Títulos, frases-conceito, verbos do método, blocos editoriais | **Fraunces** (serifada editorial, Google Fonts) | `--font-display` | `"Fraunces", ui-serif, Georgia, "Times New Roman", serif` |
+| Corpo de texto, ledes, notas, `body` | **Manrope** (sans, Google Fonts) | `--font-text` | `"Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif` |
+| Interface: menu, botões, rótulos, eyebrows, números, footer | **Manrope** | `--font-ui` | igual a `--font-text` |
 
-## Estado atual (31/08/2026)
+Carregadas em `<head>` via Google Fonts (`Fraunces` + `Manrope`). É este o
+visual aprovado: limpo, contemporâneo, legível, bom para interface digital.
 
-As três fontes são **licenciadas / pagas** e **não estão no projeto** com licença
-comercial válida (os arquivos que chegaram eram de site pirata / "personal use
-only" / pesos incompletos — não podem ir para um site comercial).
+## Fontes do manual da marca (Nexa · Athena · Alamanda)
 
-Enquanto isso, o site roda com **substitutas de licença livre**, já como fallback
-nas variáveis:
+São **referência de identidade visual** (logo, marca, peças institucionais) —
+**não** a fonte funcional do site. Decisão de 01/09/2026: não aplicar
+Nexa/Athena/Alamanda como padrão global do site; o ambiente digital fica em
+Fraunces + Manrope.
 
-- `--font-display` → **Fraunces** (serifada editorial, Google Fonts)
-- `--font-text` e `--font-ui` → **Manrope** (sans, Google Fonts)
+Se, no futuro, a marca quiser usar alguma delas em pontos **muito específicos**
+definidos pela identidade, isso é exceção pontual — não regra. Nesse caso:
+`@font-face` só para o(s) peso(s) necessário(s), aplicado só naquele componente,
+com Fraunces/Manrope como fallback, e revendo `line-height`/`clamp()` porque as
+métricas diferem.
 
-## Como trocar (quando os webfonts licenciados chegarem)
+## Histórico
 
-1. Colocar os `.woff2` em `site/fonts/` com os nomes de `site/fonts/README.md`.
-2. Pronto — as `@font-face` do `<head>` já apontam para lá; a marca assume e o
-   Fraunces/Manrope viram só fallback.
-3. Revisar tamanhos/entrelinhas: Nexa e Athena têm métricas diferentes de
-   Manrope; pode ser preciso reajustar `line-height` e alguns `clamp()`.
-
-## Decisão pendente
-
-O manual manda **Nexa (sans) nos títulos**. A V2 aprovada usa **serifada
-(Alamanda/Fraunces) nos títulos grandes** — é o ar "revista" que a cliente
-aprovou. Confirmar com a marca se mantém o híbrido (serifada nos grandes títulos
-+ Nexa na interface) ou vai 100% Nexa nos títulos.
+- `9045dc7` (31/08) tinha trocado as pilhas para "manual primeiro, Fraunces/
+  Manrope como fallback" + `@font-face` apontando para `site/fonts/*.woff2`.
+  Os `.woff2` nunca existiram no projeto, então o navegador sempre usou o
+  fallback — mas o manual ficava como padrão latente.
+- **Revertido em 01/09**: `--font-*` voltaram a ser só Fraunces/Manrope, os
+  `@font-face` do manual foram removidos, e `.mstep__lead` (frase-síntese do
+  método na People) voltou a herdar a sans, como no estado aprovado.

@@ -5,46 +5,17 @@
      RAIZ #4B5143 · ESPRESSO #373028 · LINHO #D9CDBF
      NÉVOA #D1E2EC · PEDRA #8D7D6E · LEVEZA #F9F9F9
 
-     TIPOGRAFIA — fontes da marca (Nexa · Athena · Alamanda) declaradas
-     abaixo apontando para /site/fonts/. Enquanto os arquivos LICENCIADOS
-     não estiverem lá, o navegador usa os fallbacks (Fraunces · Manrope)
-     e o visual segue igual. Ver docs/tipografia.md.
+     TIPOGRAFIA — sistema digital do site: Fraunces (serifada editorial) +
+     Manrope (sans), via Google Fonts. As fontes do manual da marca
+     (Nexa · Athena · Alamanda) são referência de IDENTIDADE (logo/marca),
+     não fonte funcional global. Ver docs/tipografia.md.
      ================================================================ */
 
-  /* Alamanda — títulos de destaque */
-  @font-face {
-    font-family: "Alamanda";
-    src: url("fonts/Alamanda.woff2") format("woff2");
-    font-weight: 300 500; font-display: swap;
-  }
-  /* Nexa — cabeçalhos e interface (rótulos, menu, botões) */
-  @font-face {
-    font-family: "Nexa";
-    src: url("fonts/Nexa-Light.woff2") format("woff2");
-    font-weight: 300 400; font-display: swap;
-  }
-  @font-face {
-    font-family: "Nexa";
-    src: url("fonts/Nexa-Bold.woff2") format("woff2");
-    font-weight: 500 700; font-display: swap;
-  }
-  /* Athena — subcabeçalhos e parágrafos */
-  @font-face {
-    font-family: "Athena";
-    src: url("fonts/Athena-Regular.woff2") format("woff2");
-    font-weight: 400; font-display: swap;
-  }
-  @font-face {
-    font-family: "Athena";
-    src: url("fonts/Athena-Medium.woff2") format("woff2");
-    font-weight: 500 700; font-display: swap;
-  }
-
   :root {
-    /* tipografia: marca primeiro, substituta livre como fallback */
-    --font-display: "Alamanda", "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
-    --font-text: "Athena", "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --font-ui: "Nexa", "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* tipografia do site (digital) — Fraunces + Manrope */
+    --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+    --font-text: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-ui: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
     /* base — tema claro */
     --ground: #F9F9F9;
