@@ -448,8 +448,7 @@
 
   /* tema */
   document.querySelector(".theme-toggle").addEventListener("click", function () {
-    var isDark = root.getAttribute("data-theme") === "dark"
-      || (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var isDark = root.getAttribute("data-theme") === "dark";
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 

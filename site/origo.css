@@ -73,27 +73,11 @@
     --sym-url: url("brand/symbol.png");
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground: #29241E;
-      --ink: #EAE3D6;
-      --ink-soft: #B3A895;
-      --ink-faint: #9A8F80;
-      --hairline: #423B31;
-      --hairline-strong: #4E4638;
-
-      --ch-cool: #222A2D;
-      --ch-warm: #2E2A21;
-      --ch-warm-ghost: #2A251E;
-
-      --raiz-ground: #454B3E;
-      --espresso-ground: #201C17;
-
-      --accent-text: #9AA783;
-      --on-accent: #F3EFE6;
-      --glyph-opacity: 0.22;
-    }
-  }
+  /* Tema padrão = claro ("versão do dia"), igual em desktop e mobile.
+     O escuro NÃO segue mais o modo do sistema — só entra pelo botão
+     sol/lua (data-theme="dark"). */
+  :root { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
 
   :root[data-theme="dark"] {
     --ground: #29241E;
@@ -143,9 +127,6 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   }
   :root[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: 0.35; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) body::before { mix-blend-mode: screen; opacity: 0.35; }
-  }
 
   h1, h2, h3 {
     font-family: var(--font-display);
@@ -247,10 +228,6 @@
   .tri-neg { display: none; }
   :root[data-theme="dark"] .tri-pos { display: none; }
   :root[data-theme="dark"] .tri-neg { display: block; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .tri-pos { display: none; }
-    :root:not([data-theme="light"]) .tri-neg { display: block; }
-  }
   .brand span {
     font-family: var(--font-display); font-weight: 400; font-size: 1.24rem;
     letter-spacing: 0.01em; color: var(--ink);
@@ -290,10 +267,6 @@
   .theme-toggle .moon { display: none; }
   :root[data-theme="dark"] .theme-toggle .moon { display: block; }
   :root[data-theme="dark"] .theme-toggle .sun { display: none; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-toggle .sun { display: none; }
-    :root:not([data-theme="light"]) .theme-toggle .moon { display: block; }
-  }
   .menu-btn {
     display: none; margin-left: auto; width: 42px; height: 42px;
     border: 1px solid var(--hairline-strong); border-radius: 999px; background: transparent;
