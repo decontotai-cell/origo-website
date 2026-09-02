@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="origo.css" />
 
 <style>
-  .stub { min-height: calc(100svh - 4.2rem); display: flex; align-items: center; }
+  .stub { min-height: calc(100svh - 4.2rem); display: flex; align-items: center; position: relative; overflow: clip; }
   .stub__glyph {
     position: absolute; z-index: 1; pointer-events: none;
     width: min(46vw, 520px); right: -12vw; top: 50%; transform: translateY(-50%);
@@ -87,18 +87,19 @@
       <p class="eyebrow">Órigo Select · Oportunidades</p>
       <h1 class="stub__h1">Estamos preparando a nova experiência de oportunidades da Órigo Select.</h1>
       <p class="lede">
-        Assim que a estrutura estiver pronta, você vai poder ver as vagas
-        abertas e se candidatar diretamente por aqui.
+        Em breve, as oportunidades abertas poderão ser consultadas diretamente
+        por aqui.
       </p>
-      <p class="body-copy">
-        Enquanto isso, fale com a gente pelo WhatsApp ou volte para conhecer a
-        Órigo Select.
-      </p>
+
+      <!-- Ponto de montagem da experiência de vagas.
+           Enquanto OrigoSelect.ATS_STATUS === "pending", nada é renderizado
+           aqui. Quando o ATS for definido (status "active"),
+           OrigoSelect.JobsProvider.list() alimenta este container — sem
+           reescrever o resto da página. -->
+      <div id="ats-mount" data-ats="pending" hidden></div>
+
       <div class="stub__actions">
-        <a class="btn btn--solid" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Falar com a Órigo
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn btn--ghost" href="select.html">Voltar para a Órigo Select</a>
+        <a class="btn btn--solid" href="select.html">Voltar para a Órigo Select</a>
       </div>
     </div>
   </section>
@@ -120,8 +121,8 @@
         </div>
         <div class="footer__col">
           <h4>Legal</h4>
-          <a href="politica-de-privacidade.html" data-route>Política de Privacidade</a>
-          <a href="termos.html" data-route>Termos</a>
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="termos.html">Termos</a>
         </div>
         <div class="footer__col">
           <h4>Contato</h4>
@@ -206,6 +207,18 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(function () { toast.removeAttribute("data-show"); }, 3200);
     });
+  });
+
+  /* modo ATS: o ponto de montagem só aparece quando a integração estiver ativa.
+     Enquanto OrigoSelect.ATS_STATUS === "pending", a página fica no estado atual. */
+  window.addEventListener("DOMContentLoaded", function () {
+    var mount = document.getElementById("ats-mount");
+    if (mount && window.OrigoSelect && window.OrigoSelect.isActive()) {
+      mount.hidden = false;
+      mount.setAttribute("data-ats", "active");
+      document.documentElement.setAttribute("data-ats", "active");
+      /* futuro: window.OrigoSelect.JobsProvider.list().then(renderVagas); */
+    }
   });
 })();
 </script>
