@@ -14,6 +14,89 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" />
 <link rel="stylesheet" href="origo.css" />
+
+<style>
+  /* ===================================================================
+     HOME — refino de escala tipográfica, quebras, alinhamento e grid.
+     Só apresentação: nada de conteúdo, fonte, paleta, foto ou animação.
+     Hierarquia:  HERO  >  frases conceituais  >  títulos de seção  >
+                  texto explicativo  >  eyebrow
+     =================================================================== */
+
+  /* ---- GRID: uma linha estrutural — todo conteúdo parte da mesma borda.
+       Os blocos .measure deixam de ser uma coluna centralizada e passam a
+       alinhar com o hero e as grandes frases; o texto corrido segue
+       limitado à medida de leitura. ---- */
+  @media (min-width: 769px) {
+    main .wrap.measure { max-width: var(--wrap); }
+    main .wrap.measure > :is(p, ul, ol) { max-width: var(--measure); }
+  }
+
+  /* ---- 1 · HERO — maior nível, sem "pôster gigante" (~18% menor).
+       O título ganha a largura da página (a coluna vazia à direita era só
+       espaçador); assim compõe em 3 linhas naturais em vez de 5. ---- */
+  .hero h1 {
+    font-size: clamp(2rem, 1rem + 2.9vw, 3.9rem);      /* ~58px @1440, ~62 @1920 (era ~78) */
+    line-height: 1.16;
+    text-wrap: balance;
+    max-width: 20ch;
+  }
+  @media (min-width: 901px) {
+    .hero__grid { grid-template-columns: minmax(0, 1fr); }
+    .hero__aside { display: none; }
+    .hero h1 { max-width: 34ch; }   /* proporcional à fonte: 1ª linha inteira, 2ª frase em 2 linhas */
+  }
+
+  /* frase-conceito do Raiz: alinha na mesma borda dos demais blocos
+     (o .wrap dentro de um flex estava sendo centralizado) */
+  .phrase > .wrap { width: 100%; margin-inline: auto; }
+
+  /* ---- 2 · Grandes frases conceituais — fortes, porém menores que o hero ---- */
+  .phrase__big {
+    font-size: clamp(1.8rem, 1rem + 2vw, 3.2rem);      /* ~45px @1440, ~51 @1920 (era ~108) */
+    line-height: 1.16;
+    max-width: 28ch;
+  }
+  #conceito h2 {
+    font-size: clamp(1.7rem, 1rem + 1.8vw, 2.7rem);    /* ~42px @1440 */
+    line-height: 1.16;
+    max-width: 24ch;
+  }
+  .manifesto__big {
+    font-size: clamp(1.7rem, 1rem + 1.9vw, 2.8rem);    /* ~43px @1440 (era ~78) */
+    line-height: 1.2;
+    max-width: 34rem;                                  /* largura útil maior */
+  }
+  .manifesto__big span { display: block; }
+  .manifesto__big span + span { margin-top: 0.42em; }
+  .final h2 {
+    font-size: clamp(1.75rem, 1rem + 2vw, 2.9rem);     /* ~45px @1440 */
+    line-height: 1.16;
+    max-width: 20ch;
+  }
+  .origin__future { font-size: clamp(1.6rem, 1rem + 1.7vw, 2.6rem); }   /* ~40px */
+  .freedom__h    { font-size: clamp(1.6rem, 1rem + 1.7vw, 2.6rem); max-width: 22ch; }
+
+  /* ---- 3 · Títulos de seção — nível intermediário, claro acima do texto ---- */
+  main section:not(.final):not(#conceito) > .wrap.measure > h2 {
+    font-size: var(--s-2);                             /* ~35px @1440 (era ~26) */
+    line-height: 1.16;
+    max-width: 30ch;
+  }
+  .terr__title { font-size: clamp(1.75rem, 1rem + 1.9vw, 2.8rem); }     /* painel: leve trim */
+  .decision__k { font-size: clamp(1.5rem, 1rem + 1.4vw, 2.2rem); }     /* linha de escolha */
+
+  /* ---- 7 · texto: sem palavra órfã / preposição sozinha na última linha ---- */
+  .lede, .body-copy, .hero__context, .terr__sub, .decision__d { text-wrap: pretty; }
+
+  /* ---- mobile: recompõe sem gerar quebras ruins ---- */
+  @media (max-width: 768px) {
+    .hero h1 { max-width: none; }              /* deixa o balance dividir sem órfã */
+    .phrase__big, #conceito h2, .final h2 { max-width: 24ch; }
+    .manifesto__big { max-width: 28ch; }
+    .manifesto__big span + span { margin-top: 0.3em; }
+  }
+</style>
 </head>
 <body><a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
@@ -339,7 +422,8 @@
     <div class="wrap measure manifesto__inner reveal">
       <p class="eyebrow">Filosofia</p>
       <p class="manifesto__big">
-        Processos organizam. Tecnologia acelera.
+        <span>Processos organizam.</span>
+        <span>Tecnologia acelera.</span>
         <span class="soft">Mas são as pessoas que sustentam o crescimento.</span>
       </p>
       <p class="body-copy">
