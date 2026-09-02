@@ -5,6 +5,15 @@
 /png sem fundo.png
 /origo_foto_*.png
 
+# --- Vídeo e material de referência pesado (nunca versionar) ---
+*.mp4
+*.mov
+*.zip
+/origo_fotos_fabrica_separadas/
+/origo_fotos_separadas/
+
+# --- Só as fotos OTIMIZADAS entram no repo, em site/assets/ ---
+
 # --- Fontes sem licença comercial (NÃO versionar / NÃO publicar) ---
 # Nexa/Athena/Alamanda só entram em site/fonts/ quando forem .woff2 LICENCIADOS.
 /nexa/
