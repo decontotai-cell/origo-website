@@ -89,6 +89,20 @@
   /* ---- 7 · texto: sem palavra órfã / preposição sozinha na última linha ---- */
   .lede, .body-copy, .hero__context, .terr__sub, .decision__d { text-wrap: pretty; }
 
+  /* ---- "Nosso Olhar": 5 fotos distintas, uma por linha (crossfade) ---- */
+  .photo--multi > img {
+    opacity: 0;
+    transform: none;                /* sem zoom/pan por frame */
+    object-position: center;
+    transition: opacity 0.6s var(--ease);
+  }
+  .photo--multi[data-frame="1"] > img[data-f="1"],
+  .photo--multi[data-frame="2"] > img[data-f="2"],
+  .photo--multi[data-frame="3"] > img[data-f="3"],
+  .photo--multi[data-frame="4"] > img[data-f="4"],
+  .photo--multi[data-frame="5"] > img[data-f="5"] { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .photo--multi > img { transition: none; } }
+
   /* ---- mobile: recompõe sem gerar quebras ruins ---- */
   @media (max-width: 768px) {
     .hero h1 { max-width: none; }              /* deixa o balance dividir sem órfã */
@@ -320,8 +334,12 @@
       </ul>
 
       <div class="lens__media reveal reveal--r">
-        <figure class="photo" data-photo="olhar" data-frame="1">
-          <img src="assets/foto-01-nosso-olhar.jpg" alt="Vista ampla de um parque fabril em plena operação." loading="lazy" decoding="async" />
+        <figure class="photo photo--multi" data-photo="olhar" data-frame="1">
+          <img src="assets/foto-olhar-linha.jpg" data-f="1" alt="Operador concentrado numa linha de produção." decoding="async" />
+          <img src="assets/foto-people-linha.jpg" data-f="2" alt="Equipe reunida com a liderança no chão de fábrica." loading="lazy" decoding="async" />
+          <img src="assets/foto-select-operacao.jpg" data-f="3" alt="Dois gestores acompanhando a operação." loading="lazy" decoding="async" />
+          <img src="assets/foto-01-nosso-olhar.jpg" data-f="4" alt="Vista ampla do parque fabril em operação." loading="lazy" decoding="async" />
+          <img src="assets/foto-03-liberdade.jpg" data-f="5" alt="Pessoa numa passarela, observando o chão de fábrica." loading="lazy" decoding="async" />
           <div class="photo__grade" aria-hidden="true"></div>
         </figure>
         <p class="lens__whisper">A empresa é a mesma. O que muda é o nosso olhar.</p>
