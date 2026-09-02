@@ -101,3 +101,28 @@ Arquivos:
 
 Links `/select` (Home) e `select.html` `data-route` (Home + People)
 foram trocados por links reais — a página deixou de ser "em construção".
+
+## Revisão técnica "sem ATS" (02/09/2026)
+
+- `site/ats-config.js` reescrito: `window.OrigoSelect` com **`ATS_STATUS`**
+  ("pending" | "active") como interruptor único + `config` +
+  três providers de contrato fixo: **`JobsProvider`** (`list`/`get`),
+  **`TalentProvider`** (`submitProfile`), **`ClientRequestProvider`**
+  (`create`/`getClientPortalUrl`). Nenhum backend próprio; em "pending"
+  tudo devolve vazio/nulo. Quando o ATS for escolhido: trocar
+  `ATS_STATUS` p/ "active", preencher `config` e implementar os providers
+  — a interface não muda.
+- `select-vagas.html` e `select-talentos.html`: têm um `<div id="ats-mount"
+  hidden>` (ponto de montagem) que só é revelado quando
+  `OrigoSelect.isActive()`. Enquanto isso, exibem o estado
+  "estrutura em preparação". **`select-talentos.html` não coleta nenhum
+  dado** (sem form/input) — copy nova conforme brief.
+- CTAs simplificados: só "Voltar para a Órigo Select" (o WhatsApp
+  permanece no header global).
+- **`politica-de-privacidade.html` e `termos.html` criados como
+  PLACEHOLDER INTERNO** — sem cláusulas jurídicas inventadas, só o aviso
+  de "documento em preparação / validação jurídica pendente" + o fato de
+  que o site não coleta dados hoje. Comentário no topo do arquivo marca
+  como placeholder a substituir. Links `data-route` → link real nas
+  páginas da família Select. **Home e People mantêm `data-route`
+  (fora do escopo desta rodada) — unificar depois.**

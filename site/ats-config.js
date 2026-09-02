@@ -1,77 +1,76 @@
 /*
- * Órigo Select — camada de integração com o ATS/CRM (recrutamento).
- * =============================================================
+ * Órigo Select — camada de preparação para o ATS/CRM de recrutamento.
+ * =================================================================
  * O ATS/CRM definitivo AINDA NÃO foi escolhido (avaliando plataformas
- * profissionais). Este arquivo isola toda a futura integração numa
- * interface única — para nenhuma URL, chamada ou credencial de ATS ficar
- * espalhada pelos componentes da página.
+ * profissionais). Este arquivo é o ÚNICO ponto de configuração da
+ * integração futura — nenhuma URL, chave ou chamada de ATS deve ficar
+ * espalhada pelas páginas.
  *
- * Enquanto `config.provider` for "pending":
- *   - nenhuma chamada de rede é feita;
- *   - toda função devolve um resultado vazio/nulo, de forma previsível;
- *   - a interface do site continua funcionando normalmente (nada quebra).
+ *   ATS_STATUS = "pending"  -> nada de rede; a interface mostra os
+ *                              estados de "estrutura em preparação".
+ *   ATS_STATUS = "active"   -> os providers passam a falar com a API /
+ *                              white-label do ATS escolhido, SEM que a
+ *                              interface precise ser reescrita.
  *
- * Quando o ATS for definido, os passos são:
- *   1. Preencher `config` (provider, jobsUrl, talentPoolUrl, clientPortalUrl,
- *      applicationMode: "external" quando o candidato é levado para o
- *      ambiente do ATS, ou "embedded" quando o ATS expõe um widget/iframe).
- *   2. Implementar cada função abaixo chamando a API real do provider
- *      escolhido (ou seu SDK/whitelabel).
- *   3. Nenhuma página (select.html, select-vagas.html, select-talentos.html)
- *      precisa mudar de estrutura — elas já esperam por este contrato.
+ * Quando o ATS for definido:
+ *   1. Trocar ATS_STATUS para "active" e preencher `config`.
+ *   2. Implementar os três providers abaixo chamando a API real.
+ *   3. Nenhuma página (select.html, select-vagas.html,
+ *      select-talentos.html) muda de estrutura — elas já esperam
+ *      por este contrato e têm um ponto de montagem (#ats-mount).
  *
- * Este arquivo NÃO cria banco de candidatos, autenticação, upload de
- * currículo nem armazenamento de dados pessoais. É só a interface.
+ * Este arquivo NÃO cria backend próprio, banco de candidatos,
+ * autenticação, upload de currículo nem coleta de dados pessoais.
  */
-window.OrigoATS = (function () {
+window.OrigoSelect = (function () {
   "use strict";
 
+  /* -------- interruptor único de modo -------- */
+  var ATS_STATUS = "pending"; // "pending" | "active"
+
+  /* -------- configuração da integração (preencher quando "active") -------- */
   var config = {
-    provider: "pending",        // "pending" | nome do ATS quando escolhido (ex.: "recruit-crm", "abler")
-    jobsUrl: null,               // URL/endpoint de listagem de vagas do ATS
-    talentPoolUrl: null,         // URL/endpoint do banco de talentos do ATS
-    clientPortalUrl: null,       // URL do portal do cliente (candidatos encaminhados, pareceres, andamento)
-    applicationMode: "pending"   // "pending" | "external" (leva ao ATS) | "embedded" (widget na própria página)
+    provider: null,             // ex.: "recruit-crm", "abler"
+    jobsUrl: null,              // endpoint/whitelabel de vagas
+    talentPoolUrl: null,        // endpoint/whitelabel do banco de talentos
+    clientPortalUrl: null,      // portal do cliente (candidatos encaminhados, pareceres, andamento)
+    applicationMode: "pending"  // "pending" | "external" (leva ao ATS) | "embedded" (widget na página)
   };
 
-  function pending() {
-    return Promise.resolve(config.provider === "pending" ? [] : []);
-  }
-  function pendingNull() {
-    return Promise.resolve(null);
-  }
+  function isActive() { return ATS_STATUS === "active"; }
+  function empty() { return Promise.resolve([]); }
+  function noop() { return Promise.resolve(null); }
+
+  /* -------- componentes reutilizáveis (contrato fixo) -------- */
+
+  /* Vagas — /select/vagas e /select/vagas/[slug] */
+  var JobsProvider = {
+    /** Lista de vagas publicadas. "pending" -> []. */
+    list: function () { return empty(); },
+    /** Detalhe de uma vaga por id ou slug. "pending" -> null. */
+    get: function (idOrSlug) { return noop(); }
+  };
+
+  /* Banco de talentos — /select/talentos */
+  var TalentProvider = {
+    /** Envio de perfil ao banco de talentos. "pending" -> null (a UI não deve coletar dados ainda). */
+    submitProfile: function (payload) { return noop(); }
+  };
+
+  /* Solicitações de empresa / portal do cliente */
+  var ClientRequestProvider = {
+    /** Abertura de vaga por um cliente. "pending" -> null. */
+    create: function (payload) { return noop(); },
+    /** URL do portal do cliente, quando existir. */
+    getClientPortalUrl: function () { return config.clientPortalUrl; }
+  };
 
   return {
+    ATS_STATUS: ATS_STATUS,
     config: config,
-
-    /** Lista de vagas publicadas. Em modo "pending": lista vazia. */
-    getJobs: function () {
-      return pending();
-    },
-
-    /** Detalhe de uma vaga por id/slug. Em modo "pending": null. */
-    getJob: function (idOrSlug) {
-      return pendingNull();
-    },
-
-    /** Candidatura a uma vaga. Em modo "pending": não faz nada (a UI não deve chamar isto ainda). */
-    applyToJob: function (jobId, payload) {
-      return pendingNull();
-    },
-
-    /** Cadastro no banco de talentos. Em modo "pending": não faz nada. */
-    createTalentProfile: function (payload) {
-      return pendingNull();
-    },
-
-    /** Abertura de vaga por um cliente (portal empresa). Em modo "pending": não faz nada. */
-    createJobRequest: function (payload) {
-      return pendingNull();
-    },
-
-    /** URL do portal do cliente, quando existir. Em modo "pending": null. */
-    getClientPortalUrl: function () {
-      return config.clientPortalUrl;
-    }
+    isActive: isActive,
+    JobsProvider: JobsProvider,
+    TalentProvider: TalentProvider,
+    ClientRequestProvider: ClientRequestProvider
   };
 })();
