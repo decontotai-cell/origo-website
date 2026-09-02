@@ -58,6 +58,14 @@
   .p-h1 em { font-style: italic; color: var(--accent-text); font-weight: 400; }
   .p-hero-actions { margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
+  /* ---------- FOTO editorial ---------- */
+  .p-photo .photo {
+    --photo-ar: 16 / 9;
+    --photo-tone: color-mix(in srgb, var(--linho) 40%, var(--ground));
+    --photo-cast: var(--pedra);
+  }
+  @media (max-width: 600px) { .p-photo .photo { --photo-ar: 4 / 3; } }
+
   /* ---------- 01 · QUANDO FAZ SENTIDO ---------- */
   .situ-list {
     position: relative; z-index: 2;
@@ -396,6 +404,16 @@
         rotina.
       </p>
     </div>
+  </section>
+
+  <!-- FOTO — respiro editorial -->
+  <section class="chapter" data-chapter="O método" style="padding-block: clamp(1.5rem,5vw,3rem)">
+    <figure class="wrap p-photo reveal">
+      <div class="photo" data-photo="people-linha">
+        <img src="assets/foto-people-linha.jpg" alt="Líder conversando com uma equipe no chão de fábrica." loading="lazy" decoding="async" />
+        <div class="photo__grade" aria-hidden="true"></div>
+      </div>
+    </figure>
   </section>
 
   <!-- 02 — O MÉTODO -->

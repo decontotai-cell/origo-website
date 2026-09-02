@@ -565,8 +565,8 @@
   }
   .photo[data-photo="olhar"] { --photo-ar: 3 / 2; --photo-tone: color-mix(in srgb, var(--pedra) 20%, var(--ground)); --photo-cast: var(--pedra); }
   .photo[data-photo="people"] { --photo-ar: 1 / 1; --photo-tone: color-mix(in srgb, var(--linho) 52%, var(--ground)); --photo-cast: var(--linho); }
-  .photo[data-photo="liberdade"] { --photo-ar: 4 / 5; --photo-tone: color-mix(in srgb, var(--espresso) 28%, var(--ground)); --photo-cast: var(--raiz); --photo-pos: 46% 42%; }
-  .photo[data-photo="select"] { --photo-ar: 3 / 4; --photo-tone: color-mix(in srgb, var(--raiz) 24%, var(--ground)); --photo-cast: var(--pedra); }
+  .photo[data-photo="liberdade"] { --photo-ar: 4 / 5; --photo-tone: color-mix(in srgb, var(--espresso) 28%, var(--ground)); --photo-cast: var(--raiz); --photo-pos: 70% 46%; }
+  .photo[data-photo="select"] { --photo-ar: 16 / 9; --photo-tone: color-mix(in srgb, var(--raiz) 24%, var(--ground)); --photo-cast: var(--pedra); }
   @media (max-width: 600px) {
     .photo[data-photo="olhar"] { --photo-ar: 4 / 3; }
     .photo[data-photo="liberdade"] { --photo-ar: 1 / 1; }
