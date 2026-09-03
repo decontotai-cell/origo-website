@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Contratar com a Órigo Select | Órigo Human Strategy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Conte à Órigo Select sobre sua empresa e a contratação e agende uma primeira conversa online." />
+<meta name="robots" content="noindex" />
+<link rel="canonical" href="https://origo.net.br/select-empresas.html" />
+<meta property="og:url" content="https://origo.net.br/select-empresas.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" />
+<link rel="icon" type="image/png" href="brand/symbol.png" />
+<link rel="stylesheet" href="origo.css" />
+
+<style>
+  :root { --ce-err: #9A5B4A; }
+  :root[data-theme="dark"] { --ce-err: #CF8E7C; }
+
+  @media (min-width: 769px) {
+    main .wrap.measure { max-width: var(--wrap); }
+    main .wrap.measure > :is(p, h1, h2) { max-width: var(--measure); }
+  }
+
+  .ce-hero { padding-block: clamp(3.5rem, 9vw, 5.5rem) clamp(1.4rem, 4vw, 2.25rem); }
+  .ce-rule { display: block; width: 2.5rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.4rem; }
+  .ce-h1 {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.8rem, 1rem + 2.6vw, 3rem); line-height: 1.15;
+    letter-spacing: -0.02em; text-wrap: balance; margin: 1rem 0 0; max-width: 22ch;
+  }
+
+  /* indicador de etapas — linha editorial, não widget */
+  .ce-steps {
+    display: flex; flex-wrap: wrap; gap: 1.1rem 1.6rem;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .ce-steps span { display: inline-flex; align-items: center; gap: 0.55rem; transition: color 0.3s var(--ease); }
+  .ce-steps span::before {
+    content: ""; width: 6px; height: 6px; border-radius: 999px;
+    border: 1px solid currentColor; transition: background 0.3s var(--ease);
+  }
+  .ce-steps span.is-active { color: var(--accent-text); }
+  .ce-steps span.is-active::before { background: var(--accent-text); }
+  .ce-steps span.is-done { color: var(--ink-soft); }
+  .ce-steps span.is-done::before { background: var(--ink-soft); }
+
+  /* formulário */
+  .ce-form { margin-top: clamp(2.5rem, 6vw, 3.5rem); }
+  .ce-group { border: 0; padding: 0; margin: 0; min-inline-size: 0; }
+  .ce-group + .ce-group { margin-top: clamp(2.75rem, 7vw, 4rem); }
+  .ce-group__legend {
+    display: block; padding: 0; margin-bottom: clamp(1.2rem, 3vw, 1.7rem);
+    font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .ce-grid { display: grid; gap: clamp(1.35rem, 3.5vw, 1.9rem) clamp(1.5rem, 4vw, 2.5rem); }
+  @media (min-width: 620px) {
+    .ce-grid { grid-template-columns: 1fr 1fr; }
+    .ce-grid .ce-field--full { grid-column: 1 / -1; }
+  }
+
+  .ce-field { display: flex; flex-direction: column; min-inline-size: 0; }
+  .ce-field > label {
+    font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.03em; color: var(--ink-soft); margin-bottom: 0.5rem;
+  }
+  .ce-field > label .req { color: var(--accent-text); margin-left: 0.15em; }
+  .ce-field input,
+  .ce-field select {
+    font-family: var(--font-ui); font-size: 1rem; line-height: 1.4; color: var(--ink);
+    background: transparent; border: 0; border-bottom: 1px solid var(--hairline-strong);
+    border-radius: 0; padding: 0.6rem 0; width: 100%;
+    transition: border-color 0.25s var(--ease);
+    -webkit-appearance: none; appearance: none;
+  }
+  .ce-field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23877C6C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat; background-position: right 0.1rem center;
+    padding-right: 1.7rem; cursor: pointer;
+  }
+  .ce-field input:focus,
+  .ce-field select:focus { outline: none; border-color: var(--accent-text); }
+  .ce-field input::placeholder { color: var(--ink-faint); }
+  .ce-field select:invalid { color: var(--ink-faint); }
+
+  .ce-field[data-invalid="true"] input,
+  .ce-field[data-invalid="true"] select { border-color: var(--ce-err); }
+  .ce-field__err {
+    font-family: var(--font-ui); font-size: 0.75rem; color: var(--ce-err);
+    margin-top: 0.45rem; display: none;
+  }
+  .ce-field[data-invalid="true"] .ce-field__err { display: block; }
+
+  .ce-consent {
+    margin-top: clamp(2.25rem, 6vw, 3.25rem);
+    display: flex; gap: 0.8rem; align-items: flex-start; max-width: var(--measure);
+  }
+  .ce-consent input {
+    margin: 0.15rem 0 0; width: 1.1rem; height: 1.1rem; flex: none;
+    accent-color: var(--accent-text); cursor: pointer;
+  }
+  .ce-consent label { font-size: 0.85rem; line-height: 1.55; color: var(--ink-soft); }
+  .ce-consent a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .ce-consent[data-invalid="true"] label { color: var(--ce-err); }
+
+  .ce-actions { margin-top: clamp(2rem, 5vw, 2.75rem); }
+  .ce-actions .btn:disabled { opacity: 0.55; pointer-events: none; }
+
+  .ce-note {
+    margin-top: 1.5rem; max-width: var(--measure);
+    font-size: 0.84rem; line-height: 1.55; color: var(--ink-soft);
+    display: none;
+  }
+  .ce-note[data-show="true"] { display: block; }
+  .ce-note .btn { margin-top: 1rem; }
+
+  /* telas pós-envio */
+  .ce-screen { display: none; }
+  .ce-screen[data-show="true"] { display: block; }
+  .ce-screen h2 { margin-top: 0.9rem; }
+  .ce-lead {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: 1.1rem; line-height: 1.4; color: var(--ink-soft); margin: 0 0 0.5rem;
+  }
+  .ce-book-actions { margin-top: clamp(2rem, 5vw, 2.75rem); display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .ce-summary {
+    margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--hairline);
+    font-family: var(--font-ui); font-size: 0.9rem; color: var(--ink-soft);
+  }
+  .ce-summary b { color: var(--ink); font-weight: 600; }
+
+  /* whatsapp — canal secundário, só depois do formulário */
+  .ce-wa {
+    margin-top: clamp(3rem, 8vw, 4.5rem); padding-top: clamp(1.7rem, 4vw, 2.25rem);
+    border-top: 1px solid var(--hairline);
+  }
+  .ce-wa p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 1rem; }
+
+  @media (max-width: 619px) {
+    .ce-actions .btn,
+    .ce-book-actions .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__fill"></div>
+  <span class="rail__chapter" data-rail>Órigo Select</span>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Órigo Human Strategy — início">
+      <img class="tri-pos" src="brand/symbol.png" alt="" width="28" />
+      <img class="tri-neg" src="brand/symbol-neg.png" alt="" width="28" />
+      <span>Órigo<small>Human Strategy</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#inicio">Início</a>
+      <a href="people.html">People</a>
+      <a href="select.html#empresas">Para empresas</a>
+      <a href="select.html#profissionais">Para profissionais</a>
+      <a href="select-vagas.html">Vagas</a>
+    </nav>
+    <a class="header-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+    <button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.4 4.4l1.8 1.8M17.8 17.8l1.8 1.8M2.5 12H5M19 12h2.5M4.4 19.6l1.8-1.8M17.8 6.2l1.8-1.8"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" data-open="false" aria-hidden="true">
+  <button class="mm-close" type="button" aria-label="Fechar menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="index.html#inicio">Início</a>
+  <a href="people.html">People</a>
+  <a href="select.html#empresas">Para empresas</a>
+  <a href="select.html#profissionais">Para profissionais</a>
+  <a href="select-vagas.html">Vagas</a>
+  <a class="mm-cta" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">Fale com a Órigo</a>
+</div>
+
+<main id="conteudo">
+  <section class="chapter ce-hero" id="topo" data-chapter="Órigo Select">
+    <div class="wrap measure reveal">
+      <span class="ce-rule" aria-hidden="true"></span>
+      <p class="eyebrow">Órigo Select</p>
+      <h1 class="ce-h1">Vamos entender quem sua empresa precisa encontrar.</h1>
+      <p class="lede">
+        Conte-nos um pouco sobre sua empresa e a contratação. Com essas
+        informações, nossa primeira conversa já começa a partir do seu contexto.
+      </p>
+      <p class="ce-steps" aria-hidden="true">
+        <span data-step="1">01 — Sobre a empresa</span>
+        <span data-step="2">02 — Sobre a contratação</span>
+        <span data-step="3">03 — Agendar conversa</span>
+      </p>
+    </div>
+
+    <!-- TELA 1 · FORMULÁRIO -->
+    <div class="wrap measure ce-screen" id="ce-screen-form" data-show="true">
+      <form class="ce-form" id="ce-form" novalidate>
+        <fieldset class="ce-group">
+          <legend class="ce-group__legend">01 — Sobre a empresa e você</legend>
+          <div class="ce-grid">
+            <div class="ce-field">
+              <label for="f-nome">Nome completo <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-nome" name="nome" type="text" autocomplete="name" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-cargo">Cargo / função na empresa <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-cargo" name="cargo" type="text" autocomplete="organization-title" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-email">E-mail corporativo <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-telefone">Telefone / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field ce-field--full">
+              <label for="f-empresa">Nome da empresa <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-segmento">Segmento <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-segmento" name="segmento" type="text" placeholder="Ex.: indústria de alimentos" required />
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-colaboradores">Número aproximado de colaboradores <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-colaboradores" name="colaboradores" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Até 20</option>
+                <option>21 a 50</option>
+                <option>51 a 100</option>
+                <option>101 a 300</option>
+                <option>301 a 500</option>
+                <option>Mais de 500</option>
+              </select>
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field ce-field--full">
+              <label for="f-cidade">Cidade / Estado <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Cidade — UF" required />
+              <span class="ce-field__err"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="ce-group">
+          <legend class="ce-group__legend">02 — Sobre a contratação</legend>
+          <div class="ce-grid">
+            <div class="ce-field">
+              <label for="f-area">Área da contratação <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-area" name="area" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Administrativo</option>
+                <option>Comercial</option>
+                <option>Financeiro</option>
+                <option>RH</option>
+                <option>Produção / Operação</option>
+                <option>Logística</option>
+                <option>Gestão / Liderança</option>
+                <option>Tecnologia</option>
+                <option>Marketing</option>
+                <option>Mais de uma área</option>
+                <option>Outra</option>
+              </select>
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field">
+              <label for="f-quantidade">Quantidade de vagas <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-quantidade" name="quantidade" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>1</option>
+                <option>2 a 3</option>
+                <option>4 a 5</option>
+                <option>6 ou mais</option>
+                <option>Ainda não sei</option>
+              </select>
+              <span class="ce-field__err"></span>
+            </div>
+            <div class="ce-field ce-field--full">
+              <label for="f-prazo">Prazo desejado para contratação <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-prazo" name="prazo" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Imediatamente</option>
+                <option>Até 30 dias</option>
+                <option>30 a 60 dias</option>
+                <option>Mais de 60 dias</option>
+                <option>Ainda estou avaliando</option>
+              </select>
+              <span class="ce-field__err"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="ce-consent" id="ce-consent">
+          <input id="f-consent" name="consent" type="checkbox" required />
+          <label for="f-consent" id="ce-consent-text">
+            Concordo com o uso das informações fornecidas para que a Órigo Human
+            Strategy entre em contato comigo sobre esta solicitação.
+            <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.
+          </label>
+        </div>
+
+        <div class="ce-actions">
+          <button class="btn btn--solid" type="submit" id="ce-submit">
+            <span class="ce-btn-label">Continuar e escolher um horário</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+
+        <p class="ce-note" id="ce-note">
+          <span class="ce-note__msg">Este canal de agendamento está sendo finalizado. Enquanto isso, fale com a Órigo diretamente pelo WhatsApp.</span>
+          <br />
+          <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- TELA 2 · AGENDAMENTO -->
+    <div class="wrap measure ce-screen" id="ce-screen-scheduling">
+      <p class="ce-lead">Recebemos suas informações.</p>
+      <h2>Agora escolha o melhor horário para conversarmos.</h2>
+      <p class="body-copy">
+        Na reunião, vamos entender melhor a empresa, a função e o perfil
+        necessário para conduzir a seleção.
+      </p>
+
+      <div class="ce-book-actions">
+        <a class="btn btn--solid" id="ce-book-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          Ver horários disponíveis
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <button class="btn btn--ghost" type="button" id="ce-done-btn" hidden>Concluí o agendamento</button>
+      </div>
+
+      <p class="body-copy" id="ce-book-holding" hidden>
+        Nossa agenda online está sendo finalizada. A Órigo vai entrar em contato
+        pelo e-mail e telefone informados para marcar o horário da conversa.
+      </p>
+
+      <div class="ce-wa">
+        <p>Precisa falar conosco antes da reunião?</p>
+        <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- TELA 3 · CONFIRMAÇÃO -->
+    <div class="wrap measure ce-screen" id="ce-screen-confirmed">
+      <p class="ce-lead">Conversa reservada.</p>
+      <h2>Está agendado.</h2>
+      <p class="body-copy">
+        Recebemos suas informações e sua conversa com a Órigo está reservada.
+        Você receberá os dados da reunião no e-mail informado.
+      </p>
+      <div class="ce-summary" id="ce-summary" hidden></div>
+
+      <div class="ce-wa">
+        <p>Precisa falar conosco antes da reunião?</p>
+        <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="brand/lockup-neg.png" alt="Órigo Human Strategy" />
+        <p class="dom">origo.net.br</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Navegação</h4>
+          <a href="people.html">Órigo People</a>
+          <a href="select.html">Órigo Select</a>
+          <a href="select.html#empresas">Para empresas</a>
+          <a href="select.html#profissionais">Para profissionais</a>
+          <a href="select-vagas.html">Vagas</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="termos.html">Termos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a href="mailto:origoelect@gmail.com">origoelect@gmail.com</a>
+          <a href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">WhatsApp (54) 99668-9010</a>
+          <a href="https://instagram.com/origoselect" target="_blank" rel="noopener">Instagram @origoselect</a>
+          <span class="soon">LinkedIn · em breve</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Órigo Human Strategy. Todos os direitos reservados.</span>
+      <span class="footer__flag">Endereço a confirmar</span>
+    </div>
+  </div>
+</footer>
+
+<script src="select-leads.js"></script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+
+  /* tema */
+  document.querySelector(".theme-toggle").addEventListener("click", function () {
+    root.setAttribute("data-theme", root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
+
+  /* header + trilho de progresso */
+  var header = document.querySelector(".site-header");
+  var railFill = document.querySelector(".rail__fill");
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset || 0;
+    header.setAttribute("data-scrolled", y > 12 ? "true" : "false");
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (railFill) railFill.style.setProperty("--progress", h > 0 ? (y / h).toFixed(4) : 0);
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+  window.addEventListener("resize", frame);
+  frame();
+
+  /* revelação */
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+  function show(el) { el.classList.add("in"); }
+  if (reduce || !("IntersectionObserver" in window)) {
+    reveals.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -22px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { reveals.forEach(show); }, 900);
+  }
+
+  /* menu mobile */
+  var menuBtn = document.querySelector(".menu-btn");
+  var mobileMenu = document.querySelector(".mobile-menu");
+  function setMenu(open) {
+    mobileMenu.setAttribute("data-open", open ? "true" : "false");
+    mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  menuBtn.addEventListener("click", function () { setMenu(true); });
+  document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
+  mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+
+  /* ---------- jornada comercial ---------- */
+  var L = window.OrigoLeads;
+  var form = document.getElementById("ce-form");
+  var submitBtn = document.getElementById("ce-submit");
+  var btnLabel = submitBtn.querySelector(".ce-btn-label");
+  var note = document.getElementById("ce-note");
+  var noteMsg = note.querySelector(".ce-note__msg");
+  var steps = [].slice.call(document.querySelectorAll(".ce-steps span"));
+  var screenForm = document.getElementById("ce-screen-form");
+  var screenSched = document.getElementById("ce-screen-scheduling");
+  var screenDone = document.getElementById("ce-screen-confirmed");
+  var bookBtn = document.getElementById("ce-book-btn");
+  var doneBtn = document.getElementById("ce-done-btn");
+  var holding = document.getElementById("ce-book-holding");
+  var currentLeadId = null;
+
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var REQUIRED = ["nome", "cargo", "email", "telefone", "empresa", "segmento", "colaboradores", "cidade", "area", "quantidade", "prazo"];
+  var DEFAULT_NOTE = noteMsg.textContent;
+
+  function setPhase(p) {
+    steps.forEach(function (s) {
+      var k = s.getAttribute("data-step");
+      s.classList.remove("is-active", "is-done");
+      if (p === "form") { if (k !== "3") s.classList.add("is-active"); }
+      else if (p === "schedule") { s.classList.add(k === "3" ? "is-active" : "is-done"); }
+      else { s.classList.add("is-done"); }
+    });
+  }
+  setPhase("form");
+
+  function wrapOf(el) { return el.closest(".ce-field") || el.closest(".ce-consent"); }
+  function markInvalid(el, msg) {
+    var w = wrapOf(el); if (!w) return;
+    w.setAttribute("data-invalid", "true");
+    var e = w.querySelector(".ce-field__err");
+    if (e && msg) e.textContent = msg;
+  }
+  function clearInvalid(el) { var w = wrapOf(el); if (w) w.removeAttribute("data-invalid"); }
+
+  function validate() {
+    var firstBad = null;
+    REQUIRED.forEach(function (name) {
+      var el = form.elements[name];
+      clearInvalid(el);
+      var v = (el.value || "").trim();
+      if (!v) {
+        markInvalid(el, "Preencha este campo.");
+        firstBad = firstBad || el;
+      } else if (name === "email" && !EMAIL_RE.test(v)) {
+        markInvalid(el, "Informe um e-mail válido.");
+        firstBad = firstBad || el;
+      } else if (name === "telefone" && v.replace(/\D/g, "").length < 10) {
+        markInvalid(el, "Informe um telefone com DDD.");
+        firstBad = firstBad || el;
+      }
+    });
+    var consent = form.elements.consent;
+    clearInvalid(consent);
+    if (!consent.checked) { markInvalid(consent); firstBad = firstBad || consent; }
+    if (firstBad) { firstBad.focus(); return false; }
+    return true;
+  }
+
+  function collect() {
+    var g = function (n) { return (form.elements[n].value || "").trim(); };
+    return {
+      nome: g("nome"), cargo: g("cargo"), email: g("email"), telefone: g("telefone"),
+      empresa: g("empresa"), segmento: g("segmento"), colaboradores: g("colaboradores"),
+      cidade: g("cidade"), area: g("area"), quantidade: g("quantidade"), prazo: g("prazo"),
+      consent: true,
+      consentText: document.getElementById("ce-consent-text").textContent.replace(/\s+/g, " ").trim()
+    };
+  }
+
+  function goScheduling() {
+    screenForm.setAttribute("data-show", "false");
+    screenSched.setAttribute("data-show", "true");
+    setPhase("schedule");
+    if (L.isMeetingActive()) {
+      bookBtn.href = L.meetingConfig.bookingUrl;
+      bookBtn.hidden = false;
+      doneBtn.hidden = false;
+      holding.hidden = true;
+    } else {
+      bookBtn.hidden = true;
+      doneBtn.hidden = true;
+      holding.hidden = false;
+    }
+    try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); }
+  }
+
+  /* canal ainda não configurado: não deixa preencher em vão */
+  if (!L.isLeadActive() && L.leadConfig.status !== "test") {
+    submitBtn.disabled = true;
+    note.setAttribute("data-show", "true");
+  }
+
+  form.addEventListener("input", function (e) { if (e.target && e.target.name) clearInvalid(e.target); });
+  form.addEventListener("change", function (e) { if (e.target && e.target.name) clearInvalid(e.target); });
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (submitBtn.disabled) return;
+    noteMsg.textContent = DEFAULT_NOTE;
+    note.setAttribute("data-show", "false");
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    var prev = btnLabel.textContent;
+    btnLabel.textContent = "Registrando…";
+
+    L.submitCompanyLead(collect()).then(function (res) {
+      currentLeadId = (res && res.id) || null;
+      goScheduling();
+    }, function (err) {
+      submitBtn.disabled = false;
+      btnLabel.textContent = prev;
+      if (err && err.code === "not-configured") {
+        noteMsg.textContent = DEFAULT_NOTE;
+      } else {
+        noteMsg.textContent = "Não conseguimos registrar suas informações neste momento. Tente novamente ou fale conosco pelo WhatsApp.";
+      }
+      note.setAttribute("data-show", "true");
+    });
+  });
+
+  doneBtn.addEventListener("click", function () {
+    doneBtn.disabled = true;
+    doneBtn.textContent = "Registrando…";
+    var finish = function () {
+      screenSched.setAttribute("data-show", "false");
+      screenDone.setAttribute("data-show", "true");
+      setPhase("done");
+      try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); }
+    };
+    L.confirmMeeting(currentLeadId).then(finish, finish);
+  });
+})();
+</script>
+</body>
+</html>
