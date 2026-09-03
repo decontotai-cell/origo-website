@@ -22,13 +22,13 @@
   var leadConfig = {
     provider: "google-apps-script",
     endpoint: "https://script.google.com/macros/s/AKfycbzLSqMCEYyelXXhPbAl5t-2-0nII0tTQj1OsyX584DTRV3UPDS0oi-JDwXlecI6UxGl/exec",
-    status: "pending"      // "pending" | "test" | "active" — vai para "active" junto com a agenda
+    status: "active"       // "pending" | "test" | "active"
   };
 
   var meetingConfig = {
     provider: "google-calendar",
-    bookingUrl: "",        // URL pública da Página de Agendamento do Google
-    status: "pending"      // "pending" | "active"
+    bookingUrl: "https://calendar.app.google/1Zd2j4cNnCxtrqZWA",
+    status: "active"       // "pending" | "active"
   };
 
   /* valores possíveis da coluna Status — funil futuro, sem CRM agora */
