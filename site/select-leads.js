@@ -21,8 +21,8 @@
 
   var leadConfig = {
     provider: "google-apps-script",
-    endpoint: "",          // URL /exec do Web App do Apps Script
-    status: "pending"      // "pending" | "test" | "active"
+    endpoint: "https://script.google.com/macros/s/AKfycbzLSqMCEYyelXXhPbAl5t-2-0nII0tTQj1OsyX584DTRV3UPDS0oi-JDwXlecI6UxGl/exec",
+    status: "pending"      // "pending" | "test" | "active" — vai para "active" junto com a agenda
   };
 
   var meetingConfig = {
