@@ -16,65 +16,125 @@
 <link rel="stylesheet" href="origo.css" />
 
 <style>
-  :root { --ce-err: #9A5B4A; }
-  :root[data-theme="dark"] { --ce-err: #CF8E7C; }
+  :root {
+    --ce-err: #9A5B4A;
+    --ce-panel-bg: #FFFFFF;
+    --ce-panel-line: #E8DFCF;
+  }
+  :root[data-theme="dark"] {
+    --ce-err: #CF8E7C;
+    --ce-panel-bg: #302B22;
+    --ce-panel-line: #443D30;
+  }
 
   @media (min-width: 769px) {
     main .wrap.measure { max-width: var(--wrap); }
-    main .wrap.measure > :is(p, h1, h2) { max-width: var(--measure); }
+    main .wrap.measure > :is(p, h1) { max-width: var(--measure); }
   }
 
-  .ce-hero { padding-block: clamp(3.5rem, 9vw, 5.5rem) clamp(1.4rem, 4vw, 2.25rem); }
+  /* ---------- CAMADA 1 · abertura institucional (fora da caixa) ---------- */
+  .ce-hero { padding-block: clamp(3.25rem, 8vw, 5rem) clamp(3rem, 8vw, 5rem); }
   .ce-rule { display: block; width: 2.5rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.4rem; }
   .ce-h1 {
     font-family: var(--font-display); font-weight: 300;
     font-size: clamp(1.8rem, 1rem + 2.6vw, 3rem); line-height: 1.15;
     letter-spacing: -0.02em; text-wrap: balance; margin: 1rem 0 0; max-width: 22ch;
   }
+  .ce-hint {
+    margin-top: 1.35rem; font-family: var(--font-ui);
+    font-size: 0.8rem; letter-spacing: 0.04em; color: var(--ink-faint);
+  }
 
-  /* indicador de etapas — linha editorial, não widget */
-  .ce-steps {
-    display: flex; flex-wrap: wrap; gap: 1.1rem 1.6rem;
-    margin-top: clamp(2rem, 5vw, 3rem);
+  /* ---------- CAMADA 2 · o painel da experiência ---------- */
+  .ce-panel {
+    max-width: 1000px;
+    margin: clamp(2rem, 5vw, 3rem) auto 0;
+    background: var(--ce-panel-bg);
+    border: 1px solid var(--ce-panel-line);
+    border-radius: 20px;
+    padding: clamp(1.6rem, 4.5vw, 3.75rem);
+    box-shadow: 0 1px 2px rgba(55, 48, 40, 0.03), 0 24px 55px -34px rgba(55, 48, 40, 0.20);
+    scroll-margin-top: 5.5rem;
+  }
+  @media (max-width: 640px) {
+    .ce-panel { border-radius: 16px; padding: clamp(1.35rem, 6vw, 1.9rem); }
+  }
+
+  /* progresso — dentro do topo do painel */
+  .ce-prog {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding-bottom: clamp(1.4rem, 3.5vw, 2rem);
+    margin-bottom: clamp(1.75rem, 4.5vw, 2.5rem);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ce-prog__item {
+    display: inline-flex; align-items: baseline; gap: 0.5rem; white-space: nowrap;
     font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-faint); transition: color 0.35s var(--ease);
   }
-  .ce-steps span { display: inline-flex; align-items: center; gap: 0.55rem; transition: color 0.3s var(--ease); }
-  .ce-steps span::before {
-    content: ""; width: 6px; height: 6px; border-radius: 999px;
-    border: 1px solid currentColor; transition: background 0.3s var(--ease);
-  }
-  .ce-steps span.is-active { color: var(--accent-text); }
-  .ce-steps span.is-active::before { background: var(--accent-text); }
-  .ce-steps span.is-done { color: var(--ink-soft); }
-  .ce-steps span.is-done::before { background: var(--ink-soft); }
+  .ce-prog__item b { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; }
+  .ce-prog__item.is-active { color: var(--accent-text); }
+  .ce-prog__item.is-done { color: var(--ink-soft); }
+  .ce-prog__line { flex: 1; min-width: 0.75rem; height: 1px; background: var(--hairline); }
+  .ce-prog__mobile { display: none; }
 
-  /* formulário */
-  .ce-form { margin-top: clamp(2.5rem, 6vw, 3.5rem); }
-  .ce-group { border: 0; padding: 0; margin: 0; min-inline-size: 0; }
-  .ce-group + .ce-group { margin-top: clamp(2.75rem, 7vw, 4rem); }
-  .ce-group__legend {
-    display: block; padding: 0; margin-bottom: clamp(1.2rem, 3vw, 1.7rem);
-    font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+  @media (max-width: 640px) {
+    .ce-prog { justify-content: flex-start; }
+    .ce-prog__item, .ce-prog__line { display: none; }
+    .ce-prog__mobile {
+      display: block; font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-text);
+    }
+    .ce-prog__mobile i { color: var(--ink-faint); font-style: normal; }
   }
-  .ce-grid { display: grid; gap: clamp(1.35rem, 3.5vw, 1.9rem) clamp(1.5rem, 4vw, 2.5rem); }
-  @media (min-width: 620px) {
+
+  /* etapas dentro do painel */
+  .ce-step { display: none; }
+  .ce-step.is-active { display: block; }
+  .ce-step.is-active[data-dir="fwd"] { animation: ceIn 420ms var(--ease); }
+  .ce-step.is-active[data-dir="back"] { animation: ceInBack 420ms var(--ease); }
+  @keyframes ceIn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+  @keyframes ceInBack { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ce-step.is-active[data-dir] { animation: none; }
+  }
+
+  .ce-step__title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.35rem, 1rem + 1.4vw, 1.95rem); line-height: 1.2;
+    letter-spacing: -0.01em; color: var(--ink); margin: 0; max-width: 24ch;
+  }
+  .ce-step__intro {
+    margin-top: 0.7rem; color: var(--ink-soft);
+    font-size: 0.95rem; line-height: 1.6; max-width: 48ch;
+  }
+  .ce-lead {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: 1.1rem; line-height: 1.4; color: var(--ink-soft); margin: 0 0 0.5rem;
+  }
+
+  /* campos — mais ar, linha discreta, sem caixa pesada */
+  .ce-grid {
+    display: grid;
+    gap: clamp(1.55rem, 3.5vw, 2.15rem) clamp(1.5rem, 4vw, 2.75rem);
+    margin-top: clamp(1.75rem, 4.5vw, 2.5rem);
+  }
+  @media (min-width: 640px) {
     .ce-grid { grid-template-columns: 1fr 1fr; }
     .ce-grid .ce-field--full { grid-column: 1 / -1; }
   }
-
   .ce-field { display: flex; flex-direction: column; min-inline-size: 0; }
   .ce-field > label {
-    font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
-    letter-spacing: 0.03em; color: var(--ink-soft); margin-bottom: 0.5rem;
+    font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.02em; color: var(--ink-soft); margin-bottom: 0.6rem;
   }
   .ce-field > label .req { color: var(--accent-text); margin-left: 0.15em; }
   .ce-field input,
   .ce-field select {
     font-family: var(--font-ui); font-size: 1rem; line-height: 1.4; color: var(--ink);
-    background: transparent; border: 0; border-bottom: 1px solid var(--hairline-strong);
-    border-radius: 0; padding: 0.6rem 0; width: 100%;
+    background: transparent; border: 0; border-bottom: 1px solid var(--hairline);
+    border-radius: 0; padding: 0.7rem 0; width: 100%;
     transition: border-color 0.25s var(--ease);
     -webkit-appearance: none; appearance: none;
   }
@@ -87,7 +147,6 @@
   .ce-field select:focus { outline: none; border-color: var(--accent-text); }
   .ce-field input::placeholder { color: var(--ink-faint); }
   .ce-field select:invalid { color: var(--ink-faint); }
-
   .ce-field[data-invalid="true"] input,
   .ce-field[data-invalid="true"] select { border-color: var(--ce-err); }
   .ce-field__err {
@@ -96,55 +155,62 @@
   }
   .ce-field[data-invalid="true"] .ce-field__err { display: block; }
 
+  /* LGPD — presença própria, não nota de rodapé */
   .ce-consent {
-    margin-top: clamp(2.25rem, 6vw, 3.25rem);
-    display: flex; gap: 0.8rem; align-items: flex-start; max-width: var(--measure);
+    margin-top: clamp(2rem, 5vw, 2.75rem);
+    padding-top: clamp(1.5rem, 4vw, 2rem);
+    border-top: 1px solid var(--hairline);
+    display: flex; gap: 0.85rem; align-items: flex-start; max-width: 56ch;
   }
   .ce-consent input {
-    margin: 0.15rem 0 0; width: 1.1rem; height: 1.1rem; flex: none;
+    margin: 0.15rem 0 0; width: 1.15rem; height: 1.15rem; flex: none;
     accent-color: var(--accent-text); cursor: pointer;
   }
-  .ce-consent label { font-size: 0.85rem; line-height: 1.55; color: var(--ink-soft); }
+  .ce-consent label { font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); }
   .ce-consent a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
   .ce-consent[data-invalid="true"] label { color: var(--ce-err); }
 
-  .ce-actions { margin-top: clamp(2rem, 5vw, 2.75rem); }
+  /* ações */
+  .ce-actions {
+    margin-top: clamp(2rem, 5vw, 2.75rem);
+    display: flex; align-items: center; gap: 0.9rem 1.25rem; flex-wrap: wrap;
+  }
   .ce-actions .btn:disabled { opacity: 0.55; pointer-events: none; }
+  .ce-back {
+    margin-right: auto; background: none; border: 0; cursor: pointer;
+    font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600; color: var(--ink-soft);
+    padding: 0.5rem 0; display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s var(--ease);
+  }
+  .ce-back:hover { color: var(--ink); }
+  .ce-back svg { width: 14px; height: 14px; }
+  @media (max-width: 560px) {
+    .ce-actions { flex-direction: column-reverse; align-items: stretch; }
+    .ce-actions .btn { width: 100%; justify-content: center; }
+    .ce-back { margin: 0; justify-content: center; }
+  }
 
   .ce-note {
-    margin-top: 1.5rem; max-width: var(--measure);
-    font-size: 0.84rem; line-height: 1.55; color: var(--ink-soft);
-    display: none;
+    margin-top: 1.5rem; max-width: 54ch;
+    font-size: 0.84rem; line-height: 1.55; color: var(--ink-soft); display: none;
   }
   .ce-note[data-show="true"] { display: block; }
   .ce-note .btn { margin-top: 1rem; }
 
-  /* telas pós-envio */
-  .ce-screen { display: none; }
-  .ce-screen[data-show="true"] { display: block; }
-  .ce-screen h2 { margin-top: 0.9rem; }
-  .ce-lead {
-    font-family: var(--font-display); font-weight: 300;
-    font-size: 1.1rem; line-height: 1.4; color: var(--ink-soft); margin: 0 0 0.5rem;
-  }
   .ce-book-actions { margin-top: clamp(2rem, 5vw, 2.75rem); display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  @media (max-width: 560px) { .ce-book-actions .btn { width: 100%; justify-content: center; } }
   .ce-summary {
     margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--hairline);
     font-family: var(--font-ui); font-size: 0.9rem; color: var(--ink-soft);
   }
   .ce-summary b { color: var(--ink); font-weight: 600; }
 
-  /* whatsapp — canal secundário, só depois do formulário */
+  /* WhatsApp — canal complementar, só nas etapas finais */
   .ce-wa {
-    margin-top: clamp(3rem, 8vw, 4.5rem); padding-top: clamp(1.7rem, 4vw, 2.25rem);
+    margin-top: clamp(2.25rem, 6vw, 3rem); padding-top: clamp(1.7rem, 4vw, 2.25rem);
     border-top: 1px solid var(--hairline);
   }
   .ce-wa p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 1rem; }
-
-  @media (max-width: 619px) {
-    .ce-actions .btn,
-    .ce-book-actions .btn { width: 100%; justify-content: center; }
-  }
 </style>
 </head>
 <body>
@@ -203,183 +269,208 @@
         Conte-nos um pouco sobre sua empresa e a contratação. Com essas
         informações, nossa primeira conversa já começa a partir do seu contexto.
       </p>
-      <p class="ce-steps" aria-hidden="true">
-        <span data-step="1">01 — Sobre a empresa</span>
-        <span data-step="2">02 — Sobre a contratação</span>
-        <span data-step="3">03 — Agendar conversa</span>
-      </p>
+      <p class="ce-hint">Leva cerca de 2 minutos.</p>
     </div>
 
-    <!-- TELA 1 · FORMULÁRIO -->
-    <div class="wrap measure ce-screen" id="ce-screen-form" data-show="true">
-      <form class="ce-form" id="ce-form" novalidate>
-        <fieldset class="ce-group">
-          <legend class="ce-group__legend">01 — Sobre a empresa e você</legend>
-          <div class="ce-grid">
-            <div class="ce-field">
-              <label for="f-nome">Nome completo <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-nome" name="nome" type="text" autocomplete="name" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-cargo">Cargo / função na empresa <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-cargo" name="cargo" type="text" autocomplete="organization-title" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-email">E-mail corporativo <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-telefone">Telefone / WhatsApp <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field ce-field--full">
-              <label for="f-empresa">Nome da empresa <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-segmento">Segmento <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-segmento" name="segmento" type="text" placeholder="Ex.: indústria de alimentos" required />
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-colaboradores">Número aproximado de colaboradores <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-colaboradores" name="colaboradores" required>
-                <option value="" disabled selected>Selecione</option>
-                <option>Até 20</option>
-                <option>21 a 50</option>
-                <option>51 a 100</option>
-                <option>101 a 300</option>
-                <option>301 a 500</option>
-                <option>Mais de 500</option>
-              </select>
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field ce-field--full">
-              <label for="f-cidade">Cidade / Estado <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Cidade — UF" required />
-              <span class="ce-field__err"></span>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="ce-group">
-          <legend class="ce-group__legend">02 — Sobre a contratação</legend>
-          <div class="ce-grid">
-            <div class="ce-field">
-              <label for="f-area">Área da contratação <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-area" name="area" required>
-                <option value="" disabled selected>Selecione</option>
-                <option>Administrativo</option>
-                <option>Comercial</option>
-                <option>Financeiro</option>
-                <option>RH</option>
-                <option>Produção / Operação</option>
-                <option>Logística</option>
-                <option>Gestão / Liderança</option>
-                <option>Tecnologia</option>
-                <option>Marketing</option>
-                <option>Mais de uma área</option>
-                <option>Outra</option>
-              </select>
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field">
-              <label for="f-quantidade">Quantidade de vagas <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-quantidade" name="quantidade" required>
-                <option value="" disabled selected>Selecione</option>
-                <option>1</option>
-                <option>2 a 3</option>
-                <option>4 a 5</option>
-                <option>6 ou mais</option>
-                <option>Ainda não sei</option>
-              </select>
-              <span class="ce-field__err"></span>
-            </div>
-            <div class="ce-field ce-field--full">
-              <label for="f-prazo">Prazo desejado para contratação <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-prazo" name="prazo" required>
-                <option value="" disabled selected>Selecione</option>
-                <option>Imediatamente</option>
-                <option>Até 30 dias</option>
-                <option>30 a 60 dias</option>
-                <option>Mais de 60 dias</option>
-                <option>Ainda estou avaliando</option>
-              </select>
-              <span class="ce-field__err"></span>
-            </div>
-          </div>
-        </fieldset>
-
-        <div class="ce-consent" id="ce-consent">
-          <input id="f-consent" name="consent" type="checkbox" required />
-          <label for="f-consent" id="ce-consent-text">
-            Concordo com o uso das informações fornecidas para que a Órigo Human
-            Strategy entre em contato comigo sobre esta solicitação.
-            <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.
-          </label>
+    <div class="wrap reveal">
+      <div class="ce-panel" id="ce-panel">
+        <div class="ce-prog" aria-hidden="true">
+          <span class="ce-prog__item" data-p="1"><b>01</b><span>Empresa e você</span></span>
+          <span class="ce-prog__line"></span>
+          <span class="ce-prog__item" data-p="2"><b>02</b><span>Contratação</span></span>
+          <span class="ce-prog__line"></span>
+          <span class="ce-prog__item" data-p="3"><b>03</b><span>Agenda</span></span>
+          <span class="ce-prog__mobile" data-prog-mobile></span>
         </div>
 
-        <div class="ce-actions">
-          <button class="btn btn--solid" type="submit" id="ce-submit">
-            <span class="ce-btn-label">Continuar e escolher um horário</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+        <form id="ce-form" novalidate>
+          <!-- ETAPA 01 · empresa e você -->
+          <div class="ce-step is-active" id="ce-step-1" data-dir="fwd">
+            <h2 class="ce-step__title">Conte-nos um pouco sobre você e sua empresa.</h2>
+            <p class="ce-step__intro">
+              Essas informações nos ajudam a chegar à primeira conversa já
+              entendendo o seu contexto.
+            </p>
+            <div class="ce-grid">
+              <div class="ce-field">
+                <label for="f-nome">Nome completo <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-nome" name="nome" type="text" autocomplete="name" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-cargo">Cargo / função na empresa <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-cargo" name="cargo" type="text" autocomplete="organization-title" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-email">E-mail corporativo <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-telefone">Telefone / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field ce-field--full">
+                <label for="f-empresa">Nome da empresa <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-segmento">Segmento <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-segmento" name="segmento" type="text" placeholder="Ex.: indústria de alimentos" required />
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-colaboradores">Número aproximado de colaboradores <span class="req" aria-hidden="true">*</span></label>
+                <select id="f-colaboradores" name="colaboradores" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Até 20</option>
+                  <option>21 a 50</option>
+                  <option>51 a 100</option>
+                  <option>101 a 300</option>
+                  <option>301 a 500</option>
+                  <option>Mais de 500</option>
+                </select>
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field ce-field--full">
+                <label for="f-cidade">Cidade / Estado <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Cidade — UF" required />
+                <span class="ce-field__err"></span>
+              </div>
+            </div>
+            <div class="ce-actions">
+              <button class="btn btn--solid" type="button" id="ce-next-1">Continuar
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ETAPA 02 · contratação -->
+          <div class="ce-step" id="ce-step-2" data-dir="fwd">
+            <h2 class="ce-step__title">Agora, conte-nos sobre a contratação.</h2>
+            <p class="ce-step__intro">
+              Não precisa ter todas as respostas. Queremos apenas entender o
+              ponto de partida.
+            </p>
+            <div class="ce-grid">
+              <div class="ce-field ce-field--full">
+                <label for="f-area">Área da contratação <span class="req" aria-hidden="true">*</span></label>
+                <select id="f-area" name="area" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Administrativo</option>
+                  <option>Comercial</option>
+                  <option>Financeiro</option>
+                  <option>RH</option>
+                  <option>Produção / Operação</option>
+                  <option>Logística</option>
+                  <option>Gestão / Liderança</option>
+                  <option>Tecnologia</option>
+                  <option>Marketing</option>
+                  <option>Mais de uma área</option>
+                  <option>Outra</option>
+                </select>
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-quantidade">Quantidade de vagas <span class="req" aria-hidden="true">*</span></label>
+                <select id="f-quantidade" name="quantidade" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>1</option>
+                  <option>2 a 3</option>
+                  <option>4 a 5</option>
+                  <option>6 ou mais</option>
+                  <option>Ainda não sei</option>
+                </select>
+                <span class="ce-field__err"></span>
+              </div>
+              <div class="ce-field">
+                <label for="f-prazo">Prazo desejado para contratação <span class="req" aria-hidden="true">*</span></label>
+                <select id="f-prazo" name="prazo" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Imediatamente</option>
+                  <option>Até 30 dias</option>
+                  <option>30 a 60 dias</option>
+                  <option>Mais de 60 dias</option>
+                  <option>Ainda estou avaliando</option>
+                </select>
+                <span class="ce-field__err"></span>
+              </div>
+            </div>
+
+            <div class="ce-consent" id="ce-consent">
+              <input id="f-consent" name="consent" type="checkbox" required />
+              <label for="f-consent" id="ce-consent-text">
+                Concordo com o uso das informações fornecidas para que a Órigo
+                Human Strategy entre em contato comigo sobre esta solicitação.
+                <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.
+              </label>
+            </div>
+
+            <div class="ce-actions">
+              <button class="ce-back" type="button" id="ce-back-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+                Voltar
+              </button>
+              <button class="btn btn--solid" type="submit" id="ce-submit">
+                <span class="ce-btn-label">Continuar e escolher um horário</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+
+            <p class="ce-note" id="ce-note">
+              <span class="ce-note__msg">Este canal de agendamento está sendo finalizado. Enquanto isso, fale com a Órigo diretamente pelo WhatsApp.</span>
+              <br />
+              <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+            </p>
+          </div>
+        </form>
+
+        <!-- ETAPA 03 · agenda -->
+        <div class="ce-step" id="ce-step-3" data-dir="fwd">
+          <p class="ce-lead">Recebemos suas informações.</p>
+          <h2 class="ce-step__title">Agora escolha o melhor horário para conversarmos.</h2>
+          <p class="ce-step__intro">
+            Na reunião, vamos conhecer melhor sua empresa, a necessidade de
+            contratação e o perfil profissional que você busca.
+          </p>
+
+          <div class="ce-book-actions">
+            <a class="btn btn--solid" id="ce-book-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>
+              Escolher um horário
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <button class="btn btn--ghost" type="button" id="ce-done-btn" hidden>Concluí o agendamento</button>
+          </div>
+
+          <p class="ce-step__intro" id="ce-book-holding" hidden>
+            Nossa agenda online está sendo finalizada. A Órigo vai entrar em
+            contato pelo e-mail e telefone informados para marcar o horário.
+          </p>
+
+          <div class="ce-wa">
+            <p>Precisa falar conosco antes da reunião?</p>
+            <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+          </div>
         </div>
 
-        <p class="ce-note" id="ce-note">
-          <span class="ce-note__msg">Este canal de agendamento está sendo finalizado. Enquanto isso, fale com a Órigo diretamente pelo WhatsApp.</span>
-          <br />
-          <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
-        </p>
-      </form>
-    </div>
+        <!-- ETAPA 03 · concluída -->
+        <div class="ce-step" id="ce-step-4" data-dir="fwd">
+          <p class="ce-lead">Conversa reservada.</p>
+          <h2 class="ce-step__title">Está agendado.</h2>
+          <p class="ce-step__intro">
+            Recebemos suas informações e sua conversa com a Órigo está reservada.
+            Você receberá os dados da reunião no e-mail informado.
+          </p>
+          <div class="ce-summary" id="ce-summary" hidden></div>
 
-    <!-- TELA 2 · AGENDAMENTO -->
-    <div class="wrap measure ce-screen" id="ce-screen-scheduling">
-      <p class="ce-lead">Recebemos suas informações.</p>
-      <h2>Agora escolha o melhor horário para conversarmos.</h2>
-      <p class="body-copy">
-        Na reunião, vamos entender melhor a empresa, a função e o perfil
-        necessário para conduzir a seleção.
-      </p>
-
-      <div class="ce-book-actions">
-        <a class="btn btn--solid" id="ce-book-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>
-          Ver horários disponíveis
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <button class="btn btn--ghost" type="button" id="ce-done-btn" hidden>Concluí o agendamento</button>
-      </div>
-
-      <p class="body-copy" id="ce-book-holding" hidden>
-        Nossa agenda online está sendo finalizada. A Órigo vai entrar em contato
-        pelo e-mail e telefone informados para marcar o horário da conversa.
-      </p>
-
-      <div class="ce-wa">
-        <p>Precisa falar conosco antes da reunião?</p>
-        <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
-      </div>
-    </div>
-
-    <!-- TELA 3 · CONFIRMAÇÃO -->
-    <div class="wrap measure ce-screen" id="ce-screen-confirmed">
-      <p class="ce-lead">Conversa reservada.</p>
-      <h2>Está agendado.</h2>
-      <p class="body-copy">
-        Recebemos suas informações e sua conversa com a Órigo está reservada.
-        Você receberá os dados da reunião no e-mail informado.
-      </p>
-      <div class="ce-summary" id="ce-summary" hidden></div>
-
-      <div class="ce-wa">
-        <p>Precisa falar conosco antes da reunião?</p>
-        <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+          <div class="ce-wa">
+            <p>Precisa falar conosco antes da reunião?</p>
+            <a class="btn btn--ghost" href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Preenchi%20a%20solicita%C3%A7%C3%A3o%20de%20recrutamento%20pelo%20site%20da%20%C3%93rigo%20Select%20e%20gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -410,7 +501,7 @@
           <h4>Contato</h4>
           <a href="mailto:origoelect@gmail.com">origoelect@gmail.com</a>
           <a href="https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-wa="select">WhatsApp (54) 99668-9010</a>
-          <a href="https://instagram.com/origoselect" target="_blank" rel="noopener">Instagram @origoselect</a>
+        <a href="https://instagram.com/origoselect" target="_blank" rel="noopener">Instagram @origoselect</a>
           <span class="soon">LinkedIn · em breve</span>
         </div>
       </div>
@@ -434,7 +525,7 @@
     root.setAttribute("data-theme", root.getAttribute("data-theme") === "dark" ? "light" : "dark");
   });
 
-  /* header + trilho de progresso */
+  /* header + trilho */
   var header = document.querySelector(".site-header");
   var railFill = document.querySelector(".rail__fill");
   var ticking = false;
@@ -475,36 +566,71 @@
   document.querySelector(".mm-close").addEventListener("click", function () { setMenu(false); });
   mobileMenu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
 
-  /* ---------- jornada comercial ---------- */
+  /* ---------- jornada comercial (multietapas em um painel) ---------- */
   var L = window.OrigoLeads;
+  var panel = document.getElementById("ce-panel");
   var form = document.getElementById("ce-form");
   var submitBtn = document.getElementById("ce-submit");
   var btnLabel = submitBtn.querySelector(".ce-btn-label");
+  var next1 = document.getElementById("ce-next-1");
+  var back2 = document.getElementById("ce-back-2");
   var note = document.getElementById("ce-note");
   var noteMsg = note.querySelector(".ce-note__msg");
-  var steps = [].slice.call(document.querySelectorAll(".ce-steps span"));
-  var screenForm = document.getElementById("ce-screen-form");
-  var screenSched = document.getElementById("ce-screen-scheduling");
-  var screenDone = document.getElementById("ce-screen-confirmed");
+  var progItems = [].slice.call(document.querySelectorAll(".ce-prog__item"));
+  var progMobile = document.querySelector("[data-prog-mobile]");
+  var stepEls = {
+    1: document.getElementById("ce-step-1"),
+    2: document.getElementById("ce-step-2"),
+    3: document.getElementById("ce-step-3"),
+    4: document.getElementById("ce-step-4")
+  };
   var bookBtn = document.getElementById("ce-book-btn");
   var doneBtn = document.getElementById("ce-done-btn");
   var holding = document.getElementById("ce-book-holding");
   var currentLeadId = null;
+  var currentStep = 1;
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var REQUIRED = ["nome", "cargo", "email", "telefone", "empresa", "segmento", "colaboradores", "cidade", "area", "quantidade", "prazo"];
+  var REQ_1 = ["nome", "cargo", "email", "telefone", "empresa", "segmento", "colaboradores", "cidade"];
+  var REQ_2 = ["area", "quantidade", "prazo"];
   var DEFAULT_NOTE = noteMsg.textContent;
+  var MOBILE_LABELS = { 1: "Empresa e você", 2: "Contratação", 3: "Agenda" };
 
-  function setPhase(p) {
-    steps.forEach(function (s) {
-      var k = s.getAttribute("data-step");
-      s.classList.remove("is-active", "is-done");
-      if (p === "form") { if (k !== "3") s.classList.add("is-active"); }
-      else if (p === "schedule") { s.classList.add(k === "3" ? "is-active" : "is-done"); }
-      else { s.classList.add("is-done"); }
+  function setProgress(n) {
+    var active = Math.min(n, 3);
+    progItems.forEach(function (it) {
+      var p = +it.getAttribute("data-p");
+      it.classList.remove("is-active", "is-done");
+      if (n >= 4 || p < active) it.classList.add("is-done");
+      else if (p === active) it.classList.add("is-active");
     });
+    if (progMobile) {
+      progMobile.innerHTML = (n >= 4)
+        ? "Concluído"
+        : ("0" + active + " <i>de</i> 03 — " + MOBILE_LABELS[active]);
+    }
   }
-  setPhase("form");
+
+  function gentleScrollToPanel() {
+    try {
+      var r = panel.getBoundingClientRect();
+      if (r.top < 8 || r.top > window.innerHeight * 0.45) {
+        panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }
+    } catch (e) {}
+  }
+
+  function showStep(n, dir) {
+    var k;
+    for (k in stepEls) { stepEls[k].classList.remove("is-active"); }
+    var el = stepEls[n];
+    el.setAttribute("data-dir", dir || "fwd");
+    void el.offsetWidth; /* reinicia a animação */
+    el.classList.add("is-active");
+    currentStep = n;
+    setProgress(n);
+    gentleScrollToPanel();
+  }
 
   function wrapOf(el) { return el.closest(".ce-field") || el.closest(".ce-consent"); }
   function markInvalid(el, msg) {
@@ -515,9 +641,9 @@
   }
   function clearInvalid(el) { var w = wrapOf(el); if (w) w.removeAttribute("data-invalid"); }
 
-  function validate() {
+  function validateNames(names) {
     var firstBad = null;
-    REQUIRED.forEach(function (name) {
+    names.forEach(function (name) {
       var el = form.elements[name];
       clearInvalid(el);
       var v = (el.value || "").trim();
@@ -532,9 +658,6 @@
         firstBad = firstBad || el;
       }
     });
-    var consent = form.elements.consent;
-    clearInvalid(consent);
-    if (!consent.checked) { markInvalid(consent); firstBad = firstBad || consent; }
     if (firstBad) { firstBad.focus(); return false; }
     return true;
   }
@@ -550,10 +673,7 @@
     };
   }
 
-  function goScheduling() {
-    screenForm.setAttribute("data-show", "false");
-    screenSched.setAttribute("data-show", "true");
-    setPhase("schedule");
+  function prepScheduling() {
     if (L.isMeetingActive()) {
       bookBtn.href = L.meetingConfig.bookingUrl;
       bookBtn.hidden = false;
@@ -564,8 +684,17 @@
       doneBtn.hidden = true;
       holding.hidden = false;
     }
-    try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); }
   }
+
+  /* etapa 01 → 02 : valida e avança, sem tocar a rede */
+  function goStep2() { if (validateNames(REQ_1)) showStep(2, "fwd"); }
+  next1.addEventListener("click", goStep2);
+
+  /* voltar : dados preservados (os inputs nunca são limpos) */
+  back2.addEventListener("click", function () {
+    note.setAttribute("data-show", "false");
+    showStep(1, "back");
+  });
 
   /* canal ainda não configurado: não deixa preencher em vão */
   if (!L.isLeadActive() && L.leadConfig.status !== "test") {
@@ -578,10 +707,20 @@
 
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
+    /* Enter na etapa 01 apenas avança */
+    if (currentStep === 1) { goStep2(); return; }
     if (submitBtn.disabled) return;
+
     noteMsg.textContent = DEFAULT_NOTE;
     note.setAttribute("data-show", "false");
-    if (!validate()) return;
+
+    var ok1 = validateNames(REQ_1);
+    if (!ok1) { showStep(1, "back"); return; }
+    var ok2 = validateNames(REQ_2);
+    var consent = form.elements.consent;
+    clearInvalid(consent);
+    if (!consent.checked) { markInvalid(consent); if (ok2) consent.focus(); }
+    if (!ok2 || !consent.checked) return;
 
     submitBtn.disabled = true;
     var prev = btnLabel.textContent;
@@ -589,15 +728,14 @@
 
     L.submitCompanyLead(collect()).then(function (res) {
       currentLeadId = (res && res.id) || null;
-      goScheduling();
+      prepScheduling();
+      showStep(3, "fwd");
     }, function (err) {
       submitBtn.disabled = false;
       btnLabel.textContent = prev;
-      if (err && err.code === "not-configured") {
-        noteMsg.textContent = DEFAULT_NOTE;
-      } else {
-        noteMsg.textContent = "Não conseguimos registrar suas informações neste momento. Tente novamente ou fale conosco pelo WhatsApp.";
-      }
+      noteMsg.textContent = (err && err.code === "not-configured")
+        ? DEFAULT_NOTE
+        : "Não conseguimos registrar suas informações neste momento. Tente novamente ou fale conosco pelo WhatsApp.";
       note.setAttribute("data-show", "true");
     });
   });
@@ -605,14 +743,11 @@
   doneBtn.addEventListener("click", function () {
     doneBtn.disabled = true;
     doneBtn.textContent = "Registrando…";
-    var finish = function () {
-      screenSched.setAttribute("data-show", "false");
-      screenDone.setAttribute("data-show", "true");
-      setPhase("done");
-      try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); }
-    };
+    var finish = function () { showStep(4, "fwd"); };
     L.confirmMeeting(currentLeadId).then(finish, finish);
   });
+
+  setProgress(1);
 })();
 </script>
 </body>
