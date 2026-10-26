@@ -58,9 +58,9 @@ até que sejam fornecidos.
 
 ## Contatos (fornecidos 31/08/2026)
 
-- E-mail: **origoelect@gmail.com** — ⚠️ conferir grafia (o Instagram é
-  `@origoselect`; o e-mail veio sem o "s"). Usar exatamente como fornecido
-  até o cliente confirmar.
+- E-mail (26/10/2026): **origohuman@gmail.com** — e-mail geral, usado em todo o site
+  (substituiu origoelect@ / origopeople@). A notificação de leads do Apps Script
+  é um endereço à parte (`origoselect@gmail.com`), configurado na planilha.
 - Instagram: **@origoselect** — https://instagram.com/origoselect
 - WhatsApp/telefone: **(54) 99114-3025** (`wa.me/5554991143025`) —
   provisório, o mesmo número da Órigo People por enquanto.
