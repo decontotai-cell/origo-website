@@ -72,9 +72,10 @@ atualiza o Status da linha para `REUNIÃO AGENDADA` (se falhar, não tem problem
 o agendamento real aparece na agenda da Órigo).
 
 ### 3. Dados que ainda faltam definir
-- E-mail que recebe a notificação de lead: o Apps Script implantado pela Órigo usa
-  **`origoselect@gmail.com`**. É independente do e-mail de contato exibido no site
-  (`origohuman@gmail.com`, geral, desde 26/10/2026).
+- E-mail que recebe a notificação de lead (`NOTIFY_TO`, vários separados por vírgula):
+  `origoselect@gmail.com` + `origohuman@gmail.com` (geral, desde 26/10/2026). Ao mudar
+  no Apps Script é preciso reimplantar: Implantar → Gerenciar implantações → editar →
+  Nova versão → Implantar (a URL /exec não muda).
 - Texto jurídico definitivo da Política de Privacidade (o link já aponta para
   `politica-de-privacidade.html`, hoje placeholder).
 
@@ -138,7 +139,7 @@ PROPOSTA ENVIADA → EM NEGOCIAÇÃO → CLIENTE / NÃO CONVERTIDO`
  */
 var SHEET_ID   = 'COLE_O_ID_DA_PLANILHA_AQUI';
 var SHEET_NAME = 'Leads';
-var NOTIFY_TO  = 'origoselect@gmail.com';
+var NOTIFY_TO  = 'origoselect@gmail.com,origohuman@gmail.com';
 var TZ         = 'America/Sao_Paulo';
 
 var COLUMNS = [
