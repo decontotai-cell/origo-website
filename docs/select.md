@@ -62,17 +62,17 @@ até que sejam fornecidos.
   `@origoselect`; o e-mail veio sem o "s"). Usar exatamente como fornecido
   até o cliente confirmar.
 - Instagram: **@origoselect** — https://instagram.com/origoselect
-- WhatsApp/telefone: **(54) 99668-9010** (`wa.me/5554996689010`) —
+- WhatsApp/telefone: **(54) 99114-3025** (`wa.me/5554991143025`) —
   provisório, o mesmo número da Órigo People por enquanto.
 - Aplicar no CTA e no rodapé quando a página for construída, no mesmo
   padrão da People.
 
 ## CTAs de WhatsApp (quando a página for criada)
 
-Número: **+55 54 99668-9010** → base `https://wa.me/5554996689010`
+Número: **+55 54 99114-3025** → base `https://wa.me/5554991143025`
 
 CTAs destinados a **EMPRESAS** ("Falar com a Órigo Select", "Quero contratar", etc.):
-`https://wa.me/5554996689010?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa.`
+`https://wa.me/5554991143025?text=Ol%C3%A1!%20Conheci%20a%20%C3%93rigo%20Select%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20recrutamento%20e%20sele%C3%A7%C3%A3o%20para%20minha%20empresa.`
 (mensagem: "Olá! Conheci a Órigo Select pelo site e gostaria de conversar sobre recrutamento e seleção para minha empresa.")
 
 Sempre com `target="_blank" rel="noopener noreferrer"` e `data-wa="select"`.
