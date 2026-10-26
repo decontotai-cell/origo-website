@@ -5,15 +5,15 @@
      RAIZ #4B5143 · ESPRESSO #373028 · LINHO #D9CDBF
      NÉVOA #D1E2EC · PEDRA #8D7D6E · LEVEZA #F9F9F9
 
-     TIPOGRAFIA — sistema digital do site: Fraunces (serifada editorial) +
+     TIPOGRAFIA — sistema digital do site: Spectral (serifada editorial) +
      Manrope (sans), via Google Fonts. As fontes do manual da marca
      (Nexa · Athena · Alamanda) são referência de IDENTIDADE (logo/marca),
      não fonte funcional global. Ver docs/tipografia.md.
      ================================================================ */
 
   :root {
-    /* tipografia do site (digital) — Fraunces + Manrope */
-    --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+    /* tipografia do site (digital) — Spectral + Manrope */
+    --font-display: "Spectral", ui-serif, Georgia, "Times New Roman", serif;
     --font-text: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --font-ui: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
