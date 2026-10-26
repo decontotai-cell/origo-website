@@ -46,7 +46,7 @@ Mocks isolados da camada visual, substituíveis pela API do ATS escolhido
 ## Conceito visual da Home
 
 - Coluna editorial com medida de leitura ~44rem e trilho de progresso à esquerda.
-- Tipografia: *Fraunces* (títulos) + *Manrope* (texto/UI) — substitutas de Nexa/Athena/Alamanda no protótipo.
+- Tipografia: *Spectral* (títulos) + *Manrope* (texto/UI) — substitutas de Nexa/Athena/Alamanda no protótipo.
 - Paleta oficial rigorosa; fundo Leveza, faixas Espresso no Manifesto e rodapé.
 - Hero sem imagem genérica: motor "*O empresário acha que o problema é [palavra que cicla] — mas a origem é outra*".
 - Símbolo oficial (arte do arquivo) ao lado do hero, com deriva lenta. Rodapé usa o lockup negativo transparente (sem caixa).
@@ -95,6 +95,6 @@ da empresa, de baixo para cima").
 - **Fundadora (Taiane)** — decidir se entra na Home ou só em "A Órigo".
 - **Método na Home (V2, revisado 30/08/2026)** — jornada de 6 macroetapas: **Diagnosticar → Estruturar → Desenvolver → Consolidar → Mensurar → Acompanhar**. Na interface: verbo grande + 1 frase-síntese + linha de palavras-chave. EVP, Employer Branding, cultura, treinamento, DISC etc. **não** são etapas — são ações possíveis que surgem do diagnóstico de cada empresa. Lógica implícita: "não chegamos com uma solução pronta; primeiro entendemos". Detalhe completo de cada fase fica para `/people`.
 - **Fotografia** — sem imagens reais ainda. Definir 3 fotos editoriais (Nosso olhar / People / Liberdade).
-- **Fontes da marca** — Nexa/Athena/Alamanda são licenciadas; o protótipo usa Fraunces + Manrope. Adquirir/instalar para o build definitivo.
+- **Fontes da marca** — Nexa/Athena/Alamanda são licenciadas; o protótipo usa Spectral + Manrope. Adquirir/instalar para o build definitivo.
 - **Números, clientes, cases, certificações** — nenhum foi inventado, conforme instruído.
 - **Política de Privacidade / Termos** — só rotas; conteúdo jurídico depois.
