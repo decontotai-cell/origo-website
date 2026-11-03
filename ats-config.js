@@ -26,15 +26,15 @@ window.OrigoSelect = (function () {
   "use strict";
 
   /* -------- interruptor único de modo -------- */
-  var ATS_STATUS = "pending"; // "pending" | "active"
+  var ATS_STATUS = "active"; // "pending" | "active"
 
   /* -------- configuração da integração (preencher quando "active") -------- */
   var config = {
-    provider: null,             // ex.: "recruit-crm", "abler"
-    jobsUrl: null,              // endpoint/whitelabel de vagas
-    talentPoolUrl: null,        // endpoint/whitelabel do banco de talentos
+    provider: "recruit-crm",    // ATS escolhido: Recruit CRM (página de carreiras embutida)
+    jobsUrl: "https://recruitcrm.io/jobs/ORIGO_HUMAN_STRATEGY_jobs", // página pública de vagas (iframe em select-vagas.html)
+    talentPoolUrl: "https://recruitcrm.io/talent_pool_submission/ORIGO_HUMAN_STRATEGY", // formulário do banco de talentos (iframe em select-talentos.html)
     clientPortalUrl: null,      // portal do cliente (candidatos encaminhados, pareceres, andamento)
-    applicationMode: "pending"  // "pending" | "external" (leva ao ATS) | "embedded" (widget na página)
+    applicationMode: "embedded" // "pending" | "external" (leva ao ATS) | "embedded" (widget na página)
   };
 
   function isActive() { return ATS_STATUS === "active"; }
