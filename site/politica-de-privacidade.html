@@ -1,17 +1,17 @@
 <!doctype html>
 <!--
-  PLACEHOLDER INTERNO — NÃO É TEXTO JURÍDICO DEFINITIVO.
-  A Política de Privacidade oficial deve ser redigida/validada por
-  assessoria jurídica antes da publicação. Não inventar cláusulas,
-  bases legais, prazos de retenção ou nomes de encarregado (DPO).
-  Substituir este arquivo pelo documento validado quando disponível.
+  Texto redigido a partir dos fluxos reais do site (formulário de empresas
+  -> Google Apps Script/Sheets/Gmail/Agenda; banco de talentos e vagas ->
+  Recruit CRM; WhatsApp). Prazos de retenção e identificação do controlador
+  (razão social/CNPJ) devem ser confirmados pela Órigo; recomenda-se revisão
+  jurídica. Se um fluxo de coleta mudar, atualizar este arquivo.
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <title>Política de Privacidade | Órigo Human Strategy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Política de Privacidade da Órigo Human Strategy — documento em preparação, com validação jurídica." />
+<meta name="description" content="Política de Privacidade da Órigo Human Strategy: quais dados coletamos, para que usamos, por quanto tempo guardamos e como exercer seus direitos (LGPD)." />
 <meta name="robots" content="noindex" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +21,15 @@
 <link rel="stylesheet" href="origo.css" />
 
 <style>
-  .legal { min-height: calc(100svh - 4.2rem); display: flex; align-items: center; }
+  .legal { padding-block: clamp(3rem, 8vw, 5.5rem); }
+  .legal__h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.01em;
+    margin: 2.6rem 0 0.7rem;
+  }
+  .legal__list { margin: 0.4rem 0 0; padding-left: 1.2rem; max-width: var(--measure); }
+  .legal__list li { margin: 0.35rem 0; line-height: 1.6; }
+  .legal__meta { margin-top: 0.9rem; font-size: 0.86rem; color: var(--ink-soft); }
   .legal__inner { position: relative; z-index: 2; }
   .legal__rule { width: 3rem; height: 1px; background: var(--hairline-strong); margin-bottom: 1.6rem; }
   .legal__h1 {
@@ -89,24 +97,124 @@
       <p class="eyebrow">Órigo Human Strategy · Legal</p>
       <h1 class="legal__h1">Política de Privacidade</h1>
       <p class="lede">
-        Este documento está sendo preparado e passará por validação jurídica
-        antes de entrar em vigor.
+        Explicamos aqui, em linguagem direta, quais dados pessoais a Órigo
+        coleta pelo site, para que os usa, com quem os compartilha e como
+        você pode exercer seus direitos, conforme a Lei Geral de Proteção de
+        Dados (Lei nº 13.709/2018, a LGPD).
       </p>
+      <p class="legal__meta">Última atualização: 3 de novembro de 2026.</p>
+
+      <h2 class="legal__h2">1. Quem é o controlador</h2>
       <p class="body-copy">
-        Enquanto isso, este site é institucional e não coleta dados pessoais
-        de visitantes. A Órigo Select ainda não recebe candidaturas nem
-        cadastros de banco de talentos; quando essas áreas forem ativadas, o
-        tratamento de dados seguirá esta política e a legislação aplicável
-        (LGPD), dentro da plataforma de recrutamento integrada à Select.
+        A <strong>Órigo Human Strategy</strong>, que atua com gestão de
+        pessoas (Órigo People) e recrutamento e seleção (Órigo Select), é a
+        responsável pelas decisões sobre o tratamento dos seus dados pessoais.
+        Contato para assuntos de privacidade:
+        <a href="mailto:origohuman@gmail.com">origohuman@gmail.com</a>.
       </p>
+
+      <h2 class="legal__h2">2. Quais dados coletamos e por quê</h2>
+      <p class="body-copy">Este site não usa cookies de publicidade nem ferramentas de análise de audiência. Coletamos dados apenas quando você os envia por um dos formulários abaixo.</p>
+      <ul class="legal__list">
+        <li>
+          <strong>Solicitação de recrutamento por empresas</strong> (página
+          “Para empresas”): nome, cargo, e-mail, telefone, empresa, segmento,
+          número de colaboradores, cidade e informações sobre a contratação
+          (área, quantidade de vagas e prazo). Também registramos a origem do
+          acesso (por exemplo, parâmetros de campanha do link). Usamos para
+          retornar seu contato, entender a necessidade e propor o serviço.
+          <em>Base legal: procedimentos preliminares relacionados a contrato
+          e legítimo interesse (art. 7º, V e IX, da LGPD).</em>
+        </li>
+        <li>
+          <strong>Banco de talentos e candidatura a vagas</strong> (páginas
+          “Banco de talentos” e “Vagas”): os dados que você informar no
+          formulário, como nome, contato, currículo, histórico profissional e
+          formação. Usamos para avaliar seu perfil, entrar em contato quando
+          surgirem oportunidades compatíveis e conduzir processos seletivos
+          em nome das empresas clientes.
+          <em>Base legal: seu consentimento (art. 7º, I) e procedimentos
+          preliminares a contrato de trabalho (art. 7º, V).</em>
+        </li>
+        <li>
+          <strong>Agendamento de conversa</strong>: ao escolher um horário na
+          nossa agenda, você informa seus dados diretamente ao Google Agenda.
+        </li>
+        <li>
+          <strong>WhatsApp e e-mail</strong>: se você nos escrever, usamos as
+          informações da mensagem apenas para responder.
+        </li>
+      </ul>
       <p class="body-copy">
-        Para dúvidas sobre tratamento de dados, fale com a Órigo pelos canais
-        de contato.
+        Não pedimos dados pessoais sensíveis (como saúde, religião ou origem
+        racial). Pedimos que não os inclua no currículo ou nas mensagens.
       </p>
-      <p class="legal__note">
-        Versão preliminar — o texto oficial, com bases legais, finalidades,
-        prazos de retenção e contato do encarregado, será publicado após a
-        revisão jurídica.
+
+      <h2 class="legal__h2">3. Com quem compartilhamos</h2>
+      <p class="body-copy">
+        Não vendemos seus dados. Eles são tratados por fornecedores que nos
+        prestam serviço, apenas para as finalidades acima:
+      </p>
+      <ul class="legal__list">
+        <li><strong>Recruit CRM</strong>: plataforma de recrutamento onde ficam os cadastros de banco de talentos e candidaturas.</li>
+        <li><strong>Google</strong> (Planilhas, Gmail, Agenda e Fontes): recebimento e armazenamento das solicitações de empresas, envio de notificações e agendamento. As fontes do site são carregadas dos servidores do Google, que recebem seu endereço IP nessa requisição.</li>
+        <li><strong>WhatsApp (Meta)</strong>: quando você opta por falar conosco por esse canal.</li>
+      </ul>
+      <p class="body-copy">
+        No processo seletivo, o perfil de finalistas pode ser encaminhado à
+        empresa contratante da vaga, para a decisão final de contratação.
+      </p>
+
+      <h2 class="legal__h2">4. Transferência internacional</h2>
+      <p class="body-copy">
+        Alguns desses fornecedores armazenam dados em servidores fora do
+        Brasil. Quando isso ocorre, a transferência se apoia nas garantias
+        previstas no art. 33 da LGPD, e adotamos fornecedores que mantêm
+        medidas de segurança compatíveis.
+      </p>
+
+      <h2 class="legal__h2">5. Por quanto tempo guardamos</h2>
+      <ul class="legal__list">
+        <li>Banco de talentos: até 24 meses após o último contato, ou até você pedir a exclusão.</li>
+        <li>Candidaturas a uma vaga específica: até 12 meses após o encerramento do processo.</li>
+        <li>Solicitações de empresas: até 24 meses após o último contato comercial.</li>
+      </ul>
+      <p class="body-copy">
+        Depois desses prazos, os dados são eliminados ou anonimizados, salvo
+        quando a lei exigir a guarda por mais tempo.
+      </p>
+
+      <h2 class="legal__h2">6. Seus direitos</h2>
+      <p class="body-copy">Você pode, a qualquer momento, solicitar:</p>
+      <ul class="legal__list">
+        <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+        <li>correção de dados incompletos ou desatualizados;</li>
+        <li>anonimização, bloqueio ou exclusão de dados desnecessários ou tratados em desconformidade;</li>
+        <li>portabilidade dos dados, quando aplicável;</li>
+        <li>informação sobre com quem compartilhamos seus dados;</li>
+        <li>revogação do consentimento, sem prejuízo do tratamento já realizado;</li>
+        <li>revisão de decisões tomadas exclusivamente de forma automatizada. Não tomamos decisões assim: toda avaliação de candidatos é feita por pessoas.</li>
+      </ul>
+      <p class="body-copy">
+        Para exercer qualquer direito, escreva para
+        <a href="mailto:origohuman@gmail.com">origohuman@gmail.com</a>.
+        Respondemos no prazo previsto em lei. Você também pode recorrer à
+        Autoridade Nacional de Proteção de Dados (ANPD).
+      </p>
+
+      <h2 class="legal__h2">7. Segurança</h2>
+      <p class="body-copy">
+        Usamos conexão segura (HTTPS), limitamos o acesso aos dados a quem
+        precisa deles para o trabalho e escolhemos fornecedores com controles
+        de segurança reconhecidos. Nenhum sistema é totalmente imune a
+        incidentes; se ocorrer um que possa causar risco relevante a você,
+        comunicaremos você e a ANPD, nos termos da lei.
+      </p>
+
+      <h2 class="legal__h2">8. Alterações desta política</h2>
+      <p class="body-copy">
+        Podemos atualizar este texto quando o site ou a lei mudarem. A data
+        da última atualização fica sempre no topo desta página.
       </p>
       <div class="legal__actions">
         <a class="btn btn--solid" href="index.html">Voltar para a Home</a>
