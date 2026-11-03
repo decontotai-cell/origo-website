@@ -234,8 +234,13 @@
       document.querySelector(".stub__h1").textContent = "Faça parte do banco de talentos da Órigo Select.";
       document.querySelector(".stub .lede").textContent =
         "Envie seu perfil e currículo. Entraremos em contato quando surgirem oportunidades compatíveis.";
-      document.querySelector(".stub .body-copy").textContent =
-        "Seus dados são tratados dentro da plataforma de recrutamento da Órigo Select.";
+      var copy = document.querySelector(".stub .body-copy");
+      copy.textContent = "Seus dados são tratados dentro da plataforma de recrutamento da Órigo Select. Ao enviar seu perfil, você declara ter lido nossa ";
+      var pp = document.createElement("a");
+      pp.href = "politica-de-privacidade.html";
+      pp.textContent = "Política de Privacidade";
+      copy.appendChild(pp);
+      copy.appendChild(document.createTextNode("."));
 
       var frame = document.createElement("iframe");
       frame.className = "ats-frame";
