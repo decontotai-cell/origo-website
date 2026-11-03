@@ -32,7 +32,7 @@ window.OrigoSelect = (function () {
   var config = {
     provider: "recruit-crm",    // ATS escolhido: Recruit CRM (página de carreiras embutida)
     jobsUrl: "https://recruitcrm.io/jobs/ORIGO_HUMAN_STRATEGY_jobs", // página pública de vagas (iframe em select-vagas.html)
-    talentPoolUrl: null,        // endpoint/whitelabel do banco de talentos (a definir)
+    talentPoolUrl: "https://recruitcrm.io/talent_pool_submission/ORIGO_HUMAN_STRATEGY", // formulário do banco de talentos (iframe em select-talentos.html)
     clientPortalUrl: null,      // portal do cliente (candidatos encaminhados, pareceres, andamento)
     applicationMode: "embedded" // "pending" | "external" (leva ao ATS) | "embedded" (widget na página)
   };
