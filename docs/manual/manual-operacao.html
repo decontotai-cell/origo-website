@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<title>Manual de operação — vagas, candidatos e empresas | Órigo Select</title>
+<style>
+ @page { size: A4; margin: 20mm 18mm; }
+ body { font-family: Georgia, "Times New Roman", serif; font-size: 10.5pt; line-height: 1.5; color: #222; }
+ h1 { font-size: 22pt; font-weight: 400; margin: 0 0 2pt; color: #373028; }
+ h2 { font-size: 14pt; margin: 20pt 0 4pt; color: #4B5143; border-bottom: 1px solid #C9C0B2; padding-bottom: 2pt; page-break-after: avoid; }
+ h3 { font-size: 11.5pt; margin: 12pt 0 2pt; color: #373028; page-break-after: avoid; }
+ p { margin: 4pt 0; }
+ ol, ul { margin: 3pt 0 3pt; padding-left: 18pt; } li { margin: 2pt 0; }
+ .sub { color: #666; font-size: 10pt; }
+ .box { border: 1px solid #B9B0A2; background: #F7F4EE; padding: 7pt 10pt; margin: 8pt 0; page-break-inside: avoid; }
+ .warn { border-color: #B58A3C; background: #FBF4E4; }
+ .ok { color: #3b6b3b; font-weight: 700; } .no { color: #9a4b2a; font-weight: 700; }
+ table { border-collapse: collapse; width: 100%; font-size: 9.5pt; margin: 6pt 0; page-break-inside: avoid; }
+ th, td { border: 1px solid #C9C0B2; padding: 3pt 6pt; vertical-align: top; text-align: left; } th { background: #EFE9DE; }
+ code { font-family: Consolas, monospace; font-size: 9.5pt; background: #EFE9DE; padding: 0 2pt; }
+ .cover { page-break-after: always; }
+ .menu a { color: #222; }
+</style></head><body>
+
+<section class="cover">
+<h1>Manual de operação</h1>
+<p class="sub">Órigo Select · como as vagas, os candidatos e as empresas chegam até nós, e como fazemos o match</p>
+<p class="sub">Versão de 3 de novembro de 2026 · baseado nos testes reais feitos no site e no Recruit CRM</p>
+
+<h2>Mapa geral: três portas de entrada</h2>
+<table>
+<tr><th style="width:24%">Quem entra</th><th style="width:30%">Por onde entra no site</th><th>Onde chega para nós</th></tr>
+<tr><td><b>A. Empresa</b> que quer contratar</td><td>origo.net.br/select-empresas.html (formulário em 2 etapas + agenda)</td><td>Planilha Google "Leads Órigo Select" + e-mail de aviso + horário na Agenda Google. <b>Depois</b>, nós cadastramos a empresa e a vaga no Recruit.</td></tr>
+<tr><td><b>B. Candidato</b> que se candidata a uma vaga publicada</td><td>origo.net.br/select-vagas.html (lista de vagas do Recruit)</td><td>Recruit CRM → página da vaga → funil, etapa <b>Applied</b>. Aviso no sino de notificações.</td></tr>
+<tr><td><b>C. Candidato</b> que entra no banco de talentos</td><td>origo.net.br/select-talentos.html (formulário do Recruit)</td><td>Recruit CRM → Candidatos (origem <b>Talent Pool</b>, com currículo). Aviso no sino: "novos candidatos pela reserva de talentos".</td></tr>
+</table>
+
+<div class="box"><b>Em uma frase:</b> a empresa nos procura pelo site e cai na planilha; nós a transformamos em <b>Empresa + Vaga</b> no Recruit; os candidatos chegam pelas vagas e pelo banco de talentos; o <b>match</b> é feito dentro da vaga, atribuindo candidatos e movendo-os pelas etapas até 1 ou 2 finalistas serem apresentados ao líder da empresa.</div>
+
+<h2>Onde fazer cada coisa</h2>
+<table>
+<tr><th style="width:34%">Tarefa</th><th>Onde</th></tr>
+<tr><td>Ver leads de empresas</td><td>Planilha Google "Leads Órigo Select" (conta da Órigo Select) e e-mail de aviso</td></tr>
+<tr><td>Agenda da reunião com a empresa</td><td>Google Agenda (link de agendamento do site)</td></tr>
+<tr><td>Empresas, vagas, candidatos, funil</td><td>app.recruitcrm.io (menu lateral: Candidatos, Empresas, Contatos, Vagas)</td></tr>
+<tr><td>Avisos de novas candidaturas</td><td>Sino 🔔 no topo do Recruit</td></tr>
+<tr><td>Configurações (formulários, textos, LGPD)</td><td>Recruit → engrenagem ⚙ (Configurações de Administrador)</td></tr>
+</table>
+</section>
+
+<h2>1. Quando a empresa se cadastra no site</h2>
+<h3>O que a empresa vê</h3>
+<ol>
+<li>No site, qualquer botão "Quero contratar" / "Abrir uma vaga" leva a <code>select-empresas.html</code>.</li>
+<li><b>Etapa 01:</b> nome, cargo, e-mail, telefone, empresa, segmento, nº de colaboradores, cidade. O botão "Continuar" só valida, não envia nada.</li>
+<li><b>Etapa 02:</b> área da contratação, quantidade de vagas, prazo e aceite da LGPD. Ao clicar em "Continuar e escolher um horário", os dados são enviados.</li>
+<li><b>Etapa 03:</b> só aparece depois que o servidor confirma o recebimento. Mostra "Recebemos suas informações." e o botão para escolher horário na Agenda Google.</li>
+</ol>
+<div class="box">Se o envio falhar, a empresa <b>não avança</b> e vê a mensagem para tentar de novo ou falar pelo WhatsApp. O site nunca diz "recebido" sem a confirmação real.</div>
+
+<h3>O que chega para nós</h3>
+<ul>
+<li><b>Uma linha na planilha</b> "Leads Órigo Select", com data, nome, cargo, e-mail, telefone, empresa, segmento, colaboradores, cidade, área, quantidade, prazo, origem do acesso e consentimento. Estado inicial: <code>NOVO LEAD</code>.</li>
+<li><b>E-mail de aviso</b> para os endereços configurados no script (origoselect@gmail.com; origohuman@gmail.com só se estiver incluído no script).</li>
+<li><b>Horário na Agenda Google</b>, quando a empresa escolhe. Ao clicar em "Concluí o agendamento", a linha passa a <code>REUNIÃO AGENDADA</code>.</li>
+</ul>
+
+<h3>Como aceitamos a vaga (passo a passo)</h3>
+<ol>
+<li><b>Ler o lead.</b> Conferir se a empresa e a necessidade fazem sentido para a Órigo Select.</li>
+<li><b>Fazer a conversa agendada</b> (consultoria de função): conhecer cultura, liderança e employer branding, e traçar o perfil ideal da função. Enviar o checklist ao líder imediato.</li>
+<li><b>Atualizar o estado na planilha</b>: REUNIÃO REALIZADA → PROPOSTA ENVIADA → EM NEGOCIAÇÃO → CLIENTE (ou NÃO CONVERTIDO).</li>
+<li><b>Cadastrar a empresa no Recruit</b> (se ainda não existir): Empresas → <i>Adicionar empresa</i> → nome, site, cidade/estado/país → Enviar. A própria Órigo já está cadastrada como empresa (use-a para vagas internas).</li>
+<li><b>Cadastrar o contato da empresa</b> (o líder que vai decidir): Contatos → adicionar. <span class="no">Obrigatório para "Enviar ao Cliente":</span> sem contato na vaga, o Recruit bloqueia o envio.</li>
+<li><b>Criar a vaga:</b> Vagas → <i>Adicionar Vaga</i> → título, número de aberturas, <b>Empresa</b>, <b>Contato Primário</b> → Salvar Vaga. Deixe "Criar Novo Negócio" desmarcado (o Recruit avisou que o plano gratuito esgotou o limite de negócios).</li>
+<li><b>Publicar no site:</b> na página da vaga, clicar no aviso amarelo <b>"Formulário de Candidatura Desativado"</b> → marcar <i>Activar o formulário de candidatura</i> → Enviar. A vaga passa a aparecer em <code>origo.net.br/select-vagas.html</code>. <b>Sem isso, ela não aparece.</b></li>
+<li>Não publique vagas confidenciais: o nome da vaga e a cidade ficam públicos. Para vagas sigilosas, não ative o formulário e trabalhe só pelo banco de talentos.</li>
+</ol>
+
+<h2>2. Quando o candidato se cadastra no site</h2>
+<h3>B. Candidatura direta a uma vaga</h3>
+<ol>
+<li>O candidato abre a vaga em <code>select-vagas.html</code> e preenche: nome, sobrenome, e-mail, telefone, cidade/estado/país, currículo e o aceite da Política de Privacidade.</li>
+<li>Vê "Obrigado por se candidatar! Em breve entraremos em contato."</li>
+<li><b>Para nós:</b> Recruit → Vagas → abrir a vaga → aba <b>Pipeline de candidatos</b> → etapa <b>Applied</b>. O candidato aparece com o currículo. O sino mostra "1 candidatura a novo emprego para [vaga]".</li>
+</ol>
+<h3>C. Banco de talentos</h3>
+<ol>
+<li>O candidato abre <code>select-talentos.html</code> e preenche o mesmo tipo de formulário, sem escolher vaga.</li>
+<li>Vê "Obrigado por enviar seu perfil!".</li>
+<li><b>Para nós:</b> Recruit → <b>Candidatos</b>. O registro vem com <b>Fonte: Talent Pool</b>, currículo anexado e, se o PDF permitir, cargo, empresa, anos de experiência e habilidades lidos automaticamente. O sino mostra "novos candidatos pela reserva de talentos".</li>
+</ol>
+<div class="box warn"><b>Atenção:</b> a lista de Candidatos pode ter um <b>filtro salvo</b> escondendo registros (uma caixinha com X ao lado de "Todos os Candidatos"). Se um candidato "sumiu", use a busca do topo ou remova o filtro.</div>
+
+<h2>3. Como fazemos o match</h2>
+<p>O match acontece <b>dentro da vaga</b>. As etapas seguem o método da Órigo Select: viabilidade, perfil da função, triagem de competências/função/comportamento e 1 a 2 finalistas.</p>
+<h3>3.1 Trazer candidatos para a vaga</h3>
+<ul>
+<li><b>Os que se candidataram</b> já entram sozinhos em <b>Applied</b>.</li>
+<li><b>Os do banco de talentos:</b> na vaga, botão azul <b>Atribuir Candidatos</b> → aparece a lista de todos os candidatos (com habilidades, currículo e data) → marque os que combinam → <b>Atribuir</b>. Eles entram na etapa <b>Assigned</b>. Dá para usar a busca e "Adicionar filtros" para achar o perfil.</li>
+</ul>
+<h3>3.2 Mover pelas etapas</h3>
+<p>Na linha do candidato, clique na etapa (por exemplo "Assigned") → escolha a nova etapa, a data e escreva a observação/feedback → <b>Enviar</b>. Etapas do funil:</p>
+<table>
+<tr><th>Etapa</th><th>Uso sugerido na Órigo</th></tr>
+<tr><td>Applied</td><td>Candidatou-se pelo site. Ainda não triado.</td></tr>
+<tr><td>Assigned</td><td>Nós atribuímos (veio do banco de talentos ou foi selecionado por nós). Em triagem.</td></tr>
+<tr><td>Interview Scheduled / Not Attended / Rescheduled</td><td>Entrevista voltada para a vaga (marcada, faltou, remarcada).</td></tr>
+<tr><td>Selected</td><td>Passou na triagem: é finalista (1 a 2 por vaga).</td></tr>
+<tr><td>Offered</td><td>Líder escolheu e a proposta foi feita.</td></tr>
+<tr><td>Placed</td><td>Contratado.</td></tr>
+<tr><td>Did Not Join</td><td>Aceitou, mas não entrou.</td></tr>
+<tr><td>Rejected / On Hold</td><td>Descartado / em espera (guardar no banco).</td></tr>
+</table>
+<p class="sub">O uso sugerido é uma convenção nossa; o Recruit só fornece os nomes das etapas. As etapas aparecem em inglês porque são o padrão do funil "Master Hiring Pipeline".</p>
+<h3>3.3 Apresentar à empresa</h3>
+<ol>
+<li>Confirme que a vaga tem <b>Contato Primário</b> (a pessoa da empresa).</li>
+<li>Na vaga, botão <b>Enviar ao Cliente</b> → escolha os candidatos finalistas. <span class="no">Não testei o envio em si</span>, só confirmei que o botão exige o contato na vaga.</li>
+<li>A empresa decide por afinidade; a triagem de competências já foi feita por nós. Registre a decisão movendo para Offered/Placed ou Rejected.</li>
+<li>Na janela de mudança de etapa há também as caixas <i>Criar colocação</i> e <i>Criar fatura</i> (opcionais, para controle de contratação e financeiro). Não testei essas opções.</li>
+</ol>
+
+<h2>4. Encerrar ou esconder uma vaga</h2>
+<div class="box warn"><b>Arquivar NÃO tira a vaga do site.</b> Para despublicar: clique no <b>estado</b> da vaga (ex.: "Open") → marque <i>Encerramento do trabalho no quadro de vagas externos</i> e <i>Formulário de candidatura… para deficientes</i> → Enviar. Se escolher o estado <b>Canceled</b>, o Recruit marca as duas caixas sozinho. Depois, se quiser, arquive.</div>
+<p>Excluir é definitivo: peça confirmação antes. Para excluir candidato ou vaga, o Recruit pede que você digite a <b>quantidade</b> de registros (ex.: <code>1</code>).</p>
+
+<h2>5. LGPD no dia a dia</h2>
+<ul>
+<li>Os formulários do Recruit mostram "Concordo com a Política de Privacidade", que abre o texto com o link da política do site. A opção "Conformidade com a LGPD" está ligada na conta.</li>
+<li><b>Pedido de exclusão/atualização</b> do candidato (por e-mail para origohuman@gmail.com): localizar em Candidatos → ⋮ → Excluir.</li>
+<li>Prazos de guarda publicados na política: banco de talentos 24 meses; candidatura a vaga 12 meses após encerrar; empresas 24 meses. A rotina de apagar ao fim do prazo é manual (sugestão: revisão trimestral).</li>
+<li>A política aguarda revisão do advogado. Quando voltar, ajustar o texto do site e os "Termos do Candidato" no Recruit (Configurações → Formulários de Candidatura).</li>
+</ul>
+
+<h2>6. O que foi testado e o que não foi</h2>
+<table>
+<tr><th style="width:60%">Item</th><th>Resultado</th></tr>
+<tr><td>Cadastro no banco de talentos (com currículo) → candidato no Recruit com fonte Talent Pool</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Candidatura direta a uma vaga → etapa Applied no funil</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Aviso no sino do Recruit (candidatura e banco de talentos)</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Atribuir candidato do banco à vaga + mudar de etapa</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Cadastro da empresa e criação/publicação/despublicação de vaga</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Formulário de empresas no site: servidor confirmou o recebimento</td><td><span class="ok">Testado, funcionou</span></td></tr>
+<tr><td>Linha da planilha e e-mail de aviso do lead de empresa</td><td><span class="no">Não verificado</span> (a planilha está na conta da Órigo Select; confira)</td></tr>
+<tr><td>Reunião na Agenda Google com Google Meet numa reserva real</td><td><span class="no">Não verificado</span></td></tr>
+<tr><td>"Enviar ao Cliente" (envio dos finalistas à empresa)</td><td><span class="no">Não testado</span> (exige contato na vaga)</td></tr>
+<tr><td>E-mails automáticos do Recruit para candidatos</td><td><span class="no">Não configurados</span> (nenhum modelo de e-mail definido)</td></tr>
+</table>
+
+<h2>7. Limitações conhecidas</h2>
+<ul>
+<li>Com nenhuma vaga publicada, a lista mostra "No Jobs Match Your Search" (texto padrão do Recruit, em inglês).</li>
+<li>Os exemplos dentro dos campos do banco de talentos (Tony, Jordan…) ainda estão em inglês; os rótulos estão em português.</li>
+<li>Plano gratuito/trial do Recruit: limite de negócios e funções de IA pausadas por falta de créditos. Confirmar o plano antes de o trial acabar.</li>
+<li>O formulário do Recruit é embutido no site; se o Recruit sair do ar, o site oferece um link "Abrir em uma nova aba".</li>
+</ul>
+
+<h2>Rotina sugerida</h2>
+<ol>
+<li><b>Todo dia:</b> abrir o sino 🔔 do Recruit; olhar leads novos na planilha; responder novos candidatos.</li>
+<li><b>Por vaga aberta:</b> conferir Applied e Assigned, mover etapas e registrar feedback.</li>
+<li><b>Semanal:</b> vagas encerradas → despublicar (passo da seção 4); candidatos parados → Rejected ou On Hold.</li>
+<li><b>Trimestral:</b> revisão de prazos de guarda (LGPD).</li>
+</ol>
+</body></html>
