@@ -40,6 +40,14 @@
   }
   .ats-alt { margin-top: 1.1rem; font-size: 0.85rem; color: var(--ink-soft); }
   .ats-alt a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .ats-talent {
+    margin-top: clamp(1.8rem, 4vw, 2.6rem); padding: 1.4rem 1.5rem;
+    border: 1px solid var(--hairline-strong); border-radius: 14px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 1.5rem;
+  }
+  .ats-talent p { margin: 0; max-width: 34rem; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.55; }
+  .ats-talent strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 768px) { .ats-talent .btn { flex: 1 1 100%; justify-content: center; } }
   @media (max-width: 768px) {
     .stub__glyph { width: 160px; right: -20px; }
     .stub__actions .btn { flex: 1 1 100%; justify-content: center; }
@@ -252,6 +260,23 @@
       alt.appendChild(a);
       alt.appendChild(document.createTextNode("."));
       mount.appendChild(alt);
+
+      /* mensagem em português sempre visível: cobre o caso de lista vazia
+         (o texto "No Jobs Match Your Search" vem de dentro do Recruit e não é editável) */
+      var talent = document.createElement("div");
+      talent.className = "ats-talent";
+      var tp = document.createElement("p");
+      var ts = document.createElement("strong");
+      ts.textContent = "Não encontrou uma vaga para o seu perfil, ou não há vagas abertas no momento?";
+      tp.appendChild(ts);
+      tp.appendChild(document.createTextNode(" Deixe seu currículo no nosso banco de talentos. Entramos em contato quando surgir uma oportunidade compatível."));
+      var tb = document.createElement("a");
+      tb.className = "btn btn--solid";
+      tb.href = "select-talentos.html";
+      tb.textContent = "Entrar no banco de talentos";
+      talent.appendChild(tp);
+      talent.appendChild(tb);
+      mount.appendChild(talent);
 
       mount.hidden = false;
     }
