@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cadastro do banco de talentos — Órigo Select</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: #373028; font-size: 10.5pt; line-height: 1.5; }
+  h1 { font-size: 20pt; margin: 0 0 4px; color: #4B5143; }
+  h2 { font-size: 13.5pt; margin: 22px 0 6px; color: #4B5143; border-bottom: 1px solid #D9CDBF; padding-bottom: 3px; }
+  h3 { font-size: 11pt; margin: 14px 0 4px; }
+  p, li { margin: 3px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+  th, td { border: 1px solid #D9CDBF; padding: 5px 8px; text-align: left; vertical-align: top; font-size: 9.8pt; }
+  th { background: #F3EEE7; }
+  .sub { color: #8D7D6E; margin-bottom: 14px; }
+  .box { background: #F3EEE7; border-left: 3px solid #4B5143; padding: 8px 12px; margin: 10px 0; }
+  code { background: #F3EEE7; padding: 0 3px; }
+  ol li { margin: 4px 0; }
+</style>
+</head>
+<body>
+
+<h1>Cadastro do banco de talentos</h1>
+<p class="sub">Órigo Select · versão de 5 de novembro de 2026 · página: origo.net.br/select-talentos.html</p>
+
+<h2>1. Diagnóstico do cadastro anterior</h2>
+<ul>
+  <li><strong>O que é do site e o que é do Recruit.</strong> A página <code>select-talentos.html</code> só tem o texto de apresentação e uma moldura (iframe). Os campos, as regras de preenchimento, o botão de envio e o armazenamento dos dados são do formulário do Recruit CRM (<code>Admin → Configurações da Página de Banco de Talentos</code>). Por isso o site não consegue mudar campos: isso é feito na conta do Recruit.</li>
+  <li><strong>Campos que existiam:</strong> nome, sobrenome, e-mail (obrigatório), telefone, cidade, estado, país e currículo. Nada dizia em que a pessoa trabalha, onde aceita trabalhar ou quando está disponível. Sem isso não dá para buscar o banco por área, cidade ou turno.</li>
+  <li><strong>Problema do currículo desatualizado:</strong> o formulário não avisava o candidato nem oferecia forma de atualizar depois. Passa a existir o aviso no próprio campo e o pedido de atualização (item 4).</li>
+  <li><strong>Textos:</strong> havia partes em inglês (títulos de seção, exemplos "Tony / Jordan / New York", "Search &amp; Select", "Enter Text Here") e uma descrição que dizia "Entraremos em contato", o que soava como promessa a todos.</li>
+  <li><strong>Estado e país:</strong> dá para ocultar (feito). O Recruit <u>não</u> preenche automaticamente. Por isso a cidade pede "cidade e estado", ex.: Bento Gonçalves/RS.</li>
+  <li><strong>E-mail obrigatório:</strong> mantido. É o único canal do link de atualização/exclusão (o Recruit envia esse link por e-mail), serve para evitar cadastro duplicado e é como o candidato recebe confirmações. Sem e-mail não existiria atualização nem exclusão pelo próprio candidato.</li>
+  <li><strong>Currículo opcional:</strong> o Recruit permite. Está ligado e não obrigatório.</li>
+</ul>
+
+<h2>2. Lista final de campos</h2>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Regra</th></tr>
+  <tr><td>Nome</td><td>Texto</td><td><strong>Obrigatório</strong></td></tr>
+  <tr><td>Sobrenome</td><td>Texto</td><td>Opcional</td></tr>
+  <tr><td>E-mail</td><td>E-mail</td><td><strong>Obrigatório</strong></td></tr>
+  <tr><td>WhatsApp (com DDD)</td><td>Telefone</td><td><strong>Obrigatório</strong></td></tr>
+  <tr><td>Cidade e estado</td><td>Busca de cidade</td><td>Opcional</td></tr>
+  <tr><td>Currículo ("Garanta que o seu currículo está atualizado")</td><td>Arquivo PDF/Word</td><td>Opcional</td></tr>
+  <tr><td>Áreas de interesse</td><td>Seleção múltipla: Administrativo, Financeiro e contábil, Comercial e vendas, Atendimento ao cliente, Recursos humanos, Logística e estoque, Produção e indústria, Manutenção e técnica, Tecnologia, Marketing e e-commerce, Educação, Saúde, Serviços gerais, Outra área</td><td><strong>Obrigatório</strong></td></tr>
+  <tr><td>Cidades onde aceita trabalhar</td><td>Seleção múltipla: Bento Gonçalves, Garibaldi, Carlos Barbosa, Farroupilha, Caxias do Sul, Monte Belo do Sul, Santa Tereza, Pinto Bandeira, Flores da Cunha, Veranópolis, Nova Prata, Outra cidade da Serra Gaúcha, Trabalho remoto</td><td>Opcional</td></tr>
+  <tr><td>Turnos e disponibilidade</td><td>Seleção múltipla: Manhã, Tarde, Noite, Fins de semana e feriados, Escala 12x36, Início imediato</td><td>Opcional</td></tr>
+  <tr><td>Experiência recente e tempo de atuação</td><td>Texto longo</td><td>Opcional</td></tr>
+  <tr><td>Formação e habilitações (escolaridade, cursos, CNH)</td><td>Texto curto</td><td>Opcional</td></tr>
+  <tr><td>Aceite da Política de Privacidade</td><td>Caixa de marcação</td><td><strong>Obrigatório</strong> (LGPD ligada)</td></tr>
+</table>
+<p><strong>Não coletados:</strong> data de nascimento, CPF, estado civil, gênero, saúde, religião, família, endereço completo, CEP, salário. Os campos existem no Recruit, mas ficam desligados no formulário. Se uma vaga precisar de algo a mais, peça na etapa da vaga.</p>
+<div class="box">
+  <strong>Ponto de atenção.</strong> O campo "Tempo de experiência" com opções (Sem experiência, Menos de 1 ano, 1 a 3, 3 a 5, 5 a 10, Mais de 10 anos) foi criado no Recruit, mas fica <u>fora do formulário</u>: o Recruit mostra "Not Selected" e "Search &amp; Select" em inglês nesse tipo de campo e não deixa traduzir. Para respeitar "tudo em português", o tempo de atuação é pedido junto com a experiência recente. O recrutador pode preencher o campo manualmente na ficha para filtrar por faixa.
+</div>
+
+<h2>3. Textos prontos (já aplicados)</h2>
+<h3>No site (acima do formulário)</h3>
+<p><strong>Título:</strong> Faça parte do banco de talentos da Órigo Select.</p>
+<p><strong>Chamada:</strong> Cadastro gratuito, rápido e feito pelo celular. Conte em quais áreas e cidades você gostaria de atuar.</p>
+<p><strong>Aviso:</strong> Preencher o cadastro não garante vaga nem entrevista. Quando surgir um processo compatível com o seu perfil, a Órigo Select entra em contato. O currículo é opcional. Seus dados ficam na plataforma de recrutamento da Órigo Select, são usados apenas em processos seletivos e guardados por até 24 meses. Ao enviar, você declara ter lido nossa Política de Privacidade.</p>
+<p><strong>Abaixo do formulário:</strong> Já está no banco de talentos? Para atualizar seus dados ou currículo, ou para pedir a exclusão do cadastro, escreva para origohuman@gmail.com. Enviamos a você um link seguro para atualizar suas informações.</p>
+<h3>Dentro do formulário (Recruit)</h3>
+<p><strong>Título da página:</strong> Banco de talentos Órigo Select · <strong>Título do formulário:</strong> Conte um pouco sobre você</p>
+<p><strong>Descrição:</strong> Cadastro gratuito. Informe seus dados e as áreas em que gostaria de atuar. Preencher o cadastro não garante vaga: quando surgir um processo compatível com o seu perfil, a Órigo Select entra em contato.</p>
+<p><strong>Seções:</strong> Dados pessoais · Currículo (Opcional. Anexe em PDF ou Word) · Seu perfil profissional (Para encontrarmos a oportunidade certa para você)</p>
+<p><strong>Aviso do currículo (logo acima do botão):</strong> Garanta que o seu currículo está atualizado</p>
+<p><strong>Botão:</strong> Enviar meu perfil · <strong>Confirmação:</strong> Obrigado por enviar seu perfil!</p>
+<h3>E-mail do pedido de atualização</h3>
+<p><strong>Assunto:</strong> Atualize seu cadastro na Órigo Select</p>
+<p>Olá, {candidate_first_name}! Você está no banco de talentos da Órigo Select. Para manter seu cadastro em dia, confira seus dados e anexe seu currículo mais recente pelo link abaixo: {URL}. Se preferir, você também pode excluir seu cadastro por esse mesmo link. Ele deixa de funcionar depois que você envia a atualização. Um abraço, Equipe Órigo Select.</p>
+
+<h2>4. Atualização dos dados e rotina de retenção</h2>
+<p>O Recruit tem o recurso <strong>"Solicitar atualização de perfil"</strong>. Ele envia ao candidato um link individual para uma página de atualização (já configurada em português, com campos, aviso do currículo e botão para excluir os próprios dados). O link só funciona uma vez.</p>
+<p><strong>Limite importante:</strong> o Recruit não manda isso sozinho e o candidato não consegue pedir o link pelo site. A Órigo precisa disparar o pedido. Por isso o site diz "escreva para…" e não promete atualização automática.</p>
+<h3>Como solicitar (uma pessoa ou várias)</h3>
+<ol>
+  <li>Abra <code>Candidatos</code> no Recruit.</li>
+  <li>Uma pessoa: abra a ficha e clique em <strong>Solicitar Atualização de perfil</strong> (topo da ficha).</li>
+  <li>Várias: marque as caixas na lista e use a ação em massa de pedido de atualização.</li>
+  <li>Confirme o e-mail (modelo em português já salvo) e envie. A coluna "Pedido de Perfil Enviado" da lista mostra quem já recebeu.</li>
+</ol>
+<h3>Rotina sugerida (compatível com a política: 24 meses)</h3>
+<ul>
+  <li><strong>A cada 6 meses:</strong> pedir atualização a quem está há mais de 6 meses sem atualizar (coluna "Perfil Atualizado por" / data de atualização).</li>
+  <li><strong>A cada 6 meses:</strong> excluir quem não respondeu e passou de 24 meses sem atualização ou contato.</li>
+  <li><strong>Quando alguém escrever pedindo exclusão ou atualização:</strong> atender, de preferência em até 15 dias, e registrar uma nota na ficha.</li>
+</ul>
+<p>A política de privacidade já diz isso (guarda por até 24 meses, link seguro de atualização e exclusão). Se a rotina não for cumprida, o texto público deixa de ser verdadeiro. Vale revisar com o advogado.</p>
+
+<h2>5. Passo a passo no Recruit (o que foi feito e como refazer)</h2>
+<ol>
+  <li><strong>Campos novos de candidato:</strong> <code>Admin → Campos de Candidatos → Novo campo personalizado</code>. Criados: Áreas de interesse, Cidades onde aceita trabalhar, Turnos e disponibilidade (tipo Multiselect; use "Opções de adição em massa" para colar a lista separada por vírgulas), Experiência recente (Texto longo), Formação e habilitações (Texto) e Tempo de experiência profissional (Multiselect, fora do formulário).</li>
+  <li><strong>Formulário:</strong> <code>Admin → Configurações da Página de Banco de Talentos → aba "Campos…"</code>. Desligado: Estado e País. Obrigatórios: Nome, E-mail, WhatsApp, Áreas de interesse. Ligadas: seção "Currículo" (opcional) e seção "Additional Information" (renomeada para "Seu perfil profissional") com os cinco campos novos. As seções de salário, histórico de trabalho e educação, redes sociais e perguntas ficam desligadas. Os campos de avaliação comportamental (DISC) ficam desligados para não aparecerem ao candidato.</li>
+  <li><strong>Rótulos e exemplos em português:</strong> botão <code>Editar</code> ao lado de cada campo. Há duas caixas: o rótulo e o exemplo (placeholder). Salvar em cada janela.</li>
+  <li><strong>Textos da página:</strong> aba "Configurações de Aparência" → Definições de conteúdo (título da página, título do formulário, descrição).</li>
+  <li><strong>Página de atualização:</strong> <code>Admin → Configurações dos Formulários de Atualização de Perfil</code>. Título "Atualização de cadastro", botões e mensagens em português, mesmos campos do cadastro.</li>
+  <li><strong>E-mail do pedido de atualização:</strong> <code>Caixa de entrada → Modelos de e-mail padrão → Request Updated Profile</code>. Não remover o marcador <code>{URL}</code> do corpo.</li>
+  <li><strong>Ver os dados novos na ficha:</strong> na ficha do candidato, ícone de ajustes ao lado de "Campo de pesquisa" do "Resumo das informações" → marcar os campos novos → Guardar. (Foi feito para a conta da Taiane. Cada usuário escolhe a sua visão.)</li>
+  <li><strong>Buscar o banco:</strong> lista de Candidatos → <strong>Adicionar filtros</strong> → escolher "Áreas de interesse", "Cidades onde aceita trabalhar" ou "Turnos e disponibilidade" e marcar as opções.</li>
+</ol>
+
+<h2>6. Mudanças no site (publicadas)</h2>
+<ul>
+  <li><code>select-talentos.html</code>: novos textos de apresentação, aviso de que não garante vaga, currículo opcional, retenção de 24 meses, bloco "Já está no banco de talentos?" com o e-mail para atualização/exclusão, moldura do formulário mais alta para o formulário maior, e descrição da página (meta description) corrigida.</li>
+  <li><code>politica-de-privacidade.html</code>: lista de dados do banco de talentos atualizada (áreas, cidades, turnos, experiência, formação), cadastro voluntário e currículo opcional, link de atualização e exclusão, exclusão após 24 meses sem atualização ou contato. Data da última atualização: 5 de novembro de 2026.</li>
+</ul>
+
+<h2>7. O que ainda depende de você</h2>
+<ul>
+  <li>Excluir os cadastros de teste (TESTE Cadastro Rapido, TESTE Banco de Talentos, TESTE Candidatura). Eu não excluo candidatos.</li>
+  <li>Combinar com o advogado a rotina de 6 meses e o texto da política.</li>
+  <li>Se quiser que o candidato peça o link sozinho ou que o pedido saia automático, isso exige plano com automação/API do Recruit.</li>
+</ul>
+</body>
+</html>
