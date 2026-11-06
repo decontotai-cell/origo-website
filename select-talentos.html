@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>Banco de Talentos | Órigo Select</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="A nova experiência do banco de talentos da Órigo Select está em preparação." />
+<meta name="description" content="Cadastre-se gratuitamente no banco de talentos da Órigo Select: informe suas áreas de interesse, cidades e disponibilidade. O cadastro não garante vaga." />
 <meta name="robots" content="noindex" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +32,7 @@
   html[data-ats="active"] .stub__inner { max-width: var(--wrap); }
   html[data-ats="active"] .stub__inner > :is(h1, p) { max-width: var(--measure); }
   .ats-frame {
-    display: block; width: 100%; max-width: 900px; height: clamp(760px, 110svh, 1100px);
+    display: block; width: 100%; max-width: 900px; height: clamp(900px, 150svh, 1500px);
     margin-top: clamp(2rem, 5vw, 3rem);
     border: 1px solid var(--hairline-strong); border-radius: 16px; background: #fff;
   }
@@ -233,9 +233,9 @@
 
       document.querySelector(".stub__h1").textContent = "Faça parte do banco de talentos da Órigo Select.";
       document.querySelector(".stub .lede").textContent =
-        "Envie seu perfil e currículo. Entraremos em contato quando surgirem oportunidades compatíveis.";
+        "Cadastro gratuito, rápido e feito pelo celular. Conte em quais áreas e cidades você gostaria de atuar.";
       var copy = document.querySelector(".stub .body-copy");
-      copy.textContent = "Seus dados são tratados dentro da plataforma de recrutamento da Órigo Select. Ao enviar seu perfil, você declara ter lido nossa ";
+      copy.textContent = "Preencher o cadastro não garante vaga nem entrevista. Quando surgir um processo compatível com o seu perfil, a Órigo Select entra em contato. O currículo é opcional. Seus dados ficam na plataforma de recrutamento da Órigo Select, são usados apenas em processos seletivos e guardados por até 24 meses. Ao enviar, você declara ter lido nossa ";
       var pp = document.createElement("a");
       pp.href = "politica-de-privacidade.html";
       pp.textContent = "Política de Privacidade";
@@ -260,6 +260,19 @@
       alt.appendChild(a);
       alt.appendChild(document.createTextNode("."));
       mount.appendChild(alt);
+
+      var upd = document.createElement("p");
+      upd.className = "ats-alt";
+      var updStrong = document.createElement("strong");
+      updStrong.textContent = "Já está no banco de talentos? ";
+      upd.appendChild(updStrong);
+      upd.appendChild(document.createTextNode("Para atualizar seus dados ou currículo, ou para pedir a exclusão do cadastro, escreva para "));
+      var mail = document.createElement("a");
+      mail.href = "mailto:origohuman@gmail.com?subject=Atualizar%20cadastro%20no%20banco%20de%20talentos";
+      mail.textContent = "origohuman@gmail.com";
+      upd.appendChild(mail);
+      upd.appendChild(document.createTextNode(". Enviamos a você um link seguro para atualizar suas informações."));
+      mount.appendChild(upd);
 
       mount.hidden = false;
     }
